@@ -1,37 +1,18 @@
-# Python Transpiler and Interpreter
+# Bienvenidos
+Proyecto de un pseudo compilador en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
 
-## Description
-This project is a simple transpiler and interpreter for a custom programming language.
+Sientanse libres de usar el codigo para los que estan en esta clase con el mismo profesor, y  recuerden:
 
-## Requirements
-- Python 3.x
-- `ply` library
+>Si Paco Peña opina, no estoy de acuerdo.
 
-## Usage
-To run the main script with a specific code file, use the following command:
+>Si Paco Peña habla, ignoro.
 
-```bash
-python main.py {your-file-path}
-```
-```bash
-python temp.py
-```
+>Si Paco Peña falla, juzgo.
 
+>Si Paco Peña piensa, desprecio.
 
-## FALTA: CORREGIR EN EL PARSER ESTE ERROR: 
+>Si Paco Peña tiene 100 haters, yo soy uno de ellos.
 
-1) Este caso no funciona. Cuando se inicializa e iguala un valor en la misma linea 
-```bash
-program main {
-    int b = 0;
-    writeln(b);
-}
-```
+>Si Paco Peña tiene 1 hater, yo soy ese hater.
 
-2) En comparación, este caso si funciona: 
-```bash
-program main {
-    int b ;
-    b = 0;
-    writeln(b);
-}
+>Si Paco Peña no tiene un hater, yo no existo.

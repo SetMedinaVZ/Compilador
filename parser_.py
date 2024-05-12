@@ -52,8 +52,14 @@ class Parser:
         p[0] = p[1]
 
     def p_declaration_statement(self, p):
-        'declaration_statement : type id_list SEMICOLON'
-        p[0] = ('declaration', p[1], p[2])
+        '''
+        declaration_statement : type ID SEMICOLON
+                            | type ID ASSIGN expression SEMICOLON
+        '''
+        if len(p) == 4:
+            p[0] = ('declaration', p[1], p[2])
+        else:
+            p[0] = ('declaration_init', p[1], p[2], p[4])
 
     def p_id_list(self, p):
         '''
