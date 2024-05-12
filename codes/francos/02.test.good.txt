@@ -1,0 +1,5 @@
+program main {
+    int b = 3;
+    writeln(b);
+}
+

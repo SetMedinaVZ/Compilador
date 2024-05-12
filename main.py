@@ -1,15 +1,31 @@
-from Lexer import Lexer
+import sys
 import os
+from parser_ import Parser
+from interpreter import Interpreter, save_and_exit
 
-dir_path = os.getcwd()
-contents = os.listdir(dir_path + '/codes')
+if len(sys.argv) != 2:
+    print("Usage: python main.py <filename>")
+    sys.exit(1)
 
-for i, filename in enumerate(contents):
-    print(f'{i}: {filename}')
-selected = input('Escribe el código de prueba a utilizar: ')
-with open(dir_path + '/codes/' + contents[int(selected)], 'r') as file:
-    data = file.read()
+filename = sys.argv[1]
 
-lexer = Lexer()
-tokens = lexer.get_tokens(data)
-print(tokens)
+parser = Parser()
+
+try:
+    with open(filename, 'r') as file:
+        data = file.read()
+
+    parsed_data = parser.parse(data)
+    interpreter = Interpreter()
+    python_code = interpreter.generate(parsed_data)
+
+    # Save the Python code to temp.py and exit
+    save_and_exit(python_code)
+
+except Exception as e:
+    error_message = str(e)
+    python_code = ""
+    save_and_exit(python_code, error=error_message)
+
+# Command to run temp.py after the main script exits
+os.system(f"{sys.executable} temp.py")

@@ -5,6 +5,7 @@ program main{
     for (x=0 ; x<f ; x++)
     {
         n = x + f;
+        writeln(n);
     }
-    writeln(n);
+    writeln("hola bb");
 }

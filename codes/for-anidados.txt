@@ -1,0 +1,14 @@
+program main{
+    int f, x;
+    writeln("texto dump");
+    f = 0;
+    x = 0;
+    for (x=0 ; x<3 ; x++)
+    {
+        for (f=0 ; f<3 ; f++)
+        {
+            writeln(x);
+            writeln(f);
+        }
+    }
+}
