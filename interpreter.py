@@ -43,13 +43,6 @@ class Interpreter:
         self.output.append(f"if {condition}:")
         self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
 
-    def generate_if_else(self, node):
-        condition = self.generate_expression(node[1])
-        self.output.append(f"if {condition}:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
-        self.output.append("else:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[3])])
-
     def generate_while(self, node):
         condition = self.generate_expression(node[1])
         self.output.append(f"while {condition}:")
@@ -58,7 +51,8 @@ class Interpreter:
     def generate_for(self, node):
         init = self.generate_statement(node[1])
         condition = self.generate_expression(node[2])
-        increment = self.generate_statement(node[3])
+        increment_expr = self.generate_expression(node[3])
+        increment = f"{node[1][1]} = {increment_expr}"  # node[1][1] is the variable in the initialization
         self.output.append(init)
         self.output.append(f"while {condition}:")
         body = ["    " + stmt for stmt in self.generate_statements(node[4])]
@@ -97,6 +91,7 @@ class Interpreter:
 
     def to_python_code(self):
         return "\n".join(self.output)
+
 
 def save_and_exit(python_code):
     with open("temp.py", "w") as file:

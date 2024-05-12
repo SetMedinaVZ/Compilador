@@ -1,11 +1,11 @@
 program main{
     int i, n, f, x;
     writeln("texto dump");
-    f = 5;
-    for (x=0 ; x<f ; x++)
+    f = 0;
+    x = 5;
+    for (x=0 ; x>f ; x--)
     {
-        writeln("hola bb?");
         n = x + f;
-        x++;
+        writeln(n);
     }
 }
