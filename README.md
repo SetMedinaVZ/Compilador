@@ -1,6 +1,7 @@
 # Bienvenidos
-Proyecto de un pseudo compilador en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
+TC3002B ITESM
 
+Proyecto de un pseudo compilador en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
 Sientanse libres de usar el codigo para los que estan en esta clase con el mismo profesor, y  recuerden:
 
 >Si Paco Peña opina, no estoy de acuerdo.
