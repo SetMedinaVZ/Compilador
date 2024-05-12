@@ -2,6 +2,8 @@ import sys
 import ply.yacc as yacc
 from Lexer import Lexer
 import logging
+
+
 logging.basicConfig(
     level=logging.DEBUG,
     filename="parselog.txt",

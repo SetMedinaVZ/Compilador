@@ -15,4 +15,12 @@ with open(filename, 'r') as file:
 
 parsed_data = parser.parse(data)
 interpreter = Interpreter()
-interpreter.interpret(parsed_data)
+python_code = interpreter.generate(parsed_data)
+
+# Save and run the generated Python code
+def save_and_run_python_code(python_code):
+    with open("temp.py", "w") as file:
+        file.write(python_code)
+    exec(open("temp.py").read())
+
+save_and_run_python_code(python_code)

@@ -6,5 +6,5 @@ program main{
     {
         n = x + f;
     }
-    writeln(n);
+    writeln("hola bb");
 }
