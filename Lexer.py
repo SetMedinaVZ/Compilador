@@ -1,6 +1,5 @@
 import ply.lex as lex
 
-
 class Lexer(object):
     def __init__(self):
         self.lexer = None
@@ -32,7 +31,6 @@ class Lexer(object):
         'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE',  # LOGICAL OPERATORS
 
     ] + list(reserved.values())
-
 
     # Regular expression rules for tokens
     t_SEMICOLON = r';'
@@ -77,7 +75,6 @@ class Lexer(object):
 
     # Discard comments
     def t_COMMENT(self, _):
-        #comment for csharp
         r'\//.*'
         pass
         # No return value. Token discarded

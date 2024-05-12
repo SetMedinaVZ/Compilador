@@ -1,15 +1,18 @@
-from Lexer import Lexer
-import os
+import sys
+from parser_ import Parser
+from interpreter import Interpreter
 
-dir_path = os.getcwd()
-contents = os.listdir(dir_path + '/codes')
+if len(sys.argv) != 2:
+    print("Usage: python main.py <filename>")
+    sys.exit(1)
 
-for i, filename in enumerate(contents):
-    print(f'{i}: {filename}')
-selected = input('Escribe el código de prueba a utilizar: ')
-with open(dir_path + '/codes/' + contents[int(selected)], 'r') as file:
+filename = sys.argv[1]
+
+parser = Parser()
+
+with open(filename, 'r') as file:
     data = file.read()
 
-lexer = Lexer()
-tokens = lexer.get_tokens(data)
-print(tokens)
+parsed_data = parser.parse(data)
+interpreter = Interpreter()
+interpreter.interpret(parsed_data)
