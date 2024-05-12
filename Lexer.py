@@ -20,17 +20,18 @@ class Lexer(object):
         'int': 'INT',
         'float': 'FLOAT',
         'bool': 'BOOL',
-        'string': 'STRING',
     }
 
     # List of token names
     tokens = [
-                 'ID', 'SEMICOLON', 'COMA', 'ASSIGN',
-                 'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',  # BRACES
-                 'VAR_INT', 'VAR_FLOAT', "VAR_STRING",  # VAR TYPE
-                 'PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'PLUSPLUS', 'MINUSMINUS',  # ARITHMETIC OPERATORS
-                 'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE'  # LOGICAL OPERATORS
-             ] + list(reserved.values())
+        'ID', 'SEMICOLON', 'COMA', 'ASSIGN',
+        'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',  # BRACES
+        'VAR_INT', 'VAR_FLOAT', "STRING", # VAR TYPE
+        'PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'PLUSPLUS', 'MINUSMINUS',  # ARITHMETIC OPERATORS
+        'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE',  # LOGICAL OPERATORS
+
+    ] + list(reserved.values())
+
 
     # Regular expression rules for tokens
     t_SEMICOLON = r';'
@@ -75,7 +76,8 @@ class Lexer(object):
 
     # Discard comments
     def t_COMMENT(self, _):
-        r'\#.*'
+        #comment for csharp
+        r'\//.*'
         pass
         # No return value. Token discarded
 

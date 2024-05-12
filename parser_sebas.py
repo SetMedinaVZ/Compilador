@@ -43,16 +43,27 @@ class Parser:
         p[0] = p[1]
 
     def p_declaration_statement(self, p):
-        'declaration_statement : type ID SEMICOLON'
+        'declaration_statement : type id_list SEMICOLON'
         p[0] = ('declaration', p[1], p[2])
+
+    def p_id_list(self, p):
+        '''
+        id_list : ID
+                | id_list COMA ID
+        '''
+        if len(p) == 2:
+            p[0] = [p[1]]
+        else:
+            p[0] = p[1] + [p[3]]
 
     def p_assignment_statement(self, p):
         'assignment_statement : ID ASSIGN expression SEMICOLON'
         p[0] = ('assignment', p[1], p[3])
 
     def p_print_statement(self, p):
-        'print_statement : WRITELN LPAREN expression RPAREN SEMICOLON'
+        'print_statement : WRITELN LPAREN STRING RPAREN SEMICOLON'
         p[0] = ('print', p[3])
+
 
     def p_if_statement(self, p):
         '''
@@ -80,7 +91,7 @@ class Parser:
                    | expression DIVIDE expression
                    | VAR_INT
                    | VAR_FLOAT
-                   | VAR_STRING
+                   | STRING
                    | ID
         '''
         if len(p) == 2:

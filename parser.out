@@ -2,7 +2,6 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    COMA
     EQ
     GT
     GTE
@@ -24,74 +23,76 @@ Rule 6     statement -> print_statement
 Rule 7     statement -> if_statement
 Rule 8     statement -> while_statement
 Rule 9     statement -> for_statement
-Rule 10    declaration_statement -> type ID SEMICOLON
-Rule 11    assignment_statement -> ID ASSIGN expression SEMICOLON
-Rule 12    print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON
-Rule 13    if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-Rule 14    if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-Rule 15    while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-Rule 16    for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-Rule 17    expression -> expression PLUS expression
-Rule 18    expression -> expression MINUS expression
-Rule 19    expression -> expression TIMES expression
-Rule 20    expression -> expression DIVIDE expression
-Rule 21    expression -> VAR_INT
-Rule 22    expression -> VAR_FLOAT
-Rule 23    expression -> VAR_STRING
-Rule 24    expression -> ID
-Rule 25    type -> INT
-Rule 26    type -> FLOAT
-Rule 27    type -> BOOL
-Rule 28    type -> STRING
+Rule 10    declaration_statement -> type id_list SEMICOLON
+Rule 11    id_list -> ID
+Rule 12    id_list -> id_list COMA ID
+Rule 13    assignment_statement -> ID ASSIGN expression SEMICOLON
+Rule 14    print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON
+Rule 15    if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+Rule 16    if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+Rule 17    while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+Rule 18    for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+Rule 19    expression -> expression PLUS expression
+Rule 20    expression -> expression MINUS expression
+Rule 21    expression -> expression TIMES expression
+Rule 22    expression -> expression DIVIDE expression
+Rule 23    expression -> VAR_INT
+Rule 24    expression -> VAR_FLOAT
+Rule 25    expression -> STRING
+Rule 26    expression -> ID
+Rule 27    type -> INT
+Rule 28    type -> FLOAT
+Rule 29    type -> BOOL
+Rule 30    type -> STRING
 
 Terminals, with rules where they appear
 
-ASSIGN               : 11
-BOOL                 : 27
-COMA                 : 
-DIVIDE               : 20
-ELSE                 : 14
+ASSIGN               : 13
+BOOL                 : 29
+COMA                 : 12
+DIVIDE               : 22
+ELSE                 : 16
 EQ                   : 
-FLOAT                : 26
-FOR                  : 16
+FLOAT                : 28
+FOR                  : 18
 GT                   : 
 GTE                  : 
-ID                   : 1 10 11 24
-IF                   : 13 14
-INT                  : 25
-LBRACE               : 1 13 14 14 15 16
-LPAREN               : 12 13 14 15 16
+ID                   : 1 11 12 13 26
+IF                   : 15 16
+INT                  : 27
+LBRACE               : 1 15 16 16 17 18
+LPAREN               : 14 15 16 17 18
 LT                   : 
 LTE                  : 
-MINUS                : 18
+MINUS                : 20
 MINUSMINUS           : 
 NE                   : 
-PLUS                 : 17
+PLUS                 : 19
 PLUSPLUS             : 
 PROGRAM              : 1
-RBRACE               : 1 13 14 14 15 16
-RPAREN               : 12 13 14 15 16
-SEMICOLON            : 10 11 12 16
-STRING               : 28
-TIMES                : 19
-VAR_FLOAT            : 22
-VAR_INT              : 21
-VAR_STRING           : 23
-WHILE                : 15
-WRITELN              : 12
+RBRACE               : 1 15 16 16 17 18
+RPAREN               : 14 15 16 17 18
+SEMICOLON            : 10 13 14 18
+STRING               : 14 25 30
+TIMES                : 21
+VAR_FLOAT            : 24
+VAR_INT              : 23
+WHILE                : 17
+WRITELN              : 14
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment_statement : 5 16
+assignment_statement : 5 18
 declaration_statement : 4
-expression           : 11 12 13 14 15 16 16 17 17 18 18 19 19 20 20
+expression           : 13 15 16 17 18 18 19 19 20 20 21 21 22 22
 for_statement        : 9
+id_list              : 10 12
 if_statement         : 7
 print_statement      : 6
 program              : 0
 statement            : 2 3
-statement_list       : 1 3 13 14 14 15 16
+statement_list       : 1 3 15 16 16 17 18
 type                 : 10
 while_statement      : 8
 
@@ -137,27 +138,27 @@ state 4
     (7) statement -> . if_statement
     (8) statement -> . while_statement
     (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
     ID              shift and go to state 5
     WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
     statement_list                 shift and go to state 6
     statement                      shift and go to state 7
@@ -171,7 +172,7 @@ state 4
 
 state 5
 
-    (11) assignment_statement -> ID . ASSIGN expression SEMICOLON
+    (13) assignment_statement -> ID . ASSIGN expression SEMICOLON
 
     ASSIGN          shift and go to state 23
 
@@ -186,28 +187,28 @@ state 6
     (7) statement -> . if_statement
     (8) statement -> . while_statement
     (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
     RBRACE          shift and go to state 24
     ID              shift and go to state 5
     WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
     statement                      shift and go to state 25
     declaration_statement          shift and go to state 8
@@ -332,86 +333,89 @@ state 13
 
 state 14
 
-    (10) declaration_statement -> type . ID SEMICOLON
+    (10) declaration_statement -> type . id_list SEMICOLON
+    (11) id_list -> . ID
+    (12) id_list -> . id_list COMA ID
 
-    ID              shift and go to state 26
+    ID              shift and go to state 27
 
+    id_list                        shift and go to state 26
 
 state 15
 
-    (12) print_statement -> WRITELN . LPAREN expression RPAREN SEMICOLON
-
-    LPAREN          shift and go to state 27
-
-
-state 16
-
-    (13) if_statement -> IF . LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> IF . LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (14) print_statement -> WRITELN . LPAREN STRING RPAREN SEMICOLON
 
     LPAREN          shift and go to state 28
 
 
+state 16
+
+    (30) type -> STRING .
+
+    ID              reduce using rule 30 (type -> STRING .)
+
+
 state 17
 
-    (15) while_statement -> WHILE . LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (15) if_statement -> IF . LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> IF . LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
 
     LPAREN          shift and go to state 29
 
 
 state 18
 
-    (16) for_statement -> FOR . LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (17) while_statement -> WHILE . LPAREN expression RPAREN LBRACE statement_list RBRACE
 
     LPAREN          shift and go to state 30
 
 
 state 19
 
-    (25) type -> INT .
+    (18) for_statement -> FOR . LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
 
-    ID              reduce using rule 25 (type -> INT .)
+    LPAREN          shift and go to state 31
 
 
 state 20
 
-    (26) type -> FLOAT .
+    (27) type -> INT .
 
-    ID              reduce using rule 26 (type -> FLOAT .)
+    ID              reduce using rule 27 (type -> INT .)
 
 
 state 21
 
-    (27) type -> BOOL .
+    (28) type -> FLOAT .
 
-    ID              reduce using rule 27 (type -> BOOL .)
+    ID              reduce using rule 28 (type -> FLOAT .)
 
 
 state 22
 
-    (28) type -> STRING .
+    (29) type -> BOOL .
 
-    ID              reduce using rule 28 (type -> STRING .)
+    ID              reduce using rule 29 (type -> BOOL .)
 
 
 state 23
 
-    (11) assignment_statement -> ID ASSIGN . expression SEMICOLON
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (13) assignment_statement -> ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
-    expression                     shift and go to state 32
+    expression                     shift and go to state 33
 
 state 24
 
@@ -438,517 +442,478 @@ state 25
 
 state 26
 
-    (10) declaration_statement -> type ID . SEMICOLON
+    (10) declaration_statement -> type id_list . SEMICOLON
+    (12) id_list -> id_list . COMA ID
 
-    SEMICOLON       shift and go to state 36
+    SEMICOLON       shift and go to state 37
+    COMA            shift and go to state 38
 
 
 state 27
 
-    (12) print_statement -> WRITELN LPAREN . expression RPAREN SEMICOLON
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (11) id_list -> ID .
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    SEMICOLON       reduce using rule 11 (id_list -> ID .)
+    COMA            reduce using rule 11 (id_list -> ID .)
 
-    expression                     shift and go to state 37
 
 state 28
 
-    (13) if_statement -> IF LPAREN . expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> IF LPAREN . expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (14) print_statement -> WRITELN LPAREN . STRING RPAREN SEMICOLON
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    STRING          shift and go to state 39
 
-    expression                     shift and go to state 38
 
 state 29
 
-    (15) while_statement -> WHILE LPAREN . expression RPAREN LBRACE statement_list RBRACE
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (15) if_statement -> IF LPAREN . expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> IF LPAREN . expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
-    expression                     shift and go to state 39
+    expression                     shift and go to state 40
 
 state 30
 
-    (16) for_statement -> FOR LPAREN . assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (17) while_statement -> WHILE LPAREN . expression RPAREN LBRACE statement_list RBRACE
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    ID              shift and go to state 5
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
-    assignment_statement           shift and go to state 40
+    expression                     shift and go to state 41
 
 state 31
 
-    (24) expression -> ID .
+    (18) for_statement -> FOR LPAREN . assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
 
-    SEMICOLON       reduce using rule 24 (expression -> ID .)
-    PLUS            reduce using rule 24 (expression -> ID .)
-    MINUS           reduce using rule 24 (expression -> ID .)
-    TIMES           reduce using rule 24 (expression -> ID .)
-    DIVIDE          reduce using rule 24 (expression -> ID .)
-    RPAREN          reduce using rule 24 (expression -> ID .)
+    ID              shift and go to state 5
 
+    assignment_statement           shift and go to state 42
 
 state 32
 
-    (11) assignment_statement -> ID ASSIGN expression . SEMICOLON
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (26) expression -> ID .
 
-    SEMICOLON       shift and go to state 41
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    SEMICOLON       reduce using rule 26 (expression -> ID .)
+    PLUS            reduce using rule 26 (expression -> ID .)
+    MINUS           reduce using rule 26 (expression -> ID .)
+    TIMES           reduce using rule 26 (expression -> ID .)
+    DIVIDE          reduce using rule 26 (expression -> ID .)
+    RPAREN          reduce using rule 26 (expression -> ID .)
 
 
 state 33
 
-    (21) expression -> VAR_INT .
+    (13) assignment_statement -> ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    SEMICOLON       reduce using rule 21 (expression -> VAR_INT .)
-    PLUS            reduce using rule 21 (expression -> VAR_INT .)
-    MINUS           reduce using rule 21 (expression -> VAR_INT .)
-    TIMES           reduce using rule 21 (expression -> VAR_INT .)
-    DIVIDE          reduce using rule 21 (expression -> VAR_INT .)
-    RPAREN          reduce using rule 21 (expression -> VAR_INT .)
+    SEMICOLON       shift and go to state 43
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
 
 state 34
 
-    (22) expression -> VAR_FLOAT .
+    (23) expression -> VAR_INT .
 
-    SEMICOLON       reduce using rule 22 (expression -> VAR_FLOAT .)
-    PLUS            reduce using rule 22 (expression -> VAR_FLOAT .)
-    MINUS           reduce using rule 22 (expression -> VAR_FLOAT .)
-    TIMES           reduce using rule 22 (expression -> VAR_FLOAT .)
-    DIVIDE          reduce using rule 22 (expression -> VAR_FLOAT .)
-    RPAREN          reduce using rule 22 (expression -> VAR_FLOAT .)
+    SEMICOLON       reduce using rule 23 (expression -> VAR_INT .)
+    PLUS            reduce using rule 23 (expression -> VAR_INT .)
+    MINUS           reduce using rule 23 (expression -> VAR_INT .)
+    TIMES           reduce using rule 23 (expression -> VAR_INT .)
+    DIVIDE          reduce using rule 23 (expression -> VAR_INT .)
+    RPAREN          reduce using rule 23 (expression -> VAR_INT .)
 
 
 state 35
 
-    (23) expression -> VAR_STRING .
+    (24) expression -> VAR_FLOAT .
 
-    SEMICOLON       reduce using rule 23 (expression -> VAR_STRING .)
-    PLUS            reduce using rule 23 (expression -> VAR_STRING .)
-    MINUS           reduce using rule 23 (expression -> VAR_STRING .)
-    TIMES           reduce using rule 23 (expression -> VAR_STRING .)
-    DIVIDE          reduce using rule 23 (expression -> VAR_STRING .)
-    RPAREN          reduce using rule 23 (expression -> VAR_STRING .)
+    SEMICOLON       reduce using rule 24 (expression -> VAR_FLOAT .)
+    PLUS            reduce using rule 24 (expression -> VAR_FLOAT .)
+    MINUS           reduce using rule 24 (expression -> VAR_FLOAT .)
+    TIMES           reduce using rule 24 (expression -> VAR_FLOAT .)
+    DIVIDE          reduce using rule 24 (expression -> VAR_FLOAT .)
+    RPAREN          reduce using rule 24 (expression -> VAR_FLOAT .)
 
 
 state 36
 
-    (10) declaration_statement -> type ID SEMICOLON .
+    (25) expression -> STRING .
 
-    RBRACE          reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    ID              reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    WRITELN         reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    IF              reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    WHILE           reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    FOR             reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    INT             reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    FLOAT           reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    BOOL            reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
-    STRING          reduce using rule 10 (declaration_statement -> type ID SEMICOLON .)
+    SEMICOLON       reduce using rule 25 (expression -> STRING .)
+    PLUS            reduce using rule 25 (expression -> STRING .)
+    MINUS           reduce using rule 25 (expression -> STRING .)
+    TIMES           reduce using rule 25 (expression -> STRING .)
+    DIVIDE          reduce using rule 25 (expression -> STRING .)
+    RPAREN          reduce using rule 25 (expression -> STRING .)
 
 
 state 37
 
-    (12) print_statement -> WRITELN LPAREN expression . RPAREN SEMICOLON
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (10) declaration_statement -> type id_list SEMICOLON .
 
-    RPAREN          shift and go to state 46
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    RBRACE          reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    ID              reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    WRITELN         reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    IF              reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    WHILE           reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    FOR             reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    INT             reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    FLOAT           reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    BOOL            reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
+    STRING          reduce using rule 10 (declaration_statement -> type id_list SEMICOLON .)
 
 
 state 38
 
-    (13) if_statement -> IF LPAREN expression . RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> IF LPAREN expression . RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (12) id_list -> id_list COMA . ID
 
-    RPAREN          shift and go to state 47
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    ID              shift and go to state 48
 
 
 state 39
 
-    (15) while_statement -> WHILE LPAREN expression . RPAREN LBRACE statement_list RBRACE
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (14) print_statement -> WRITELN LPAREN STRING . RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 48
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    RPAREN          shift and go to state 49
 
 
 state 40
 
-    (16) for_statement -> FOR LPAREN assignment_statement . expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (15) if_statement -> IF LPAREN expression . RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> IF LPAREN expression . RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    RPAREN          shift and go to state 50
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
-    expression                     shift and go to state 49
 
 state 41
 
-    (11) assignment_statement -> ID ASSIGN expression SEMICOLON .
+    (17) while_statement -> WHILE LPAREN expression . RPAREN LBRACE statement_list RBRACE
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    RBRACE          reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    ID              reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    WRITELN         reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    IF              reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    WHILE           reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    FOR             reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    INT             reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    FLOAT           reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    BOOL            reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    STRING          reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    VAR_INT         reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    VAR_FLOAT       reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
-    VAR_STRING      reduce using rule 11 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    RPAREN          shift and go to state 51
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
 
 state 42
 
-    (17) expression -> expression PLUS . expression
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (18) for_statement -> FOR LPAREN assignment_statement . expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
-
-    expression                     shift and go to state 50
-
-state 43
-
-    (18) expression -> expression MINUS . expression
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
-
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
-
-    expression                     shift and go to state 51
-
-state 44
-
-    (19) expression -> expression TIMES . expression
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
-
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
     expression                     shift and go to state 52
 
-state 45
+state 43
 
-    (20) expression -> expression DIVIDE . expression
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
+    (13) assignment_statement -> ID ASSIGN expression SEMICOLON .
 
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
+    RBRACE          reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    ID              reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    WRITELN         reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    WHILE           reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    FOR             reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    FLOAT           reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    VAR_INT         reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+    VAR_FLOAT       reduce using rule 13 (assignment_statement -> ID ASSIGN expression SEMICOLON .)
+
+
+state 44
+
+    (19) expression -> expression PLUS . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
+
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
     expression                     shift and go to state 53
 
+state 45
+
+    (20) expression -> expression MINUS . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
+
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
+
+    expression                     shift and go to state 54
+
 state 46
 
-    (12) print_statement -> WRITELN LPAREN expression RPAREN . SEMICOLON
+    (21) expression -> expression TIMES . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    SEMICOLON       shift and go to state 54
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
+    expression                     shift and go to state 55
 
 state 47
 
-    (13) if_statement -> IF LPAREN expression RPAREN . LBRACE statement_list RBRACE
-    (14) if_statement -> IF LPAREN expression RPAREN . LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (22) expression -> expression DIVIDE . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    LBRACE          shift and go to state 55
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
+    expression                     shift and go to state 56
 
 state 48
 
-    (15) while_statement -> WHILE LPAREN expression RPAREN . LBRACE statement_list RBRACE
+    (12) id_list -> id_list COMA ID .
 
-    LBRACE          shift and go to state 56
+    SEMICOLON       reduce using rule 12 (id_list -> id_list COMA ID .)
+    COMA            reduce using rule 12 (id_list -> id_list COMA ID .)
 
 
 state 49
 
-    (16) for_statement -> FOR LPAREN assignment_statement expression . SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (14) print_statement -> WRITELN LPAREN STRING RPAREN . SEMICOLON
 
     SEMICOLON       shift and go to state 57
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
 
 
 state 50
 
-    (17) expression -> expression PLUS expression .
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (15) if_statement -> IF LPAREN expression RPAREN . LBRACE statement_list RBRACE
+    (16) if_statement -> IF LPAREN expression RPAREN . LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 17 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 17 (expression -> expression PLUS expression .)
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
-
-  ! PLUS            [ reduce using rule 17 (expression -> expression PLUS expression .) ]
-  ! MINUS           [ reduce using rule 17 (expression -> expression PLUS expression .) ]
-  ! TIMES           [ reduce using rule 17 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 17 (expression -> expression PLUS expression .) ]
+    LBRACE          shift and go to state 58
 
 
 state 51
 
-    (18) expression -> expression MINUS expression .
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (17) while_statement -> WHILE LPAREN expression RPAREN . LBRACE statement_list RBRACE
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 18 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 18 (expression -> expression MINUS expression .)
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
-
-  ! PLUS            [ reduce using rule 18 (expression -> expression MINUS expression .) ]
-  ! MINUS           [ reduce using rule 18 (expression -> expression MINUS expression .) ]
-  ! TIMES           [ reduce using rule 18 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 18 (expression -> expression MINUS expression .) ]
+    LBRACE          shift and go to state 59
 
 
 state 52
 
-    (19) expression -> expression TIMES expression .
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (18) for_statement -> FOR LPAREN assignment_statement expression . SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 19 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 19 (expression -> expression TIMES expression .)
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
-
-  ! PLUS            [ reduce using rule 19 (expression -> expression TIMES expression .) ]
-  ! MINUS           [ reduce using rule 19 (expression -> expression TIMES expression .) ]
-  ! TIMES           [ reduce using rule 19 (expression -> expression TIMES expression .) ]
-  ! DIVIDE          [ reduce using rule 19 (expression -> expression TIMES expression .) ]
+    SEMICOLON       shift and go to state 60
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
 
 state 53
 
-    (20) expression -> expression DIVIDE expression .
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (19) expression -> expression PLUS expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 20 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 20 (expression -> expression DIVIDE expression .)
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    SEMICOLON       reduce using rule 19 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 19 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
-  ! PLUS            [ reduce using rule 20 (expression -> expression DIVIDE expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression DIVIDE expression .) ]
-  ! TIMES           [ reduce using rule 20 (expression -> expression DIVIDE expression .) ]
-  ! DIVIDE          [ reduce using rule 20 (expression -> expression DIVIDE expression .) ]
+  ! PLUS            [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 19 (expression -> expression PLUS expression .) ]
 
 
 state 54
 
-    (12) print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .
+    (20) expression -> expression MINUS expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    RBRACE          reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    ID              reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    WRITELN         reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    IF              reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    WHILE           reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    FOR             reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    INT             reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    FLOAT           reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    BOOL            reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
-    STRING          reduce using rule 12 (print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON .)
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMICOLON       reduce using rule 20 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 20 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
+
+  ! PLUS            [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression MINUS expression .) ]
 
 
 state 55
 
-    (13) if_statement -> IF LPAREN expression RPAREN LBRACE . statement_list RBRACE
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE . statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (2) statement_list -> . statement
-    (3) statement_list -> . statement_list statement
-    (4) statement -> . declaration_statement
-    (5) statement -> . assignment_statement
-    (6) statement -> . print_statement
-    (7) statement -> . if_statement
-    (8) statement -> . while_statement
-    (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (21) expression -> expression TIMES expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    ID              shift and go to state 5
-    WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMICOLON       reduce using rule 21 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 21 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
-    statement_list                 shift and go to state 58
-    statement                      shift and go to state 7
-    declaration_statement          shift and go to state 8
-    assignment_statement           shift and go to state 9
-    print_statement                shift and go to state 10
-    if_statement                   shift and go to state 11
-    while_statement                shift and go to state 12
-    for_statement                  shift and go to state 13
-    type                           shift and go to state 14
+  ! PLUS            [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+
 
 state 56
 
-    (15) while_statement -> WHILE LPAREN expression RPAREN LBRACE . statement_list RBRACE
+    (22) expression -> expression DIVIDE expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    SEMICOLON       reduce using rule 22 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 22 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
+
+  ! PLUS            [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+
+
+state 57
+
+    (14) print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    ID              reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    WRITELN         reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    IF              reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    WHILE           reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    FOR             reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    INT             reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    FLOAT           reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    BOOL            reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+    STRING          reduce using rule 14 (print_statement -> WRITELN LPAREN STRING RPAREN SEMICOLON .)
+
+
+state 58
+
+    (15) if_statement -> IF LPAREN expression RPAREN LBRACE . statement_list RBRACE
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE . statement_list RBRACE ELSE LBRACE statement_list RBRACE
     (2) statement_list -> . statement
     (3) statement_list -> . statement_list statement
     (4) statement -> . declaration_statement
@@ -957,92 +922,30 @@ state 56
     (7) statement -> . if_statement
     (8) statement -> . while_statement
     (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
     ID              shift and go to state 5
     WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
-    statement_list                 shift and go to state 59
+    statement_list                 shift and go to state 61
     statement                      shift and go to state 7
-    declaration_statement          shift and go to state 8
-    assignment_statement           shift and go to state 9
-    print_statement                shift and go to state 10
-    if_statement                   shift and go to state 11
-    while_statement                shift and go to state 12
-    for_statement                  shift and go to state 13
-    type                           shift and go to state 14
-
-state 57
-
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON . expression RPAREN LBRACE statement_list RBRACE
-    (17) expression -> . expression PLUS expression
-    (18) expression -> . expression MINUS expression
-    (19) expression -> . expression TIMES expression
-    (20) expression -> . expression DIVIDE expression
-    (21) expression -> . VAR_INT
-    (22) expression -> . VAR_FLOAT
-    (23) expression -> . VAR_STRING
-    (24) expression -> . ID
-
-    VAR_INT         shift and go to state 33
-    VAR_FLOAT       shift and go to state 34
-    VAR_STRING      shift and go to state 35
-    ID              shift and go to state 31
-
-    expression                     shift and go to state 60
-
-state 58
-
-    (13) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list . RBRACE
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list . RBRACE ELSE LBRACE statement_list RBRACE
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . declaration_statement
-    (5) statement -> . assignment_statement
-    (6) statement -> . print_statement
-    (7) statement -> . if_statement
-    (8) statement -> . while_statement
-    (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
-
-    RBRACE          shift and go to state 61
-    ID              shift and go to state 5
-    WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
-
-    statement                      shift and go to state 25
     declaration_statement          shift and go to state 8
     assignment_statement           shift and go to state 9
     print_statement                shift and go to state 10
@@ -1053,38 +956,39 @@ state 58
 
 state 59
 
-    (15) while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list . RBRACE
-    (3) statement_list -> statement_list . statement
+    (17) while_statement -> WHILE LPAREN expression RPAREN LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
     (4) statement -> . declaration_statement
     (5) statement -> . assignment_statement
     (6) statement -> . print_statement
     (7) statement -> . if_statement
     (8) statement -> . while_statement
     (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
-    RBRACE          shift and go to state 62
     ID              shift and go to state 5
     WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
-    statement                      shift and go to state 25
+    statement_list                 shift and go to state 62
+    statement                      shift and go to state 7
     declaration_statement          shift and go to state 8
     assignment_statement           shift and go to state 9
     print_statement                shift and go to state 10
@@ -1095,113 +999,174 @@ state 59
 
 state 60
 
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression . RPAREN LBRACE statement_list RBRACE
-    (17) expression -> expression . PLUS expression
-    (18) expression -> expression . MINUS expression
-    (19) expression -> expression . TIMES expression
-    (20) expression -> expression . DIVIDE expression
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON . expression RPAREN LBRACE statement_list RBRACE
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . VAR_INT
+    (24) expression -> . VAR_FLOAT
+    (25) expression -> . STRING
+    (26) expression -> . ID
 
-    RPAREN          shift and go to state 63
-    PLUS            shift and go to state 42
-    MINUS           shift and go to state 43
-    TIMES           shift and go to state 44
-    DIVIDE          shift and go to state 45
+    VAR_INT         shift and go to state 34
+    VAR_FLOAT       shift and go to state 35
+    STRING          shift and go to state 36
+    ID              shift and go to state 32
 
+    expression                     shift and go to state 63
 
 state 61
 
-    (13) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE . ELSE LBRACE statement_list RBRACE
+    (15) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list . RBRACE
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list . RBRACE ELSE LBRACE statement_list RBRACE
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . declaration_statement
+    (5) statement -> . assignment_statement
+    (6) statement -> . print_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
-    RBRACE          reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    ID              reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    WRITELN         reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    IF              reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    WHILE           reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    FOR             reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    INT             reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    FLOAT           reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    BOOL            reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    STRING          reduce using rule 13 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    ELSE            shift and go to state 64
+    RBRACE          shift and go to state 64
+    ID              shift and go to state 5
+    WRITELN         shift and go to state 15
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
+    statement                      shift and go to state 25
+    declaration_statement          shift and go to state 8
+    assignment_statement           shift and go to state 9
+    print_statement                shift and go to state 10
+    if_statement                   shift and go to state 11
+    while_statement                shift and go to state 12
+    for_statement                  shift and go to state 13
+    type                           shift and go to state 14
 
 state 62
 
-    (15) while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .
+    (17) while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list . RBRACE
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . declaration_statement
+    (5) statement -> . assignment_statement
+    (6) statement -> . print_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
-    RBRACE          reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    ID              reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    WRITELN         reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    IF              reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    WHILE           reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    FOR             reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    INT             reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    FLOAT           reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    BOOL            reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
-    STRING          reduce using rule 15 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    RBRACE          shift and go to state 65
+    ID              shift and go to state 5
+    WRITELN         shift and go to state 15
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
+    statement                      shift and go to state 25
+    declaration_statement          shift and go to state 8
+    assignment_statement           shift and go to state 9
+    print_statement                shift and go to state 10
+    if_statement                   shift and go to state 11
+    while_statement                shift and go to state 12
+    for_statement                  shift and go to state 13
+    type                           shift and go to state 14
 
 state 63
 
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN . LBRACE statement_list RBRACE
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression . RPAREN LBRACE statement_list RBRACE
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
 
-    LBRACE          shift and go to state 65
+    RPAREN          shift and go to state 66
+    PLUS            shift and go to state 44
+    MINUS           shift and go to state 45
+    TIMES           shift and go to state 46
+    DIVIDE          shift and go to state 47
 
 
 state 64
 
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE . LBRACE statement_list RBRACE
+    (15) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE . ELSE LBRACE statement_list RBRACE
 
-    LBRACE          shift and go to state 66
+    RBRACE          reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    ID              reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    WRITELN         reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    IF              reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    WHILE           reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    INT             reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    FLOAT           reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    BOOL            reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    STRING          reduce using rule 15 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    ELSE            shift and go to state 67
 
 
 state 65
 
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE . statement_list RBRACE
-    (2) statement_list -> . statement
-    (3) statement_list -> . statement_list statement
-    (4) statement -> . declaration_statement
-    (5) statement -> . assignment_statement
-    (6) statement -> . print_statement
-    (7) statement -> . if_statement
-    (8) statement -> . while_statement
-    (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (17) while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .
 
-    ID              shift and go to state 5
-    WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    RBRACE          reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    ID              reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    WRITELN         reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    IF              reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    WHILE           reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    INT             reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    FLOAT           reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    BOOL            reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
+    STRING          reduce using rule 17 (while_statement -> WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE .)
 
-    assignment_statement           shift and go to state 9
-    statement_list                 shift and go to state 67
-    statement                      shift and go to state 7
-    declaration_statement          shift and go to state 8
-    print_statement                shift and go to state 10
-    if_statement                   shift and go to state 11
-    while_statement                shift and go to state 12
-    for_statement                  shift and go to state 13
-    type                           shift and go to state 14
 
 state 66
 
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE . statement_list RBRACE
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 68
+
+
+state 67
+
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 69
+
+
+state 68
+
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE . statement_list RBRACE
     (2) statement_list -> . statement
     (3) statement_list -> . statement_list statement
     (4) statement -> . declaration_statement
@@ -1210,116 +1175,32 @@ state 66
     (7) statement -> . if_statement
     (8) statement -> . while_statement
     (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
     ID              shift and go to state 5
     WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
-    statement_list                 shift and go to state 68
+    assignment_statement           shift and go to state 9
+    statement_list                 shift and go to state 70
     statement                      shift and go to state 7
     declaration_statement          shift and go to state 8
-    assignment_statement           shift and go to state 9
-    print_statement                shift and go to state 10
-    if_statement                   shift and go to state 11
-    while_statement                shift and go to state 12
-    for_statement                  shift and go to state 13
-    type                           shift and go to state 14
-
-state 67
-
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list . RBRACE
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . declaration_statement
-    (5) statement -> . assignment_statement
-    (6) statement -> . print_statement
-    (7) statement -> . if_statement
-    (8) statement -> . while_statement
-    (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
-
-    RBRACE          shift and go to state 69
-    ID              shift and go to state 5
-    WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
-
-    assignment_statement           shift and go to state 9
-    statement                      shift and go to state 25
-    declaration_statement          shift and go to state 8
-    print_statement                shift and go to state 10
-    if_statement                   shift and go to state 11
-    while_statement                shift and go to state 12
-    for_statement                  shift and go to state 13
-    type                           shift and go to state 14
-
-state 68
-
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list . RBRACE
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . declaration_statement
-    (5) statement -> . assignment_statement
-    (6) statement -> . print_statement
-    (7) statement -> . if_statement
-    (8) statement -> . while_statement
-    (9) statement -> . for_statement
-    (10) declaration_statement -> . type ID SEMICOLON
-    (11) assignment_statement -> . ID ASSIGN expression SEMICOLON
-    (12) print_statement -> . WRITELN LPAREN expression RPAREN SEMICOLON
-    (13) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (14) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
-    (15) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
-    (16) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
-    (25) type -> . INT
-    (26) type -> . FLOAT
-    (27) type -> . BOOL
-    (28) type -> . STRING
-
-    RBRACE          shift and go to state 70
-    ID              shift and go to state 5
-    WRITELN         shift and go to state 15
-    IF              shift and go to state 16
-    WHILE           shift and go to state 17
-    FOR             shift and go to state 18
-    INT             shift and go to state 19
-    FLOAT           shift and go to state 20
-    BOOL            shift and go to state 21
-    STRING          shift and go to state 22
-
-    statement                      shift and go to state 25
-    declaration_statement          shift and go to state 8
-    assignment_statement           shift and go to state 9
     print_statement                shift and go to state 10
     if_statement                   shift and go to state 11
     while_statement                shift and go to state 12
@@ -1328,51 +1209,178 @@ state 68
 
 state 69
 
-    (16) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . declaration_statement
+    (5) statement -> . assignment_statement
+    (6) statement -> . print_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
-    RBRACE          reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    ID              reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    WRITELN         reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    IF              reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    WHILE           reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    FOR             reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    INT             reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    FLOAT           reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    BOOL            reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
-    STRING          reduce using rule 16 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    ID              shift and go to state 5
+    WRITELN         shift and go to state 15
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
 
+    statement_list                 shift and go to state 71
+    statement                      shift and go to state 7
+    declaration_statement          shift and go to state 8
+    assignment_statement           shift and go to state 9
+    print_statement                shift and go to state 10
+    if_statement                   shift and go to state 11
+    while_statement                shift and go to state 12
+    for_statement                  shift and go to state 13
+    type                           shift and go to state 14
 
 state 70
 
-    (14) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list . RBRACE
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . declaration_statement
+    (5) statement -> . assignment_statement
+    (6) statement -> . print_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
 
-    RBRACE          reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    ID              reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    WRITELN         reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    IF              reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    WHILE           reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    FOR             reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    INT             reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    FLOAT           reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    BOOL            reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
-    STRING          reduce using rule 14 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    RBRACE          shift and go to state 72
+    ID              shift and go to state 5
+    WRITELN         shift and go to state 15
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
+
+    assignment_statement           shift and go to state 9
+    statement                      shift and go to state 25
+    declaration_statement          shift and go to state 8
+    print_statement                shift and go to state 10
+    if_statement                   shift and go to state 11
+    while_statement                shift and go to state 12
+    for_statement                  shift and go to state 13
+    type                           shift and go to state 14
+
+state 71
+
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list . RBRACE
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . declaration_statement
+    (5) statement -> . assignment_statement
+    (6) statement -> . print_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) declaration_statement -> . type id_list SEMICOLON
+    (13) assignment_statement -> . ID ASSIGN expression SEMICOLON
+    (14) print_statement -> . WRITELN LPAREN STRING RPAREN SEMICOLON
+    (15) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (16) if_statement -> . IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+    (17) while_statement -> . WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE
+    (18) for_statement -> . FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE
+    (27) type -> . INT
+    (28) type -> . FLOAT
+    (29) type -> . BOOL
+    (30) type -> . STRING
+
+    RBRACE          shift and go to state 73
+    ID              shift and go to state 5
+    WRITELN         shift and go to state 15
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    FOR             shift and go to state 19
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 21
+    BOOL            shift and go to state 22
+    STRING          shift and go to state 16
+
+    statement                      shift and go to state 25
+    declaration_statement          shift and go to state 8
+    assignment_statement           shift and go to state 9
+    print_statement                shift and go to state 10
+    if_statement                   shift and go to state 11
+    while_statement                shift and go to state 12
+    for_statement                  shift and go to state 13
+    type                           shift and go to state 14
+
+state 72
+
+    (18) for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    ID              reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    WRITELN         reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    IF              reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    WHILE           reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    INT             reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    FLOAT           reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    BOOL            reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+    STRING          reduce using rule 18 (for_statement -> FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN LBRACE statement_list RBRACE .)
+
+
+state 73
+
+    (16) if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .
+
+    RBRACE          reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    ID              reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    WRITELN         reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    IF              reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    WHILE           reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    INT             reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    FLOAT           reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    BOOL            reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
+    STRING          reduce using rule 16 (if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 50 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 50 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 50 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 50 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 51 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 51 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 51 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 51 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 52 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 52 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 52 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 52 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 53 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 53 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 53 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 53 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 54 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 54 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 54 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 54 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 55 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 55 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 55 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 55 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 56 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 56 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 56 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 56 resolved as shift
