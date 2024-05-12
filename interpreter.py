@@ -5,6 +5,7 @@ class Interpreter:
     def __init__(self):
         self.variables = {}
         self.output = []
+        self.indent_level = 0  # Contador de indentación
 
     def generate(self, node):
         if node[0] == 'program':
@@ -12,8 +13,8 @@ class Interpreter:
                 self.generate(statement)
         elif node[0] == 'declaration':
             self.generate_declaration(node)
-        elif node[0] == 'declaration_init':  
-            self.generate_declaration_init(node)  
+        elif node[0] == 'declaration_init':
+            self.generate_declaration_init(node)
         elif node[0] == 'assignment':
             self.generate_assignment(node)
         elif node[0] == 'print':
@@ -29,56 +30,100 @@ class Interpreter:
         return "\n".join(self.output)
 
     def generate_declaration(self, node):
-        # node[1] es el tipo y node[2] es una lista de tuplas (ID, expresión opcional)
         for var, expr in node[2]:
             if expr is None:
-                self.output.append(f"{var} = None")  # o un valor por defecto según el tipo
+                self.output.append(f"{'    ' * self.indent_level}{var} = None")
             else:
                 value = self.generate_expression(expr)
-                self.output.append(f"{var} = {value}")
+                self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
         
     def generate_declaration_init(self, node):
-        # node[1] es el tipo, node[2] es el ID y node[3] es la expresión
         value = self.generate_expression(node[3])
         self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
-        self.output.append(f"{node[2]} = {value}")
+        self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
 
     def generate_assignment(self, node):
         value = self.generate_expression(node[2])
-        self.output.append(f"{node[1]} = {value}")
+        self.output.append(f"{'    ' * self.indent_level}{node[1]} = {value}")
 
     def generate_print(self, node):
         value = self.generate_expression(node[1])
-        self.output.append(f"print({value})")
+        self.output.append(f"{'    ' * self.indent_level}print({value})")
 
     def generate_if(self, node):
         condition = self.generate_expression(node[1])
-        self.output.append(f"if {condition}:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
+        self.output.append(f"{'    ' * self.indent_level}if {condition}:")
+        self.indent_level += 1
+        self.generate_statements(node[2])
+        self.indent_level -= 1
 
     def generate_if_else(self, node):
         condition = self.generate_expression(node[1])
-        self.output.append(f"if {condition}:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
-        self.output.append("else:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[3])])
+        self.output.append(f"{'    ' * self.indent_level}if {condition}:")
+        self.indent_level += 1
+        self.generate_statements(node[2])
+        self.indent_level -= 1
+        self.output.append(f"{'    ' * self.indent_level}else:")
+        self.indent_level += 1
+        self.generate_statements(node[3])
+        self.indent_level -= 1
 
     def generate_while(self, node):
+        # Generar la condición del bucle
         condition = self.generate_expression(node[1])
-        self.output.append(f"while {condition}:")
-        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
+        # Escribir la cabecera del bucle while con la condición
+        self.output.append(f"{'    ' * self.indent_level}while {condition}:")
+        # Incrementar el nivel de indentación para el cuerpo del bucle
+        self.indent_level += 1
+        # Generar cada instrucción dentro del cuerpo del bucle
+        for stmt in node[2]:
+            self.generate_statement(stmt)
+        # Decrementar el nivel de indentación después de finalizar el cuerpo del bucle
+        self.indent_level -= 1
+
 
     def generate_for(self, node):
         init = self.generate_statement(node[1])
         condition = self.generate_expression(node[2])
         increment_expr = self.generate_expression(node[3])
-        increment = f"{node[1][1]} = {increment_expr}"  # Ensure the increment is an assignment
-        self.output.append(init)
-        self.output.append(f"while {condition}:")
-        body = ["    " + stmt for stmt in self.generate_statements(node[4])]
-        body.append("    " + increment)
-        self.output.extend(body)
+        increment = f"{node[1][1]} = {increment_expr}"
 
+        self.output.append(f"{'    ' * self.indent_level}{init}")
+        self.output.append(f"{'    ' * self.indent_level}while {condition}:")
+        self.indent_level += 1
+        body_statements = node[4]
+        for stmt in body_statements:
+            self.generate_statement(stmt)
+        self.output.append(f"{'    ' * self.indent_level}{increment}")
+        self.indent_level -= 1
+
+    def generate_statements(self, statements):
+        for statement in statements:
+            self.generate_statement(statement)
+
+    def generate_statement(self, statement):
+        if statement[0] == 'assignment':
+            self.generate_assignment(statement)
+        elif statement[0] == 'expression':
+            if isinstance(statement[1], tuple) and statement[1][0] == 'postfix_op':
+                var = self.generate_expression(statement[1][1])
+                op = ' += 1' if statement[1][2] == '++' else ' -= 1'
+                self.output.append(f"{'    ' * self.indent_level}{var}{op}")
+            else:
+                expr = self.generate_expression(statement[1])
+                self.output.append(f"{'    ' * self.indent_level}{expr};")
+        elif statement[0] == 'print':
+            self.generate_print(statement)
+        elif statement[0] == 'if':
+            self.generate_if(statement)
+        elif statement[0] == 'if_else':
+            self.generate_if_else(statement)
+        elif statement[0] == 'while':
+            self.generate_while(statement)
+        elif statement[0] == 'for':
+            self.generate_for(statement)
+
+            
     def generate_expression(self, node):
         if isinstance(node, tuple):
             if node[0] == 'binary_op':
@@ -95,20 +140,6 @@ class Interpreter:
         else:
             return str(node)
 
-    def generate_statements(self, statements):
-        result = []
-        for statement in statements:
-            result.append(self.generate_statement(statement))
-        return result
-
-    def generate_statement(self, statement):
-        original_output = self.output
-        self.output = []
-        self.generate(statement)
-        result = "\n".join(self.output)
-        self.output = original_output
-        return result
-
     def to_python_code(self):
         return "\n".join(self.output)
 
@@ -120,7 +151,7 @@ def save_and_exit(python_code, error=None):
             file.write(f"report_error()\n")
         else:
             file.write(python_code)
-    
+
     if error:
         print(f"Error: {error}. Exiting to run temp.py.")
     else:

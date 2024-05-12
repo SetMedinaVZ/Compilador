@@ -93,7 +93,8 @@ class Parser:
         
     def p_expression_statement(self, p):
         'expression_statement : expression SEMICOLON'
-        p[0] = p[1]
+        p[0] = ('expression', p[1])
+
 
     def p_print_statement(self, p):
         '''

@@ -1,11 +1,11 @@
 program main{
     int i, n, f, x;
     write("texto dump");
-    f = 1;
-    x = 5;
-    while (x<f)
-    {
-        x--;
+    x = 1;
+    f = 5;
+    while (x < 5){
+        x++;
+        writeln(x);
     }
-    writeln(n);
+    
 }
