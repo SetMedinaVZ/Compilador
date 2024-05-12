@@ -1,10 +1,12 @@
+import sys
+import os
+
 class Interpreter:
     def __init__(self):
         self.variables = {}
         self.output = []
 
     def generate(self, node):
-        print(node, self.output, 'node mf! ')
         if node[0] == 'program':
             for statement in node[2]:
                 self.generate(statement)
@@ -22,7 +24,6 @@ class Interpreter:
             self.generate_while(node)
         elif node[0] == 'for':
             self.generate_for(node)
-        # Ensure the method returns a string
         return "\n".join(self.output)
 
     def generate_declaration(self, node):
@@ -97,12 +98,10 @@ class Interpreter:
     def to_python_code(self):
         return "\n".join(self.output)
 
-def save_and_run_python_code(python_code):
+def save_and_exit(python_code):
     with open("temp.py", "w") as file:
         file.write(python_code)
-    exec(open("temp.py").read())
-
-# Assuming `parsed_data` comes from your parser:
-# interpreter = Interpreter()
-# python_code = interpreter.generate(parsed_data)
-# save_and_run_python_code(python_code)
+    
+    # After writing the file, exit the current script
+    print("Python code saved to temp.py. Exiting to run temp.py.")
+    os._exit(0)

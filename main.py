@@ -1,6 +1,7 @@
 import sys
+import os
 from parser_ import Parser
-from interpreter import Interpreter
+from interpreter import Interpreter, save_and_exit
 
 if len(sys.argv) != 2:
     print("Usage: python main.py <filename>")
@@ -17,10 +18,8 @@ parsed_data = parser.parse(data)
 interpreter = Interpreter()
 python_code = interpreter.generate(parsed_data)
 
-# Save and run the generated Python code
-def save_and_run_python_code(python_code):
-    with open("temp.py", "w") as file:
-        file.write(python_code)
-    exec(open("temp.py").read())
+# Save the Python code to temp.py and exit
+save_and_exit(python_code)
 
-save_and_run_python_code(python_code)
+# Command to run temp.py after the main script exits
+os.system(f"{sys.executable} temp.py")
