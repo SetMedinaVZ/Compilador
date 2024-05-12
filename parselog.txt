@@ -9,136 +9,433 @@
    yacc.py: 445:Action : Shift and goto state 3
    yacc.py: 410:
    yacc.py: 411:State  : 3
-   yacc.py: 434:Stack  : PROGRAM ID . LexToken(LBRACE,'{',1,13)
+   yacc.py: 434:Stack  : PROGRAM ID . LexToken(LBRACE,'{',1,12)
    yacc.py: 445:Action : Shift and goto state 4
    yacc.py: 410:
    yacc.py: 411:State  : 4
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE . LexToken(INT,'int',2,19)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE . LexToken(INT,'int',2,18)
    yacc.py: 445:Action : Shift and goto state 27
    yacc.py: 410:
    yacc.py: 411:State  : 27
    yacc.py: 430:Defaulted state 27: Reduce using 40
    yacc.py: 434:Stack  : PROGRAM ID LBRACE INT . None
    yacc.py: 469:Action : Reduce rule [type -> INT] with ['int'] and goto state 16
-   yacc.py: 506:Result : <str @ 0x104ea3470> ('int')
+   yacc.py: 506:Result : <str @ 0x10322d4f0> ('int')
    yacc.py: 410:
    yacc.py: 411:State  : 16
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type . LexToken(ID,'b',2,23)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type . LexToken(ID,'i',2,22)
    yacc.py: 445:Action : Shift and goto state 47
    yacc.py: 410:
    yacc.py: 411:State  : 47
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type ID . LexToken(SEMICOLON,';',2,24)
-   yacc.py: 469:Action : Reduce rule [id_list -> ID] with ['b'] and goto state 46
-   yacc.py: 506:Result : <list @ 0x104ed7440> (['b'])
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type ID . LexToken(COMA,',',2,23)
+   yacc.py: 469:Action : Reduce rule [id_list -> ID] with ['i'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103233580> (['i'])
    yacc.py: 410:
    yacc.py: 411:State  : 46
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(SEMICOLON,';',2,24)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,23)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'n',2,24)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(COMA,',',2,25)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i'],',','n'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103233480> (['i', 'n'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,25)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'f',2,26)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(COMA,',',2,27)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i', 'n'],',','f'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103233580> (['i', 'n', 'f'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,27)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'x',2,28)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(SEMICOLON,';',2,29)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i', 'n', 'f'],',','x'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103233480> (['i', 'n', 'f', 'x'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(SEMICOLON,';',2,29)
    yacc.py: 445:Action : Shift and goto state 68
    yacc.py: 410:
    yacc.py: 411:State  : 68
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list SEMICOLON . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [declaration_statement -> type id_list SEMICOLON] with ['int',['b'],';'] and goto state 9
-   yacc.py: 506:Result : <tuple @ 0x104ed0980> (('declaration', 'int', ['b']))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list SEMICOLON . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [declaration_statement -> type id_list SEMICOLON] with ['int',<list @ 0x103233480>,';'] and goto state 9
+   yacc.py: 506:Result : <tuple @ 0x10322ca80> (('declaration', 'int', ['i', 'n', 'f', ' ...)
    yacc.py: 410:
    yacc.py: 411:State  : 9
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE declaration_statement . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [statement -> declaration_statement] with [<tuple @ 0x104ed0980>] and goto state 7
-   yacc.py: 506:Result : <tuple @ 0x104ed0980> (('declaration', 'int', ['b']))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE declaration_statement . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [statement -> declaration_statement] with [<tuple @ 0x10322ca80>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x10322ca80> (('declaration', 'int', ['i', 'n', 'f', ' ...)
    yacc.py: 410:
    yacc.py: 411:State  : 7
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x104ed0980>] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104ed73c0> ([('declaration', 'int', ['b'])])
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x10322ca80>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032334c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
    yacc.py: 410:
    yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'b',3,31)
-   yacc.py: 445:Action : Shift and goto state 5
-   yacc.py: 410:
-   yacc.py: 411:State  : 5
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',3,33)
-   yacc.py: 445:Action : Shift and goto state 30
-   yacc.py: 410:
-   yacc.py: 411:State  : 30
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,0,3,35)
-   yacc.py: 445:Action : Shift and goto state 24
-   yacc.py: 410:
-   yacc.py: 411:State  : 24
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',3,36)
-   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [0] and goto state 57
-   yacc.py: 506:Result : <int @ 0x105f9a488> (0)
-   yacc.py: 410:
-   yacc.py: 411:State  : 57
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',3,36)
-   yacc.py: 445:Action : Shift and goto state 76
-   yacc.py: 410:
-   yacc.py: 411:State  : 76
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['b','=',0,';'] and goto state 10
-   yacc.py: 506:Result : <tuple @ 0x104ed08c0> (('assignment', 'b', 0))
-   yacc.py: 410:
-   yacc.py: 411:State  : 10
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x104ed08c0>] and goto state 32
-   yacc.py: 506:Result : <tuple @ 0x104ed08c0> (('assignment', 'b', 0))
-   yacc.py: 410:
-   yacc.py: 411:State  : 32
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x104ed73c0>,<tuple @ 0x104ed08c0>] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104ed7340> ([('declaration', 'int', ['b']), ('assign ...)
-   yacc.py: 410:
-   yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',4,42)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',3,35)
    yacc.py: 445:Action : Shift and goto state 17
    yacc.py: 410:
    yacc.py: 411:State  : 17
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',4,49)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',3,42)
    yacc.py: 445:Action : Shift and goto state 48
    yacc.py: 410:
    yacc.py: 411:State  : 48
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(ID,'b',4,50)
-   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(STRING,'"texto dump"',3,43)
+   yacc.py: 445:Action : Shift and goto state 54
    yacc.py: 410:
-   yacc.py: 411:State  : 55
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN ID . LexToken(RPAREN,')',4,51)
-   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['b'] and goto state 70
-   yacc.py: 506:Result : <str @ 0x105fa58b8> ('b')
+   yacc.py: 411:State  : 54
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN STRING . LexToken(RPAREN,')',3,55)
+   yacc.py: 469:Action : Reduce rule [expression -> STRING] with ['"texto dump"'] and goto state 70
+   yacc.py: 506:Result : <str @ 0x103233c30> ('"texto dump"')
    yacc.py: 410:
    yacc.py: 411:State  : 70
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',4,51)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',3,55)
    yacc.py: 445:Action : Shift and goto state 78
    yacc.py: 410:
    yacc.py: 411:State  : 78
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',4,52)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',3,56)
    yacc.py: 445:Action : Shift and goto state 83
    yacc.py: 410:
    yacc.py: 411:State  : 83
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','b',')',';'] and goto state 11
-   yacc.py: 506:Result : <tuple @ 0x104ec6700> (('print', 'b'))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','"texto dump"',')',';'] and goto state 11
+   yacc.py: 506:Result : <tuple @ 0x103222840> (('print', '"texto dump"'))
    yacc.py: 410:
    yacc.py: 411:State  : 11
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [('print', 'b')] and goto state 32
-   yacc.py: 506:Result : <tuple @ 0x104ec6700> (('print', 'b'))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [<tuple @ 0x103222840>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103222840> (('print', '"texto dump"'))
    yacc.py: 410:
    yacc.py: 411:State  : 32
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x104ed7340>,('print', 'b')] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104ed73c0> ([('declaration', 'int', ['b']), ('assign ...)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x1032334c0>,<tuple @ 0x103222840>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103233580> ([('declaration', 'int', ['i', 'n', 'f',  ...)
    yacc.py: 410:
    yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(RBRACE,'}',5,54)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'f',4,62)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',4,64)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,1,4,66)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',4,67)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [1] and goto state 57
+   yacc.py: 506:Result : <int @ 0x1043f64a8> (1)
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',4,67)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['f','=',1,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x10322c9c0> (('assignment', 'f', 1))
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x10322c9c0>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x10322c9c0> (('assignment', 'f', 1))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103233580>,<tuple @ 0x10322c9c0>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103233440> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'x',5,73)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',5,75)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,5,5,77)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',5,78)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [5] and goto state 57
+   yacc.py: 506:Result : <int @ 0x1043f6528> (5)
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',5,78)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['x','=',5,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x10322da40> (('assignment', 'x', 5))
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x10322da40>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x10322da40> (('assignment', 'x', 5))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103233440>,<tuple @ 0x10322da40>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032334c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(IF,'if',6,84)
+   yacc.py: 445:Action : Shift and goto state 19
+   yacc.py: 410:
+   yacc.py: 411:State  : 19
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF . LexToken(LPAREN,'(',6,87)
+   yacc.py: 445:Action : Shift and goto state 50
+   yacc.py: 410:
+   yacc.py: 411:State  : 50
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN . LexToken(ID,'x',6,89)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN ID . LexToken(GT,'>',6,91)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 72
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 72
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression . LexToken(GT,'>',6,91)
+   yacc.py: 445:Action : Shift and goto state 41
+   yacc.py: 410:
+   yacc.py: 411:State  : 41
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT . LexToken(ID,'f',6,93)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT ID . LexToken(RPAREN,')',6,94)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['f'] and goto state 63
+   yacc.py: 506:Result : <str @ 0x104401998> ('f')
+   yacc.py: 410:
+   yacc.py: 411:State  : 63
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT expression . LexToken(RPAREN,')',6,94)
+   yacc.py: 469:Action : Reduce rule [expression -> expression GT expression] with ['x','>','f'] and goto state 72
+   yacc.py: 506:Result : <tuple @ 0x1032266b0> (('binary_op', 'x', '>', 'f'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 72
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression . LexToken(RPAREN,')',6,94)
+   yacc.py: 445:Action : Shift and goto state 80
+   yacc.py: 410:
+   yacc.py: 411:State  : 80
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN . LexToken(LBRACE,'{',7,100)
+   yacc.py: 445:Action : Shift and goto state 85
+   yacc.py: 410:
+   yacc.py: 411:State  : 85
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE . LexToken(ID,'n',8,110)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID . LexToken(ASSIGN,'=',8,112)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN . LexToken(ID,'x',8,114)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN ID . LexToken(PLUS,'+',8,116)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 57
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression . LexToken(PLUS,'+',8,116)
+   yacc.py: 445:Action : Shift and goto state 36
+   yacc.py: 410:
+   yacc.py: 411:State  : 36
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS . LexToken(ID,'f',8,118)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS ID . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['f'] and goto state 58
+   yacc.py: 506:Result : <str @ 0x104401998> ('f')
+   yacc.py: 410:
+   yacc.py: 411:State  : 58
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS expression . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 469:Action : Reduce rule [expression -> expression PLUS expression] with ['x','+','f'] and goto state 57
+   yacc.py: 506:Result : <tuple @ 0x103226750> (('binary_op', 'x', '+', 'f'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression SEMICOLON . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['n','=',<tuple @ 0x103226750>,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x10322dcc0> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE assignment_statement . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x10322dcc0>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x10322dcc0> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 7
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x10322dcc0>] and goto state 88
+   yacc.py: 506:Result : <list @ 0x103233440> ([('assignment', 'n', ('binary_op', 'x',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 88
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list . LexToken(RBRACE,'}',9,125)
+   yacc.py: 445:Action : Shift and goto state 91
+   yacc.py: 410:
+   yacc.py: 411:State  : 91
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE . LexToken(ELSE,'else',9,126)
+   yacc.py: 445:Action : Shift and goto state 94
+   yacc.py: 410:
+   yacc.py: 411:State  : 94
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE . LexToken(LBRACE,'{',10,135)
+   yacc.py: 445:Action : Shift and goto state 96
+   yacc.py: 410:
+   yacc.py: 411:State  : 96
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE . LexToken(ID,'n',11,145)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID . LexToken(ASSIGN,'=',11,147)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN . LexToken(ID,'x',11,149)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN ID . LexToken(MINUS,'-',11,151)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 57
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression . LexToken(MINUS,'-',11,151)
+   yacc.py: 445:Action : Shift and goto state 37
+   yacc.py: 410:
+   yacc.py: 411:State  : 37
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS . LexToken(VAR_INT,4,11,153)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS VAR_INT . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [4] and goto state 59
+   yacc.py: 506:Result : <int @ 0x1043f6508> (4)
+   yacc.py: 410:
+   yacc.py: 411:State  : 59
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS expression . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 469:Action : Reduce rule [expression -> expression MINUS expression] with ['x','-',4] and goto state 57
+   yacc.py: 506:Result : <tuple @ 0x103226700> (('binary_op', 'x', '-', 4))
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression SEMICOLON . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['n','=',<tuple @ 0x103226700>,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x10322df00> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE assignment_statement . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x10322df00>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x10322df00> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 7
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x10322df00>] and goto state 98
+   yacc.py: 506:Result : <list @ 0x103233400> ([('assignment', 'n', ('binary_op', 'x',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 98
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list . LexToken(RBRACE,'}',12,160)
+   yacc.py: 445:Action : Shift and goto state 100
+   yacc.py: 410:
+   yacc.py: 411:State  : 100
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE] with ['if','(',<tuple @ 0x1032266b0>,')','{',<list @ 0x103233440>,'}','else','{',<list @ 0x103233400>,'}'] and goto state 12
+   yacc.py: 506:Result : <tuple @ 0x103226480> (('if_else', ('binary_op', 'x', '>', 'f') ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 12
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list if_statement . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [statement -> if_statement] with [<tuple @ 0x103226480>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103226480> (('if_else', ('binary_op', 'x', '>', 'f') ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x1032334c0>,<tuple @ 0x103226480>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103233580> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 445:Action : Shift and goto state 17
+   yacc.py: 410:
+   yacc.py: 411:State  : 17
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',13,173)
+   yacc.py: 445:Action : Shift and goto state 48
+   yacc.py: 410:
+   yacc.py: 411:State  : 48
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(ID,'n',13,174)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN ID . LexToken(RPAREN,')',13,175)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['n'] and goto state 70
+   yacc.py: 506:Result : <str @ 0x104401b58> ('n')
+   yacc.py: 410:
+   yacc.py: 411:State  : 70
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',13,175)
+   yacc.py: 445:Action : Shift and goto state 78
+   yacc.py: 410:
+   yacc.py: 411:State  : 78
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',13,176)
+   yacc.py: 445:Action : Shift and goto state 83
+   yacc.py: 410:
+   yacc.py: 411:State  : 83
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','n',')',';'] and goto state 11
+   yacc.py: 506:Result : <tuple @ 0x103220f00> (('print', 'n'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 11
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [('print', 'n')] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103220f00> (('print', 'n'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103233580>,('print', 'n')] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032334c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(RBRACE,'}',14,178)
    yacc.py: 445:Action : Shift and goto state 31
    yacc.py: 410:
    yacc.py: 411:State  : 31
    yacc.py: 430:Defaulted state 31: Reduce using 1
    yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list RBRACE . None
-   yacc.py: 469:Action : Reduce rule [program -> PROGRAM ID LBRACE statement_list RBRACE] with ['program','main','{',<list @ 0x104ed73c0>,'}'] and goto state 1
-   yacc.py: 506:Result : <tuple @ 0x104ed1940> (('program', 'main', [('declaration', 'in ...)
+   yacc.py: 469:Action : Reduce rule [program -> PROGRAM ID LBRACE statement_list RBRACE] with ['program','main','{',<list @ 0x1032334c0>,'}'] and goto state 1
+   yacc.py: 506:Result : <tuple @ 0x10322e240> (('program', 'main', [('declaration', 'in ...)
    yacc.py: 410:
    yacc.py: 411:State  : 1
    yacc.py: 434:Stack  : program . $end
-   yacc.py: 571:Done   : Returning <tuple @ 0x104ed1940> (('program', 'main', [('declaration', 'in ...)
+   yacc.py: 571:Done   : Returning <tuple @ 0x10322e240> (('program', 'main', [('declaration', 'in ...)
    yacc.py: 572:PLY: PARSE DEBUG END
    yacc.py: 362:PLY: PARSE DEBUG START
    yacc.py: 410:
@@ -151,134 +448,431 @@
    yacc.py: 445:Action : Shift and goto state 3
    yacc.py: 410:
    yacc.py: 411:State  : 3
-   yacc.py: 434:Stack  : PROGRAM ID . LexToken(LBRACE,'{',1,13)
+   yacc.py: 434:Stack  : PROGRAM ID . LexToken(LBRACE,'{',1,12)
    yacc.py: 445:Action : Shift and goto state 4
    yacc.py: 410:
    yacc.py: 411:State  : 4
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE . LexToken(INT,'int',2,19)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE . LexToken(INT,'int',2,18)
    yacc.py: 445:Action : Shift and goto state 27
    yacc.py: 410:
    yacc.py: 411:State  : 27
    yacc.py: 430:Defaulted state 27: Reduce using 40
    yacc.py: 434:Stack  : PROGRAM ID LBRACE INT . None
    yacc.py: 469:Action : Reduce rule [type -> INT] with ['int'] and goto state 16
-   yacc.py: 506:Result : <str @ 0x104eed030> ('int')
+   yacc.py: 506:Result : <str @ 0x1032465f0> ('int')
    yacc.py: 410:
    yacc.py: 411:State  : 16
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type . LexToken(ID,'b',2,23)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type . LexToken(ID,'i',2,22)
    yacc.py: 445:Action : Shift and goto state 47
    yacc.py: 410:
    yacc.py: 411:State  : 47
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type ID . LexToken(SEMICOLON,';',2,24)
-   yacc.py: 469:Action : Reduce rule [id_list -> ID] with ['b'] and goto state 46
-   yacc.py: 506:Result : <list @ 0x104eee480> (['b'])
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type ID . LexToken(COMA,',',2,23)
+   yacc.py: 469:Action : Reduce rule [id_list -> ID] with ['i'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103246400> (['i'])
    yacc.py: 410:
    yacc.py: 411:State  : 46
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(SEMICOLON,';',2,24)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,23)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'n',2,24)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(COMA,',',2,25)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i'],',','n'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103246340> (['i', 'n'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,25)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'f',2,26)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(COMA,',',2,27)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i', 'n'],',','f'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103246400> (['i', 'n', 'f'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(COMA,',',2,27)
+   yacc.py: 445:Action : Shift and goto state 69
+   yacc.py: 410:
+   yacc.py: 411:State  : 69
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA . LexToken(ID,'x',2,28)
+   yacc.py: 445:Action : Shift and goto state 77
+   yacc.py: 410:
+   yacc.py: 411:State  : 77
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list COMA ID . LexToken(SEMICOLON,';',2,29)
+   yacc.py: 469:Action : Reduce rule [id_list -> id_list COMA ID] with [['i', 'n', 'f'],',','x'] and goto state 46
+   yacc.py: 506:Result : <list @ 0x103246340> (['i', 'n', 'f', 'x'])
+   yacc.py: 410:
+   yacc.py: 411:State  : 46
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list . LexToken(SEMICOLON,';',2,29)
    yacc.py: 445:Action : Shift and goto state 68
    yacc.py: 410:
    yacc.py: 411:State  : 68
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list SEMICOLON . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [declaration_statement -> type id_list SEMICOLON] with ['int',['b'],';'] and goto state 9
-   yacc.py: 506:Result : <tuple @ 0x104ed77c0> (('declaration', 'int', ['b']))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE type id_list SEMICOLON . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [declaration_statement -> type id_list SEMICOLON] with ['int',<list @ 0x103246340>,';'] and goto state 9
+   yacc.py: 506:Result : <tuple @ 0x103233c00> (('declaration', 'int', ['i', 'n', 'f', ' ...)
    yacc.py: 410:
    yacc.py: 411:State  : 9
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE declaration_statement . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [statement -> declaration_statement] with [<tuple @ 0x104ed77c0>] and goto state 7
-   yacc.py: 506:Result : <tuple @ 0x104ed77c0> (('declaration', 'int', ['b']))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE declaration_statement . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [statement -> declaration_statement] with [<tuple @ 0x103233c00>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x103233c00> (('declaration', 'int', ['i', 'n', 'f', ' ...)
    yacc.py: 410:
    yacc.py: 411:State  : 7
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement . LexToken(ID,'b',3,31)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x104ed77c0>] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104eee400> ([('declaration', 'int', ['b'])])
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement . LexToken(WRITELN,'writeln',3,35)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x103233c00>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032463c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
    yacc.py: 410:
    yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'b',3,31)
-   yacc.py: 445:Action : Shift and goto state 5
-   yacc.py: 410:
-   yacc.py: 411:State  : 5
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',3,33)
-   yacc.py: 445:Action : Shift and goto state 30
-   yacc.py: 410:
-   yacc.py: 411:State  : 30
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,0,3,35)
-   yacc.py: 445:Action : Shift and goto state 24
-   yacc.py: 410:
-   yacc.py: 411:State  : 24
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',3,36)
-   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [0] and goto state 57
-   yacc.py: 506:Result : <int @ 0x105f9a488> (0)
-   yacc.py: 410:
-   yacc.py: 411:State  : 57
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',3,36)
-   yacc.py: 445:Action : Shift and goto state 76
-   yacc.py: 410:
-   yacc.py: 411:State  : 76
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['b','=',0,';'] and goto state 10
-   yacc.py: 506:Result : <tuple @ 0x104ed7c80> (('assignment', 'b', 0))
-   yacc.py: 410:
-   yacc.py: 411:State  : 10
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x104ed7c80>] and goto state 32
-   yacc.py: 506:Result : <tuple @ 0x104ed7c80> (('assignment', 'b', 0))
-   yacc.py: 410:
-   yacc.py: 411:State  : 32
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(WRITELN,'writeln',4,42)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x104eee400>,<tuple @ 0x104ed7c80>] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104eee3c0> ([('declaration', 'int', ['b']), ('assign ...)
-   yacc.py: 410:
-   yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',4,42)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',3,35)
    yacc.py: 445:Action : Shift and goto state 17
    yacc.py: 410:
    yacc.py: 411:State  : 17
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',4,49)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',3,42)
    yacc.py: 445:Action : Shift and goto state 48
    yacc.py: 410:
    yacc.py: 411:State  : 48
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(ID,'b',4,50)
-   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(STRING,'"texto dump"',3,43)
+   yacc.py: 445:Action : Shift and goto state 54
    yacc.py: 410:
-   yacc.py: 411:State  : 55
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN ID . LexToken(RPAREN,')',4,51)
-   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['b'] and goto state 70
-   yacc.py: 506:Result : <str @ 0x105fa58b8> ('b')
+   yacc.py: 411:State  : 54
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN STRING . LexToken(RPAREN,')',3,55)
+   yacc.py: 469:Action : Reduce rule [expression -> STRING] with ['"texto dump"'] and goto state 70
+   yacc.py: 506:Result : <str @ 0x103246730> ('"texto dump"')
    yacc.py: 410:
    yacc.py: 411:State  : 70
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',4,51)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',3,55)
    yacc.py: 445:Action : Shift and goto state 78
    yacc.py: 410:
    yacc.py: 411:State  : 78
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',4,52)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',3,56)
    yacc.py: 445:Action : Shift and goto state 83
    yacc.py: 410:
    yacc.py: 411:State  : 83
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','b',')',';'] and goto state 11
-   yacc.py: 506:Result : <tuple @ 0x104ed3d00> (('print', 'b'))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','"texto dump"',')',';'] and goto state 11
+   yacc.py: 506:Result : <tuple @ 0x103230040> (('print', '"texto dump"'))
    yacc.py: 410:
    yacc.py: 411:State  : 11
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [('print', 'b')] and goto state 32
-   yacc.py: 506:Result : <tuple @ 0x104ed3d00> (('print', 'b'))
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [<tuple @ 0x103230040>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103230040> (('print', '"texto dump"'))
    yacc.py: 410:
    yacc.py: 411:State  : 32
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(RBRACE,'}',5,54)
-   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x104eee3c0>,('print', 'b')] and goto state 6
-   yacc.py: 506:Result : <list @ 0x104eee400> ([('declaration', 'int', ['b']), ('assign ...)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(ID,'f',4,62)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x1032463c0>,<tuple @ 0x103230040>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103246400> ([('declaration', 'int', ['i', 'n', 'f',  ...)
    yacc.py: 410:
    yacc.py: 411:State  : 6
-   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(RBRACE,'}',5,54)
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'f',4,62)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',4,64)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,1,4,66)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',4,67)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [1] and goto state 57
+   yacc.py: 506:Result : <int @ 0x1043f64a8> (1)
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',4,67)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['f','=',1,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x103233c80> (('assignment', 'f', 1))
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x103233c80>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103233c80> (('assignment', 'f', 1))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(ID,'x',5,73)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103246400>,<tuple @ 0x103233c80>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103246300> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(ID,'x',5,73)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID . LexToken(ASSIGN,'=',5,75)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN . LexToken(VAR_INT,5,5,77)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN VAR_INT . LexToken(SEMICOLON,';',5,78)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [5] and goto state 57
+   yacc.py: 506:Result : <int @ 0x1043f6528> (5)
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression . LexToken(SEMICOLON,';',5,78)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list ID ASSIGN expression SEMICOLON . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['x','=',5,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x103246780> (('assignment', 'x', 5))
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list assignment_statement . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x103246780>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103246780> (('assignment', 'x', 5))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(IF,'if',6,84)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103246300>,<tuple @ 0x103246780>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032463c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(IF,'if',6,84)
+   yacc.py: 445:Action : Shift and goto state 19
+   yacc.py: 410:
+   yacc.py: 411:State  : 19
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF . LexToken(LPAREN,'(',6,87)
+   yacc.py: 445:Action : Shift and goto state 50
+   yacc.py: 410:
+   yacc.py: 411:State  : 50
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN . LexToken(ID,'x',6,89)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN ID . LexToken(GT,'>',6,91)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 72
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 72
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression . LexToken(GT,'>',6,91)
+   yacc.py: 445:Action : Shift and goto state 41
+   yacc.py: 410:
+   yacc.py: 411:State  : 41
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT . LexToken(ID,'f',6,93)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT ID . LexToken(RPAREN,')',6,94)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['f'] and goto state 63
+   yacc.py: 506:Result : <str @ 0x104401998> ('f')
+   yacc.py: 410:
+   yacc.py: 411:State  : 63
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression GT expression . LexToken(RPAREN,')',6,94)
+   yacc.py: 469:Action : Reduce rule [expression -> expression GT expression] with ['x','>','f'] and goto state 72
+   yacc.py: 506:Result : <tuple @ 0x103226a20> (('binary_op', 'x', '>', 'f'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 72
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression . LexToken(RPAREN,')',6,94)
+   yacc.py: 445:Action : Shift and goto state 80
+   yacc.py: 410:
+   yacc.py: 411:State  : 80
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN . LexToken(LBRACE,'{',7,100)
+   yacc.py: 445:Action : Shift and goto state 85
+   yacc.py: 410:
+   yacc.py: 411:State  : 85
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE . LexToken(ID,'n',8,110)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID . LexToken(ASSIGN,'=',8,112)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN . LexToken(ID,'x',8,114)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN ID . LexToken(PLUS,'+',8,116)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 57
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression . LexToken(PLUS,'+',8,116)
+   yacc.py: 445:Action : Shift and goto state 36
+   yacc.py: 410:
+   yacc.py: 411:State  : 36
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS . LexToken(ID,'f',8,118)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS ID . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['f'] and goto state 58
+   yacc.py: 506:Result : <str @ 0x104401998> ('f')
+   yacc.py: 410:
+   yacc.py: 411:State  : 58
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression PLUS expression . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 469:Action : Reduce rule [expression -> expression PLUS expression] with ['x','+','f'] and goto state 57
+   yacc.py: 506:Result : <tuple @ 0x103226930> (('binary_op', 'x', '+', 'f'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression . LexToken(SEMICOLON,';',8,119)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE ID ASSIGN expression SEMICOLON . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['n','=',<tuple @ 0x103226930>,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x103246b80> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE assignment_statement . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x103246b80>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x103246b80> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 7
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement . LexToken(RBRACE,'}',9,125)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x103246b80>] and goto state 88
+   yacc.py: 506:Result : <list @ 0x103246300> ([('assignment', 'n', ('binary_op', 'x',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 88
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list . LexToken(RBRACE,'}',9,125)
+   yacc.py: 445:Action : Shift and goto state 91
+   yacc.py: 410:
+   yacc.py: 411:State  : 91
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE . LexToken(ELSE,'else',9,126)
+   yacc.py: 445:Action : Shift and goto state 94
+   yacc.py: 410:
+   yacc.py: 411:State  : 94
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE . LexToken(LBRACE,'{',10,135)
+   yacc.py: 445:Action : Shift and goto state 96
+   yacc.py: 410:
+   yacc.py: 411:State  : 96
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE . LexToken(ID,'n',11,145)
+   yacc.py: 445:Action : Shift and goto state 5
+   yacc.py: 410:
+   yacc.py: 411:State  : 5
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID . LexToken(ASSIGN,'=',11,147)
+   yacc.py: 445:Action : Shift and goto state 30
+   yacc.py: 410:
+   yacc.py: 411:State  : 30
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN . LexToken(ID,'x',11,149)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN ID . LexToken(MINUS,'-',11,151)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['x'] and goto state 57
+   yacc.py: 506:Result : <str @ 0x104401d88> ('x')
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression . LexToken(MINUS,'-',11,151)
+   yacc.py: 445:Action : Shift and goto state 37
+   yacc.py: 410:
+   yacc.py: 411:State  : 37
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS . LexToken(VAR_INT,4,11,153)
+   yacc.py: 445:Action : Shift and goto state 24
+   yacc.py: 410:
+   yacc.py: 411:State  : 24
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS VAR_INT . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 469:Action : Reduce rule [expression -> VAR_INT] with [4] and goto state 59
+   yacc.py: 506:Result : <int @ 0x1043f6508> (4)
+   yacc.py: 410:
+   yacc.py: 411:State  : 59
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression MINUS expression . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 469:Action : Reduce rule [expression -> expression MINUS expression] with ['x','-',4] and goto state 57
+   yacc.py: 506:Result : <tuple @ 0x103226a70> (('binary_op', 'x', '-', 4))
+   yacc.py: 410:
+   yacc.py: 411:State  : 57
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression . LexToken(SEMICOLON,';',11,154)
+   yacc.py: 445:Action : Shift and goto state 76
+   yacc.py: 410:
+   yacc.py: 411:State  : 76
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE ID ASSIGN expression SEMICOLON . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [assignment_statement -> ID ASSIGN expression SEMICOLON] with ['n','=',<tuple @ 0x103226a70>,';'] and goto state 10
+   yacc.py: 506:Result : <tuple @ 0x103246880> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 10
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE assignment_statement . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [statement -> assignment_statement] with [<tuple @ 0x103246880>] and goto state 7
+   yacc.py: 506:Result : <tuple @ 0x103246880> (('assignment', 'n', ('binary_op', 'x', ' ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 7
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement . LexToken(RBRACE,'}',12,160)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<tuple @ 0x103246880>] and goto state 98
+   yacc.py: 506:Result : <list @ 0x1032462c0> ([('assignment', 'n', ('binary_op', 'x',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 98
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list . LexToken(RBRACE,'}',12,160)
+   yacc.py: 445:Action : Shift and goto state 100
+   yacc.py: 410:
+   yacc.py: 411:State  : 100
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [if_statement -> IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE] with ['if','(',<tuple @ 0x103226a20>,')','{',<list @ 0x103246300>,'}','else','{',<list @ 0x1032462c0>,'}'] and goto state 12
+   yacc.py: 506:Result : <tuple @ 0x103226520> (('if_else', ('binary_op', 'x', '>', 'f') ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 12
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list if_statement . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [statement -> if_statement] with [<tuple @ 0x103226520>] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103226520> (('if_else', ('binary_op', 'x', '>', 'f') ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x1032463c0>,<tuple @ 0x103226520>] and goto state 6
+   yacc.py: 506:Result : <list @ 0x103246400> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(WRITELN,'writeln',13,166)
+   yacc.py: 445:Action : Shift and goto state 17
+   yacc.py: 410:
+   yacc.py: 411:State  : 17
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN . LexToken(LPAREN,'(',13,173)
+   yacc.py: 445:Action : Shift and goto state 48
+   yacc.py: 410:
+   yacc.py: 411:State  : 48
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN . LexToken(ID,'n',13,174)
+   yacc.py: 445:Action : Shift and goto state 55
+   yacc.py: 410:
+   yacc.py: 411:State  : 55
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN ID . LexToken(RPAREN,')',13,175)
+   yacc.py: 469:Action : Reduce rule [expression -> ID] with ['n'] and goto state 70
+   yacc.py: 506:Result : <str @ 0x104401b58> ('n')
+   yacc.py: 410:
+   yacc.py: 411:State  : 70
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression . LexToken(RPAREN,')',13,175)
+   yacc.py: 445:Action : Shift and goto state 78
+   yacc.py: 410:
+   yacc.py: 411:State  : 78
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN . LexToken(SEMICOLON,';',13,176)
+   yacc.py: 445:Action : Shift and goto state 83
+   yacc.py: 410:
+   yacc.py: 411:State  : 83
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list WRITELN LPAREN expression RPAREN SEMICOLON . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [print_statement -> WRITELN LPAREN expression RPAREN SEMICOLON] with ['writeln','(','n',')',';'] and goto state 11
+   yacc.py: 506:Result : <tuple @ 0x103220800> (('print', 'n'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 11
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list print_statement . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [statement -> print_statement] with [('print', 'n')] and goto state 32
+   yacc.py: 506:Result : <tuple @ 0x103220800> (('print', 'n'))
+   yacc.py: 410:
+   yacc.py: 411:State  : 32
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list statement . LexToken(RBRACE,'}',14,178)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<list @ 0x103246400>,('print', 'n')] and goto state 6
+   yacc.py: 506:Result : <list @ 0x1032463c0> ([('declaration', 'int', ['i', 'n', 'f',  ...)
+   yacc.py: 410:
+   yacc.py: 411:State  : 6
+   yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list . LexToken(RBRACE,'}',14,178)
    yacc.py: 445:Action : Shift and goto state 31
    yacc.py: 410:
    yacc.py: 411:State  : 31
    yacc.py: 430:Defaulted state 31: Reduce using 1
    yacc.py: 434:Stack  : PROGRAM ID LBRACE statement_list RBRACE . None
-   yacc.py: 469:Action : Reduce rule [program -> PROGRAM ID LBRACE statement_list RBRACE] with ['program','main','{',<list @ 0x104eee400>,'}'] and goto state 1
-   yacc.py: 506:Result : <tuple @ 0x104eee700> (('program', 'main', [('declaration', 'in ...)
+   yacc.py: 469:Action : Reduce rule [program -> PROGRAM ID LBRACE statement_list RBRACE] with ['program','main','{',<list @ 0x1032463c0>,'}'] and goto state 1
+   yacc.py: 506:Result : <tuple @ 0x103246d00> (('program', 'main', [('declaration', 'in ...)
    yacc.py: 410:
    yacc.py: 411:State  : 1
    yacc.py: 434:Stack  : program . $end
-   yacc.py: 571:Done   : Returning <tuple @ 0x104eee700> (('program', 'main', [('declaration', 'in ...)
+   yacc.py: 571:Done   : Returning <tuple @ 0x103246d00> (('program', 'main', [('declaration', 'in ...)
    yacc.py: 572:PLY: PARSE DEBUG END

@@ -11,9 +11,12 @@ This project is a simple transpiler and interpreter for a custom programming lan
 To run the main script with a specific code file, use the following command:
 
 ```bash
-python main.py codes/code1.txt
-
+python main.py {your-file-path}
 ```
+```bash
+python temp.py
+```
+
 
 ## FALTA: CORREGIR EN EL PARSER ESTE ERROR: 
 
