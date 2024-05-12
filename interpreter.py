@@ -12,6 +12,8 @@ class Interpreter:
                 self.generate(statement)
         elif node[0] == 'declaration':
             self.generate_declaration(node)
+        elif node[0] == 'declaration_init':  
+            self.generate_declaration_init(node)  
         elif node[0] == 'assignment':
             self.generate_assignment(node)
         elif node[0] == 'print':
@@ -27,8 +29,19 @@ class Interpreter:
         return "\n".join(self.output)
 
     def generate_declaration(self, node):
-        for var in node[2]:
-            self.output.append(f"{var} = None")
+        # node[1] es el tipo y node[2] es una lista de tuplas (ID, expresión opcional)
+        for var, expr in node[2]:
+            if expr is None:
+                self.output.append(f"{var} = None")  # o un valor por defecto según el tipo
+            else:
+                value = self.generate_expression(expr)
+                self.output.append(f"{var} = {value}")
+        
+    def generate_declaration_init(self, node):
+        # node[1] es el tipo, node[2] es el ID y node[3] es la expresión
+        value = self.generate_expression(node[3])
+        self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
+        self.output.append(f"{node[2]} = {value}")
 
     def generate_assignment(self, node):
         value = self.generate_expression(node[2])

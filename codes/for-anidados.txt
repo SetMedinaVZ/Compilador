@@ -1,0 +1,9 @@
+program main{
+    int x;
+    int f;
+    for (x=0 ; x>f ; x--)
+    {
+        n = x + f;
+        writeln(n);
+    }
+}

@@ -53,13 +53,29 @@ class Parser:
 
     def p_declaration_statement(self, p):
         '''
-        declaration_statement : type ID SEMICOLON
-                            | type ID ASSIGN expression SEMICOLON
+        declaration_statement : type declaration_list SEMICOLON
         '''
-        if len(p) == 4:
-            p[0] = ('declaration', p[1], p[2])
+        p[0] = ('declaration', p[1], p[2])
+
+    def p_declaration_list(self, p):
+        '''
+        declaration_list : declaration_item
+                        | declaration_list COMA declaration_item
+        '''
+        if len(p) == 2:
+            p[0] = [p[1]]
         else:
-            p[0] = ('declaration_init', p[1], p[2], p[4])
+            p[0] = p[1] + [p[3]]
+
+    def p_declaration_item(self, p):
+        '''
+        declaration_item : ID
+                        | ID ASSIGN expression
+        '''
+        if len(p) == 2:
+            p[0] = (p[1], None)  # No hay inicialización
+        else:
+            p[0] = (p[1], p[3])  # Con inicialización
 
     def p_id_list(self, p):
         '''
