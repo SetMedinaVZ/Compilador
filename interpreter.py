@@ -43,6 +43,13 @@ class Interpreter:
         self.output.append(f"if {condition}:")
         self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
 
+    def generate_if_else(self, node):
+        condition = self.generate_expression(node[1])
+        self.output.append(f"if {condition}:")
+        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[2])])
+        self.output.append("else:")
+        self.output.extend(["    " + stmt for stmt in self.generate_statements(node[3])])
+
     def generate_while(self, node):
         condition = self.generate_expression(node[1])
         self.output.append(f"while {condition}:")
@@ -52,7 +59,7 @@ class Interpreter:
         init = self.generate_statement(node[1])
         condition = self.generate_expression(node[2])
         increment_expr = self.generate_expression(node[3])
-        increment = f"{node[1][1]} = {increment_expr}"  # node[1][1] is the variable in the initialization
+        increment = f"{node[1][1]} = {increment_expr}"  # Ensure the increment is an assignment
         self.output.append(init)
         self.output.append(f"while {condition}:")
         body = ["    " + stmt for stmt in self.generate_statements(node[4])]
@@ -92,11 +99,17 @@ class Interpreter:
     def to_python_code(self):
         return "\n".join(self.output)
 
-
-def save_and_exit(python_code):
+def save_and_exit(python_code, error=None):
     with open("temp.py", "w") as file:
-        file.write(python_code)
+        if error:
+            file.write(f"def report_error():\n")
+            file.write(f"    print('Error: {error}')\n\n")
+            file.write(f"report_error()\n")
+        else:
+            file.write(python_code)
     
-    # After writing the file, exit the current script
-    print("Python code saved to temp.py. Exiting to run temp.py.")
+    if error:
+        print(f"Error: {error}. Exiting to run temp.py.")
+    else:
+        print("Python code saved to temp.py. Exiting to run temp.py.")
     os._exit(0)

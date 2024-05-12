@@ -1,0 +1,13 @@
+program main{
+    int f,x;
+    f = 1;
+    x = 5;
+    if ( x > f)
+    {
+        writeln("x > f");
+    } else
+    {
+        writeln("x minus f");
+    }
+
+}

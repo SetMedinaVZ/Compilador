@@ -11,15 +11,21 @@ filename = sys.argv[1]
 
 parser = Parser()
 
-with open(filename, 'r') as file:
-    data = file.read()
+try:
+    with open(filename, 'r') as file:
+        data = file.read()
 
-parsed_data = parser.parse(data)
-interpreter = Interpreter()
-python_code = interpreter.generate(parsed_data)
+    parsed_data = parser.parse(data)
+    interpreter = Interpreter()
+    python_code = interpreter.generate(parsed_data)
 
-# Save the Python code to temp.py and exit
-save_and_exit(python_code)
+    # Save the Python code to temp.py and exit
+    save_and_exit(python_code)
+
+except Exception as e:
+    error_message = str(e)
+    python_code = ""
+    save_and_exit(python_code, error=error_message)
 
 # Command to run temp.py after the main script exits
 os.system(f"{sys.executable} temp.py")
