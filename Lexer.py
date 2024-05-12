@@ -17,6 +17,7 @@ class Lexer(object):
         'while': 'WHILE',
         'for': 'FOR',
         'writeln': 'WRITELN',
+        'write': 'WRITE',
         'int': 'INT',
         'float': 'FLOAT',
         'bool': 'BOOL',
@@ -43,7 +44,7 @@ class Lexer(object):
     t_RBRACE = r'\}'
     t_STRING = r'\".*?\"'
     t_PLUSPLUS = r'\+\+'
-    t_MINUSMINUS = r'-\-'
+    t_MINUSMINUS = r'\-\-'
     t_PLUS = r'\+'
     t_MINUS = r'-'
     t_DIVIDE = r'\/'
