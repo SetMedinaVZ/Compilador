@@ -4,6 +4,10 @@ import ply.lex as lex
 class Lexer(object):
     def __init__(self):
         self.lexer = None
+        
+    def get_lexer(self):
+        self.lexer = lex.lex(module=self)
+        return self.lexer
 
     # Reserved words
     reserved = {
