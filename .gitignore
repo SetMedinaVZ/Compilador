@@ -24,6 +24,7 @@ share/python-wheels/
 MANIFEST
 temp.py
 parselog.txt
+*.parsetab
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -132,3 +133,10 @@ __pycache__/
 # Ignore virtual environment directories
 {{path/to/venv}}
 
+__pycache__/parsetab.cpython-311.pyc
+parselog.txt
+temp.py
+
+*__pycache__*
+*parselog.txt*
+*temp.py*

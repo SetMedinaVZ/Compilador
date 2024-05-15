@@ -1,15 +1,8 @@
 f = None
 x = None
-print("texto dump")
-f = 0
-x = 0
-x = 0
-None
-while (x < 3):
-    f = 0
-    None
-    while (f < 3):
-        print(x)
-        print(f)
-        f = (f + 1)
-    x = (x + 1)
+f = 1
+x = 5
+if (x > f):
+    print("x > f")
+else:
+    print("x minus f")
