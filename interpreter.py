@@ -15,6 +15,12 @@ class Interpreter:
             self.generate_declaration(node)
         elif node[0] == 'declaration_init':
             self.generate_declaration_init(node)
+        elif node[0] == 'array_declaration':
+            self.generate_array_declaration(node)
+        elif node[0] == 'array_assignment':
+            self.generate_array_assignment(node)
+        elif node[0] == 'array_initialization':
+            self.generate_array_initialization(node)
         elif node[0] == 'assignment':
             self.generate_assignment(node)
         elif node[0] == 'print':
@@ -28,6 +34,22 @@ class Interpreter:
         elif node[0] == 'for':
             self.generate_for(node)
         return "\n".join(self.output)
+
+    def generate_array_declaration(self, node):
+        var_name = node[1]
+        size = self.generate_expression(node[2])
+        self.output.append(f"{'    ' * self.indent_level}{var_name} = [None] * {size}")
+
+    def generate_array_assignment(self, node):
+        var_name = node[1]
+        index = self.generate_expression(node[2])
+        value = self.generate_expression(node[3])
+        self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
+
+    def generate_array_initialization(self, node):
+        var_name = node[1]
+        values = ", ".join([self.generate_expression(expr) for expr in node[2]])
+        self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values}]")
 
     def generate_declaration(self, node):
         for var, expr in node[2]:

@@ -1,11 +1,6 @@
 program main{
-    int i, n, f, x;
-    writeln("texto dump");
-    f = 0;
-    x = 5;
-    for (x=0 ; x>f ; x--)
-    {
-        n = x + f;
-        writeln(n);
-    }
+    int[] myNum = {10, 20, 30, 40};
+    myNum[0] = {15};
+
+    int arr[1+1] = 2
 }

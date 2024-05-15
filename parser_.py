@@ -3,7 +3,6 @@ import ply.yacc as yacc
 from Lexer import Lexer
 import logging
 
-
 logging.basicConfig(
     level=logging.DEBUG,
     filename="parselog.txt",
@@ -71,16 +70,23 @@ class Parser:
         '''
         declaration_item : ID
                         | ID ASSIGN expression
+                        | ID LBRACKET expression RBRACKET ASSIGN expression
+                        | ID LBRACKET expression RBRACKET
+                        | ID LBRACKET RBRACKET ASSIGN LBRACE expression_list RBRACE
         '''
         if len(p) == 2:
             p[0] = (p[1], None)  # No hay inicialización
-        else:
-            p[0] = (p[1], p[3])  # Con inicialización
+        elif len(p) == 4:
+            p[0] = ('array_declaration', p[1], p[3])  # Declaración de array con tamaño
+        elif len(p) == 6 and p[3] == '[':
+            p[0] = ('array_assignment', p[1], p[3], p[5])  # Asignación a array
+        elif len(p) == 8:
+            p[0] = ('array_initialization', p[1], p[6])  # Inicialización de array
 
-    def p_id_list(self, p):
+    def p_expression_list(self, p):
         '''
-        id_list : ID
-                | id_list COMA ID
+        expression_list : expression
+                        | expression_list COMA expression
         '''
         if len(p) == 2:
             p[0] = [p[1]]
@@ -158,8 +164,12 @@ class Parser:
              | FLOAT
              | BOOL
              | STRING
+             | INT LBRACKET RBRACKET
         '''
-        p[0] = p[1]
+        if len(p) == 2:
+            p[0] = p[1]
+        else:
+            p[0] = f'{p[1]}[]'  # Tipo array
 
     def p_error(self, p):
         print("Syntax error at line: %s, at token %s" % (p.lineno, p.value))
