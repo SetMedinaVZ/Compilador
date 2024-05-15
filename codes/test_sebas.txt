@@ -1,6 +1,4 @@
 program main{
     int[] myNum = {10, 20, 30, 40};
-    myNum[0] = {15};
-
-    int arr[1+1] = 2
+    myNum[0] = 15;
 }
