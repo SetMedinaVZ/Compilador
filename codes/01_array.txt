@@ -1,0 +1,8 @@
+program main{
+    // being myNum the name of the array and the content ahead the actual content of it
+    int[] myNum = {10, 20, 30, 40};
+    myNum[0] = {15}
+
+    // other example 
+    int arr[1+1] = 2
+}
