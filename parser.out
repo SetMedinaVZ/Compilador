@@ -21,7 +21,7 @@ Rule 15    declaration_item -> ID ASSIGN expression
 Rule 16    declaration_item -> ID LBRACKET expression RBRACKET ASSIGN expression
 Rule 17    declaration_item -> ID LBRACKET expression RBRACKET
 Rule 18    declaration_item -> ID ASSIGN array_initialization
-Rule 19    array_initialization -> LBRACE expression_list RBRACE
+Rule 19    array_initialization -> LBRACKET expression_list RBRACKET
 Rule 20    expression_list -> expression
 Rule 21    expression_list -> expression_list COMA expression
 Rule 22    assignment_statement -> ID ASSIGN expression SEMICOLON
@@ -72,8 +72,8 @@ GTE                  : 42
 ID                   : 1 14 15 16 17 18 22 23 48
 IF                   : 27 28
 INT                  : 49 53
-LBRACE               : 1 19 27 28 28 29 30
-LBRACKET             : 16 17 23 53
+LBRACE               : 1 27 28 28 29 30
+LBRACKET             : 16 17 19 23 53
 LPAREN               : 25 26 27 28 29 30
 LT                   : 39
 LTE                  : 41
@@ -83,8 +83,8 @@ NE                   : 44
 PLUS                 : 35
 PLUSPLUS             : 31 33
 PROGRAM              : 1
-RBRACE               : 1 19 27 28 28 29 30
-RBRACKET             : 16 17 23 53
+RBRACE               : 1 27 28 28 29 30
+RBRACKET             : 16 17 19 23 53
 RPAREN               : 25 26 27 28 29 30
 SEMICOLON            : 11 22 23 24 25 26 30
 STRING               : 47 52
@@ -647,7 +647,6 @@ state 24
     RBRACKET        reduce using rule 45 (expression -> VAR_INT .)
     RPAREN          reduce using rule 45 (expression -> VAR_INT .)
     COMA            reduce using rule 45 (expression -> VAR_INT .)
-    RBRACE          reduce using rule 45 (expression -> VAR_INT .)
 
 
 state 25
@@ -670,7 +669,6 @@ state 25
     RBRACKET        reduce using rule 46 (expression -> VAR_FLOAT .)
     RPAREN          reduce using rule 46 (expression -> VAR_FLOAT .)
     COMA            reduce using rule 46 (expression -> VAR_FLOAT .)
-    RBRACE          reduce using rule 46 (expression -> VAR_FLOAT .)
 
 
 state 26
@@ -848,7 +846,6 @@ state 35
     RBRACKET        reduce using rule 31 (expression -> expression PLUSPLUS .)
     RPAREN          reduce using rule 31 (expression -> expression PLUSPLUS .)
     COMA            reduce using rule 31 (expression -> expression PLUSPLUS .)
-    RBRACE          reduce using rule 31 (expression -> expression PLUSPLUS .)
 
 
 state 36
@@ -871,7 +868,6 @@ state 36
     RBRACKET        reduce using rule 32 (expression -> expression MINUSMINUS .)
     RPAREN          reduce using rule 32 (expression -> expression MINUSMINUS .)
     COMA            reduce using rule 32 (expression -> expression MINUSMINUS .)
-    RBRACE          reduce using rule 32 (expression -> expression MINUSMINUS .)
 
 
 state 37
@@ -1382,7 +1378,6 @@ state 55
     RBRACKET        reduce using rule 33 (expression -> PLUSPLUS expression .)
     RPAREN          reduce using rule 33 (expression -> PLUSPLUS expression .)
     COMA            reduce using rule 33 (expression -> PLUSPLUS expression .)
-    RBRACE          reduce using rule 33 (expression -> PLUSPLUS expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1430,7 +1425,6 @@ state 56
     RBRACKET        reduce using rule 47 (expression -> STRING .)
     RPAREN          reduce using rule 47 (expression -> STRING .)
     COMA            reduce using rule 47 (expression -> STRING .)
-    RBRACE          reduce using rule 47 (expression -> STRING .)
 
 
 state 57
@@ -1453,7 +1447,6 @@ state 57
     RBRACKET        reduce using rule 48 (expression -> ID .)
     RPAREN          reduce using rule 48 (expression -> ID .)
     COMA            reduce using rule 48 (expression -> ID .)
-    RBRACE          reduce using rule 48 (expression -> ID .)
 
 
 state 58
@@ -1488,7 +1481,6 @@ state 58
     RBRACKET        reduce using rule 34 (expression -> MINUSMINUS expression .)
     RPAREN          reduce using rule 34 (expression -> MINUSMINUS expression .)
     COMA            reduce using rule 34 (expression -> MINUSMINUS expression .)
-    RBRACE          reduce using rule 34 (expression -> MINUSMINUS expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1617,7 +1609,6 @@ state 62
     RBRACKET        reduce using rule 35 (expression -> expression PLUS expression .)
     RPAREN          reduce using rule 35 (expression -> expression PLUS expression .)
     COMA            reduce using rule 35 (expression -> expression PLUS expression .)
-    RBRACE          reduce using rule 35 (expression -> expression PLUS expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1677,7 +1668,6 @@ state 63
     RBRACKET        reduce using rule 36 (expression -> expression MINUS expression .)
     RPAREN          reduce using rule 36 (expression -> expression MINUS expression .)
     COMA            reduce using rule 36 (expression -> expression MINUS expression .)
-    RBRACE          reduce using rule 36 (expression -> expression MINUS expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1737,7 +1727,6 @@ state 64
     RBRACKET        reduce using rule 37 (expression -> expression TIMES expression .)
     RPAREN          reduce using rule 37 (expression -> expression TIMES expression .)
     COMA            reduce using rule 37 (expression -> expression TIMES expression .)
-    RBRACE          reduce using rule 37 (expression -> expression TIMES expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1797,7 +1786,6 @@ state 65
     RBRACKET        reduce using rule 38 (expression -> expression DIVIDE expression .)
     RPAREN          reduce using rule 38 (expression -> expression DIVIDE expression .)
     COMA            reduce using rule 38 (expression -> expression DIVIDE expression .)
-    RBRACE          reduce using rule 38 (expression -> expression DIVIDE expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1857,7 +1845,6 @@ state 66
     RBRACKET        reduce using rule 39 (expression -> expression LT expression .)
     RPAREN          reduce using rule 39 (expression -> expression LT expression .)
     COMA            reduce using rule 39 (expression -> expression LT expression .)
-    RBRACE          reduce using rule 39 (expression -> expression LT expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1917,7 +1904,6 @@ state 67
     RBRACKET        reduce using rule 40 (expression -> expression GT expression .)
     RPAREN          reduce using rule 40 (expression -> expression GT expression .)
     COMA            reduce using rule 40 (expression -> expression GT expression .)
-    RBRACE          reduce using rule 40 (expression -> expression GT expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -1977,7 +1963,6 @@ state 68
     RBRACKET        reduce using rule 41 (expression -> expression LTE expression .)
     RPAREN          reduce using rule 41 (expression -> expression LTE expression .)
     COMA            reduce using rule 41 (expression -> expression LTE expression .)
-    RBRACE          reduce using rule 41 (expression -> expression LTE expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -2037,7 +2022,6 @@ state 69
     RBRACKET        reduce using rule 42 (expression -> expression GTE expression .)
     RPAREN          reduce using rule 42 (expression -> expression GTE expression .)
     COMA            reduce using rule 42 (expression -> expression GTE expression .)
-    RBRACE          reduce using rule 42 (expression -> expression GTE expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -2097,7 +2081,6 @@ state 70
     RBRACKET        reduce using rule 43 (expression -> expression EQ expression .)
     RPAREN          reduce using rule 43 (expression -> expression EQ expression .)
     COMA            reduce using rule 43 (expression -> expression EQ expression .)
-    RBRACE          reduce using rule 43 (expression -> expression EQ expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -2157,7 +2140,6 @@ state 71
     RBRACKET        reduce using rule 44 (expression -> expression NE expression .)
     RPAREN          reduce using rule 44 (expression -> expression NE expression .)
     COMA            reduce using rule 44 (expression -> expression NE expression .)
-    RBRACE          reduce using rule 44 (expression -> expression NE expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
     PLUS            shift and go to state 37
@@ -2241,7 +2223,7 @@ state 74
     (46) expression -> . VAR_FLOAT
     (47) expression -> . STRING
     (48) expression -> . ID
-    (19) array_initialization -> . LBRACE expression_list RBRACE
+    (19) array_initialization -> . LBRACKET expression_list RBRACKET
 
     PLUSPLUS        shift and go to state 22
     MINUSMINUS      shift and go to state 23
@@ -2249,7 +2231,7 @@ state 74
     VAR_FLOAT       shift and go to state 25
     STRING          shift and go to state 56
     ID              shift and go to state 57
-    LBRACE          shift and go to state 88
+    LBRACKET        shift and go to state 88
 
     expression                     shift and go to state 86
     array_initialization           shift and go to state 87
@@ -2536,7 +2518,7 @@ state 87
 
 state 88
 
-    (19) array_initialization -> LBRACE . expression_list RBRACE
+    (19) array_initialization -> LBRACKET . expression_list RBRACKET
     (20) expression_list -> . expression
     (21) expression_list -> . expression_list COMA expression
     (31) expression -> . expression PLUSPLUS
@@ -2693,10 +2675,10 @@ state 95
 
 state 96
 
-    (19) array_initialization -> LBRACE expression_list . RBRACE
+    (19) array_initialization -> LBRACKET expression_list . RBRACKET
     (21) expression_list -> expression_list . COMA expression
 
-    RBRACE          shift and go to state 105
+    RBRACKET        shift and go to state 105
     COMA            shift and go to state 106
 
 
@@ -2716,7 +2698,7 @@ state 97
     (43) expression -> expression . EQ expression
     (44) expression -> expression . NE expression
 
-    RBRACE          reduce using rule 20 (expression_list -> expression .)
+    RBRACKET        reduce using rule 20 (expression_list -> expression .)
     COMA            reduce using rule 20 (expression_list -> expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36
@@ -2995,10 +2977,10 @@ state 104
 
 state 105
 
-    (19) array_initialization -> LBRACE expression_list RBRACE .
+    (19) array_initialization -> LBRACKET expression_list RBRACKET .
 
-    SEMICOLON       reduce using rule 19 (array_initialization -> LBRACE expression_list RBRACE .)
-    COMA            reduce using rule 19 (array_initialization -> LBRACE expression_list RBRACE .)
+    SEMICOLON       reduce using rule 19 (array_initialization -> LBRACKET expression_list RBRACKET .)
+    COMA            reduce using rule 19 (array_initialization -> LBRACKET expression_list RBRACKET .)
 
 
 state 106
@@ -3276,7 +3258,7 @@ state 112
     (43) expression -> expression . EQ expression
     (44) expression -> expression . NE expression
 
-    RBRACE          reduce using rule 21 (expression_list -> expression_list COMA expression .)
+    RBRACKET        reduce using rule 21 (expression_list -> expression_list COMA expression .)
     COMA            reduce using rule 21 (expression_list -> expression_list COMA expression .)
     PLUSPLUS        shift and go to state 35
     MINUSMINUS      shift and go to state 36

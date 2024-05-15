@@ -17,12 +17,10 @@ class Interpreter:
             self.generate_declaration_init(node)
         elif node[0] == 'array_declaration':
             self.generate_array_declaration(node)
-        elif node[0] == 'array_assignment':
-            self.generate_array_assignment(node)
-        elif node[0] == 'array_initialization':
-            self.generate_array_initialization(node)
         elif node[0] == 'assignment':
             self.generate_assignment(node)
+        elif node[0] == 'array_element_assignment':
+            self.generate_array_element_assignment(node)
         elif node[0] == 'print':
             self.generate_print(node)
         elif node[0] == 'if':
@@ -35,34 +33,32 @@ class Interpreter:
             self.generate_for(node)
         return "\n".join(self.output)
 
-    def generate_array_declaration(self, node):
-        var_name = node[1]
-        size = self.generate_expression(node[2])
-        self.output.append(f"{'    ' * self.indent_level}{var_name} = [None] * {size}")
-
-    def generate_array_assignment(self, node):
-        var_name = node[1]
-        index = self.generate_expression(node[2])
-        value = self.generate_expression(node[3])
-        self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
-
-    def generate_array_initialization(self, node):
-        var_name = node[1]
-        values = ", ".join([self.generate_expression(expr) for expr in node[2]])
-        self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values}]")
-
     def generate_declaration(self, node):
-        for var, expr in node[2]:
-            if expr is None:
-                self.output.append(f"{'    ' * self.indent_level}{var} = None")
-            else:
-                value = self.generate_expression(expr)
-                self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
+        if node[1] == 'int[]':  # Manejo especial para arrays
+            self.generate_array_declaration(node)
+        else:
+            for var, expr in node[2]:
+                if expr is None:
+                    self.output.append(f"{'    ' * self.indent_level}{var} = None")
+                else:
+                    value = self.generate_expression(expr)
+                    self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
         
     def generate_declaration_init(self, node):
         value = self.generate_expression(node[3])
         self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
         self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
+        
+    def generate_array_declaration(self, node):
+        var_name = node[2][0]
+        values = ", ".join(map(str, node[2][1]))
+        self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values}]")
+
+    def generate_array_element_assignment(self, node):
+        var_name = node[1]
+        index = self.generate_expression(node[2])
+        value = self.generate_expression(node[3])
+        self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
 
     def generate_assignment(self, node):
         value = self.generate_expression(node[2])
@@ -91,18 +87,11 @@ class Interpreter:
         self.indent_level -= 1
 
     def generate_while(self, node):
-        # Generar la condición del bucle
         condition = self.generate_expression(node[1])
-        # Escribir la cabecera del bucle while con la condición
         self.output.append(f"{'    ' * self.indent_level}while {condition}:")
-        # Incrementar el nivel de indentación para el cuerpo del bucle
         self.indent_level += 1
-        # Generar cada instrucción dentro del cuerpo del bucle
-        for stmt in node[2]:
-            self.generate_statement(stmt)
-        # Decrementar el nivel de indentación después de finalizar el cuerpo del bucle
+        self.generate_statements(node[2])
         self.indent_level -= 1
-
 
     def generate_for(self, node):
         init = self.generate_statement(node[1])
@@ -144,8 +133,13 @@ class Interpreter:
             self.generate_while(statement)
         elif statement[0] == 'for':
             self.generate_for(statement)
+        elif statement[0] == 'array_element_assignment':
+            self.generate_array_element_assignment(statement)
+        elif statement[0] == 'array_declaration':
+            self.generate_array_declaration(statement)
+        elif statement[0] == 'declaration_init':
+            self.generate_declaration_init(statement)
 
-            
     def generate_expression(self, node):
         if isinstance(node, tuple):
             if node[0] == 'binary_op':

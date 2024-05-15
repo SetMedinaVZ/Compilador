@@ -85,7 +85,7 @@ class Parser:
 
     def p_array_initialization(self, p):
         '''
-        array_initialization : LBRACE expression_list RBRACE
+        array_initialization : LBRACKET expression_list RBRACKET
         '''
         p[0] = p[2]
 
