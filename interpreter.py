@@ -50,8 +50,8 @@ class Interpreter:
         self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
         
     def generate_array_declaration(self, node):
-        var_name = node[2][0]
-        values = ", ".join(map(str, node[2][1]))
+        var_name = node[2][0][1]
+        values = ", ".join(map(str, node[2][0][2]))
         self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values}]")
 
     def generate_array_element_assignment(self, node):
@@ -173,3 +173,4 @@ def save_and_exit(python_code, error=None):
     else:
         print("Python code saved to temp.py. Exiting to run temp.py.")
     os._exit(0)
+
