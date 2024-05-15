@@ -51,14 +51,25 @@ class Interpreter:
         
     def generate_array_declaration(self, node):
         var_name = node[2][0][1]
-        values = ", ".join(map(str, node[2][0][2]))
-        self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values}]")
+        values = node[2][0][2]
 
+        if all(isinstance(value, int) for value in values):
+            values_str = ", ".join(map(str, values))
+            self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values_str}]")
+        else:
+            error_message = "Array initialization must be a list of integers"
+            save_and_exit("", error_message)
+    
     def generate_array_element_assignment(self, node):
         var_name = node[1]
         index = self.generate_expression(node[2])
         value = self.generate_expression(node[3])
-        self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
+
+        if isinstance(value, int):
+            self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
+        else:
+            error_message = "Array element assignment must be an integer"
+            save_and_exit("", error_message)
 
     def generate_assignment(self, node):
         value = self.generate_expression(node[2])

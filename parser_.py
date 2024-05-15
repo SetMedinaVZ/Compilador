@@ -70,24 +70,34 @@ class Parser:
         '''
         declaration_item : ID
                         | ID ASSIGN expression
-                        | ID LBRACKET expression RBRACKET ASSIGN expression
+                        | ID LBRACKET expression RBRACKET ASSIGN array_initialization
                         | ID LBRACKET expression RBRACKET
                         | ID ASSIGN array_initialization
         '''
         if len(p) == 2:
             p[0] = (p[1], None)  # No hay inicialización
         elif len(p) == 4:
-            p[0] = ('array_declaration', p[1], p[3])  # Declaración de array con tamaño
-        elif len(p) == 6 and p[3] == '[':
-            p[0] = ('array_assignment', p[1], p[3], p[5])  # Asignación a array
-        elif len(p) == 4:
-            p[0] = ('array_initialization', p[1], p[3])  # Inicialización de array
+            p[0] = ('assignment', p[1], p[3])
+        elif len(p) == 6:
+            p[0] = ('array_initialization', p[1], p[5])
+        elif len(p) == 6:
+            p[0] = ('array_initialization', p[1], p[5])
 
     def p_array_initialization(self, p):
         '''
-        array_initialization : LBRACKET expression_list RBRACKET
+        array_initialization : LBRACKET int_list RBRACKET
         '''
         p[0] = p[2]
+
+    def p_int_list(self, p):
+        '''
+        int_list : VAR_INT
+                 | int_list COMA VAR_INT
+        '''
+        if len(p) == 2:
+            p[0] = [p[1]]
+        else:
+            p[0] = p[1] + [p[3]]
 
     def p_expression_list(self, p):
         '''

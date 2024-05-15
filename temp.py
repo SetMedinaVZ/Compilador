@@ -1,4 +1,4 @@
 def report_error():
-    print('Error: tuple index out of range')
+    print('Error: Array element assignment must be an integer')
 
 report_error()
