@@ -1,4 +1,13 @@
-def report_error():
-    print('Error: 'NoneType' object is not subscriptable')
-
-report_error()
+i = None
+n = None
+f = None
+x = None
+print("texto dump")
+f = 5
+x = 0
+None
+while (x < f):
+    n = (x + f)
+    print(n)
+    x = (x + 1)
+print("hola bb")

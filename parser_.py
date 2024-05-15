@@ -72,7 +72,7 @@ class Parser:
                         | ID ASSIGN expression
                         | ID LBRACKET expression RBRACKET ASSIGN expression
                         | ID LBRACKET expression RBRACKET
-                        | ID LBRACKET RBRACKET ASSIGN LBRACE expression_list RBRACE
+                        | ID LBRACKET RBRACKET ASSIGN array_initialization
         '''
         if len(p) == 2:
             p[0] = (p[1], None)  # No hay inicialización
@@ -80,8 +80,14 @@ class Parser:
             p[0] = ('array_declaration', p[1], p[3])  # Declaración de array con tamaño
         elif len(p) == 6 and p[3] == '[':
             p[0] = ('array_assignment', p[1], p[3], p[5])  # Asignación a array
-        elif len(p) == 8:
-            p[0] = ('array_initialization', p[1], p[6])  # Inicialización de array
+        elif len(p) == 6:
+            p[0] = ('array_initialization', p[1], p[5])  # Inicialización de array
+
+    def p_array_initialization(self, p):
+        '''
+        array_initialization : LBRACE expression_list RBRACE
+        '''
+        p[0] = p[2]
 
     def p_expression_list(self, p):
         '''
@@ -100,7 +106,6 @@ class Parser:
     def p_expression_statement(self, p):
         'expression_statement : expression SEMICOLON'
         p[0] = ('expression', p[1])
-
 
     def p_print_statement(self, p):
         '''

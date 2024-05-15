@@ -27,7 +27,6 @@ class Lexer(object):
         'ID', 'SEMICOLON', 'COMA', 'ASSIGN',
         'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',  # BRACES
         'LBRACKET', 'RBRACKET',  # Corchetes para arrays
-        'LBRACE_INIT', 'RBRACE_INIT',  # Llaves para inicialización de arrays
         'VAR_INT', 'VAR_FLOAT', "STRING", # VAR TYPE
         'PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'PLUSPLUS', 'MINUSMINUS',  # ARITHMETIC OPERATORS
         'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE',  # LOGICAL OPERATORS
@@ -44,8 +43,6 @@ class Lexer(object):
     t_RBRACE = r'\}'
     t_LBRACKET = r'\['
     t_RBRACKET = r'\]'
-    t_LBRACE_INIT = r'\{'
-    t_RBRACE_INIT = r'\}'
     t_STRING = r'\".*?\"'
     t_PLUSPLUS = r'\+\+'
     t_MINUSMINUS = r'\-\-'
