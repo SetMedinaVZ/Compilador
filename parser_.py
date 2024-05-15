@@ -104,9 +104,9 @@ class Parser:
         assignment_statement : ID ASSIGN expression SEMICOLON
                              | ID LBRACKET expression RBRACKET ASSIGN expression SEMICOLON
         '''
-        if len(p) == 4:
+        if len(p) == 5:
             p[0] = ('assignment', p[1], p[3])
-        else:
+        elif len(p) == 8:
             p[0] = ('array_element_assignment', p[1], p[3], p[6])
         
     def p_expression_statement(self, p):
