@@ -1,6 +1,9 @@
-program main{
-    bool a;
-    a=true;
-
-    writeln(a);
+program main {
+    bool a, b, result;
+    
+    a = true;
+    b = false;
+    
+    result = a && b;  // AND lógico
+    writeln(result);
 }

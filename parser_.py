@@ -181,6 +181,8 @@ class Parser:
         elif len(p) == 3:
             if p[2] in {'++', '--'}:
                 p[0] = ('postfix_op', p[1], p[2])
+            elif p[1] == '!':
+                p[0] = ('unary_op', p[1], p[2])
             else:
                 p[0] = ('binary_op', p[1], p[2])
         elif len(p) == 4:

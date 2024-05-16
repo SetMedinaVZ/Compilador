@@ -65,6 +65,8 @@ class Interpreter:
                 if expr_type != 'int':
                     raise TypeError(f"Postfix operation on non-int type: {expr_type}")
                 return 'int'
+            if node[0] == 'unary_op':
+                return self.check_expression_type(node[2])
         raise TypeError(f"Unsupported expression: {node}")
 
 
@@ -224,6 +226,10 @@ class Interpreter:
                 left_value = self.generate_expression(node[1])
                 op = node[2]
                 right_value = self.generate_expression(node[3])
+                if op == '&&':
+                    op = 'and'
+                elif op == '||':
+                    op = 'or'
                 return f"({left_value} {op} {right_value})"
             elif node[0] == 'postfix_op':
                 expr_value = self.generate_expression(node[1])
@@ -231,6 +237,12 @@ class Interpreter:
                     return f"({expr_value} + 1)"
                 elif node[2] == '--':
                     return f"({expr_value} - 1)"
+            elif node[0] == 'unary_op':
+                op = node[1]
+                expr_value = self.generate_expression(node[2])
+                if op == '!':
+                    op = 'not'
+                return f"({op} {expr_value})"
         raise TypeError(f"Unsupported expression: {node}")
 
 

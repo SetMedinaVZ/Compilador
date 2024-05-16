@@ -1,5 +1,4 @@
 program main{
-    writeln("test emi");
     int i;
     i = 1.2;
     f = 0;
