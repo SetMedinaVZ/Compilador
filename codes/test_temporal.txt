@@ -4,5 +4,26 @@ program main {
     // Asignaciones de floats
     a = 3.14F;
     b = 2.71f;
-    writeln(a, b);
+    
+    // Operaciones aritméticas con floats
+    c = a + b;
+    writeln("Suma: ", c);
+    
+    c = a - b;
+    writeln("Resta: ", c);
+    
+    c = a * b;
+    writeln("Multiplicación: ", c);
+    
+    c = a / b;
+    writeln("División: ", c);
+    
+    // Comparaciones con floats
+    if (a > b) {
+        writeln("a es mayor que b");
+    } else if (a < b) {
+        writeln("a es menor que b");
+    } else {
+        writeln("a es igual a b");
+    }
 }
