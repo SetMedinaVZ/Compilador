@@ -1,4 +1,4 @@
 def report_error():
-    print('Error: Variable 'x' is of type 'int' but got 'string'')
+    print('Error: Variable 'i' is of type 'int' but got 'float'')
 
 report_error()

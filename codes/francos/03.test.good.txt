@@ -1,8 +1,0 @@
-program main{ 
-    int f, x; 
-    f = 5;
-    for (x=0 ; x<f ; x+2)
-    {
-        writeln("allo");
-    }
-}
