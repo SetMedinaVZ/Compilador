@@ -152,7 +152,9 @@ class Interpreter:
             self.generate_declaration_init(statement)
 
     def generate_expression(self, node):
-        if isinstance(node, tuple):
+        if isinstance(node, int): # Se usa en los arrays
+            return node
+        elif isinstance(node, tuple):
             if node[0] == 'binary_op':
                 left = self.generate_expression(node[1])
                 op = node[2]

@@ -1,4 +1,4 @@
-def report_error():
-    print('Error: Array element assignment must be an integer')
-
-report_error()
+myNum = [10, 20, 30, 40]
+myNum[0] = 15
+myNum[(0 + 1)] = 20
+print(myNum)

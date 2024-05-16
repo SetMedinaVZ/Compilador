@@ -1,6 +1,6 @@
 program main{
     int[] myNum = [10, 20, 30, 40];
     myNum[0] = 15;
-    myNum[3] = "hola";
+    myNum[0+1]=20;
     writeln(myNum);
 }
