@@ -48,9 +48,11 @@ class Interpreter:
         elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
             return 'string'
         elif isinstance(node, str):
-            if node in {"True", "False"}:  # Verificar valores booleanos
+            if node.lower() in {"true", "false"}:  # Verificar valores booleanos
                 return 'bool'
             return self.var_types.get(node, 'unknown')
+        elif isinstance(node, bool):  # Reconocer booleanos True y False
+            return 'bool'
         elif isinstance(node, tuple):
             if node[0] == 'binary_op':
                 left_type = self.check_expression_type(node[1])
@@ -122,7 +124,6 @@ class Interpreter:
     def generate_assignment(self, node):
         var_name = node[1]
         value_type = self.check_expression_type(node[2])
-        var_type = self.var_types.get(var_name)
         self.check_type(var_name, value_type)  # Verificar el tipo de la variable
         value = self.generate_expression(node[2])
         self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
@@ -212,9 +213,11 @@ class Interpreter:
         elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
             return node
         elif isinstance(node, str):
-            if node in {"True", "False"}:  # Reconocer valores booleanos
-                return node
+            if node.lower() in {"true", "false"}:  # Reconocer valores booleanos
+                return node.capitalize()  # Convertir a True/False
             return node
+        elif isinstance(node, bool):  # Manejar valores booleanos directamente
+            return str(node)
         elif isinstance(node, tuple):
             if node[0] == 'binary_op':
                 left_value = self.generate_expression(node[1])
@@ -228,7 +231,6 @@ class Interpreter:
                 elif node[2] == '--':
                     return f"({expr_value} - 1)"
         raise TypeError(f"Unsupported expression: {node}")
-
 
 
     def to_python_code(self):

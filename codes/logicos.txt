@@ -7,9 +7,4 @@ program main {
     result = (a && b);  // AND lógico
     writeln(result);
     
-    result = (a || b);  // OR lógico
-    writeln(result);
-    
-    result = (!a);      // NOT lógico
-    writeln(result);
 }

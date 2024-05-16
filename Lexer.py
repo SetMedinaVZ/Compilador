@@ -20,6 +20,8 @@ class Lexer(object):
         'int': 'INT',
         'float': 'FLOAT',
         'bool': 'BOOL',
+        'true': 'TRUE',
+        'false': 'FALSE',
     }
 
     # List of token names
@@ -77,6 +79,7 @@ class Lexer(object):
     def t_VAR_BOOL(self, t):
         r'true|false'
         t.value = True if t.value == 'true' else False
+        t.type = 'TRUE' if t.value else 'FALSE'
         return t
 
     # If it's not in the reserved words, it's an ID, else its reserved

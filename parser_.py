@@ -80,8 +80,6 @@ class Parser:
             p[0] = ('assignment', p[1], p[3])
         elif len(p) == 6:
             p[0] = ('array_initialization', p[1], p[5])
-        elif len(p) == 6:
-            p[0] = ('array_initialization', p[1], p[5])
 
     def p_array_initialization(self, p):
         '''
@@ -173,9 +171,14 @@ class Parser:
                 | VAR_BOOL
                 | STRING
                 | ID
+                | TRUE
+                | FALSE
         '''
         if len(p) == 2:
-            p[0] = p[1]
+            if p[1] in {True, False}:
+                p[0] = p[1]
+            else:
+                p[0] = p[1]
         elif len(p) == 3:
             if p[2] in {'++', '--'}:
                 p[0] = ('postfix_op', p[1], p[2])
