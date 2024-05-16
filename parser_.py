@@ -168,7 +168,6 @@ class Parser:
                 | LPAREN expression RPAREN
                 | VAR_INT
                 | VAR_FLOAT
-                | VAR_BOOL
                 | STRING
                 | ID
                 | TRUE

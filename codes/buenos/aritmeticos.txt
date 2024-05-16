@@ -5,7 +5,6 @@ program main {
     b = 10 - 2; // Resta
     c = 4 * 2;  // Multiplicación
     d = 8 / 2;  // División
-    e = 10 % 3; // Módulo
     
     writeln(a);
     writeln(b);

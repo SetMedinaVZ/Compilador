@@ -1,0 +1,7 @@
+program main{
+    int[] myNum = [10, 20, 30, 40];
+    writeln(myNum);
+    myNum[0] = 15;
+    myNum[0+4] = 10;
+    writeln(myNum);
+}
