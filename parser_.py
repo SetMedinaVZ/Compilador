@@ -131,31 +131,12 @@ class Parser:
     def p_if_statement(self, p):
         '''
         if_statement : IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-                    | IF LPAREN expression RPAREN LBRACE statement_list RBRACE else_if_list ELSE LBRACE statement_list RBRACE
-                    | IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
+                     | IF LPAREN expression RPAREN LBRACE statement_list RBRACE ELSE LBRACE statement_list RBRACE
         '''
         if len(p) == 8:
             p[0] = ('if', p[3], p[6])
-        elif len(p) == 12:
-            p[0] = ('if_else', p[3], p[6], p[11])
-        elif len(p) == 13:
-            p[0] = ('if_else_if', p[3], p[6], p[8], p[12])
-            
-    def p_else_if_list(self, p):
-        '''
-        else_if_list : else_if
-                    | else_if_list else_if
-        '''
-        if len(p) == 2:
-            p[0] = [p[1]]
         else:
-            p[0] = p[1] + [p[2]]
-
-    def p_else_if(self, p):
-        '''
-        else_if : ELSE IF LPAREN expression RPAREN LBRACE statement_list RBRACE
-        '''
-        p[0] = ('else_if', p[4], p[7])
+            p[0] = ('if_else', p[3], p[6], p[10])
 
     def p_while_statement(self, p):
         'while_statement : WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE'

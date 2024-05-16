@@ -160,25 +160,6 @@ class Interpreter:
         self.indent_level += 1
         self.generate_statements(node[3])
         self.indent_level -= 1
-    
-    def generate_if_else_if(self, node):
-        condition = self.generate_expression(node[1])
-        self.output.append(f"{'    ' * self.indent_level}if {condition}:")
-        self.indent_level += 1
-        self.generate_statements(node[2])
-        self.indent_level -= 1
-
-        for else_if in node[3]:
-            else_if_condition = self.generate_expression(else_if[1])
-            self.output.append(f"{'    ' * self.indent_level}elif {else_if_condition}:")
-            self.indent_level += 1
-            self.generate_statements(else_if[2])
-            self.indent_level -= 1
-
-        self.output.append(f"{'    ' * self.indent_level}else:")
-        self.indent_level += 1
-        self.generate_statements(node[4])
-        self.indent_level -= 1
 
     def generate_while(self, node):
         condition = self.generate_expression(node[1])
@@ -223,8 +204,6 @@ class Interpreter:
             self.generate_if(statement)
         elif statement[0] == 'if_else':
             self.generate_if_else(statement)
-        elif statement[0] == 'if_else_if':
-            self.generate_if_else_if(statement)
         elif statement[0] == 'while':
             self.generate_while(statement)
         elif statement[0] == 'for':
