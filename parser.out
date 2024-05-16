@@ -1,5 +1,12 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    AND
+    NOT
+    OR
+    VAR_BOOL
+
 Grammar
 
 Rule 0     S' -> program
@@ -61,6 +68,7 @@ Rule 55    type -> INT LBRACKET RBRACKET
 
 Terminals, with rules where they appear
 
+AND                  : 
 ASSIGN               : 15 16 18 24 25
 BOOL                 : 53
 COMA                 : 13 21 23
@@ -82,6 +90,8 @@ LTE                  : 43
 MINUS                : 38
 MINUSMINUS           : 34 36
 NE                   : 46
+NOT                  : 
+OR                   : 
 PLUS                 : 37
 PLUSPLUS             : 33 35
 PROGRAM              : 1
@@ -91,6 +101,7 @@ RPAREN               : 27 28 29 30 31 32
 SEMICOLON            : 11 24 25 26 27 28 32
 STRING               : 49 54
 TIMES                : 39
+VAR_BOOL             : 
 VAR_FLOAT            : 48
 VAR_INT              : 20 21 47
 WHILE                : 31

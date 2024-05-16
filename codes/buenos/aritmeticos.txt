@@ -1,0 +1,15 @@
+program main {
+    int a, b, c, d, e;
+    
+    a = 5 + 3;  // Suma
+    b = 10 - 2; // Resta
+    c = 4 * 2;  // Multiplicación
+    d = 8 / 2;  // División
+    e = 10 % 3; // Módulo
+    
+    writeln(a);
+    writeln(b);
+    writeln(c);
+    writeln(d);
+    writeln(e);
+}

@@ -1,0 +1,25 @@
+program main {
+    int a, b;
+    bool result;
+    
+    a = 5;
+    b = 3;
+    
+    result = (a > b);   // Mayor que
+    writeln(result);
+    
+    result = (a < b);   // Menor que
+    writeln(result);
+    
+    result = (a == b);  // Igual a
+    writeln(result);
+    
+    result = (a != b);  // Diferente de
+    writeln(result);
+    
+    result = (a >= b);  // Mayor o igual que
+    writeln(result);
+    
+    result = (a <= b);  // Menor o igual que
+    writeln(result);
+}

@@ -27,9 +27,10 @@ class Lexer(object):
         'ID', 'SEMICOLON', 'COMA', 'ASSIGN',
         'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',  # BRACES
         'LBRACKET', 'RBRACKET',  # Corchetes para arrays
-        'VAR_INT', 'VAR_FLOAT', "STRING", # VAR TYPE
+        'VAR_INT', 'VAR_FLOAT', "STRING", "VAR_BOOL", # VAR TYPE
         'PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'PLUSPLUS', 'MINUSMINUS',  # ARITHMETIC OPERATORS
-        'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE',  # LOGICAL OPERATORS
+        'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE', # RELATIONAL OPERATORS
+        'AND', 'OR', 'NOT',  # LOGICAL OPERATORS
 
     ] + list(reserved.values())
 
@@ -56,6 +57,9 @@ class Lexer(object):
     t_LTE = r'<='
     t_EQ = r'=='
     t_NE = r'!='
+    t_AND = r'&&'
+    t_OR = r'\|\|'
+    t_NOT = r'!'
 
     # A string containing ignored characters (spaces and tabs)
     t_ignore = ' \t'
@@ -68,6 +72,11 @@ class Lexer(object):
     def t_VAR_INT(self, t):
         r'\d+'
         t.value = int(t.value)
+        return t
+
+    def t_VAR_BOOL(self, t):
+        r'true|false'
+        t.value = True if t.value == 'true' else False
         return t
 
     # If it's not in the reserved words, it's an ID, else its reserved
