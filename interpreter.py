@@ -57,7 +57,7 @@ class Interpreter:
                 right_type = self.check_expression_type(node[3])
                 if left_type != right_type:
                     raise TypeError(f"Type mismatch in binary operation: {left_type} {node[2]} {right_type}")
-                return left_type
+                return 'bool' if node[2] in {'>', '<', '==', '!=', '>=', '<='} else left_type
             elif node[0] == 'postfix_op':
                 expr_type = self.check_expression_type(node[1])
                 if expr_type != 'int':
@@ -228,6 +228,7 @@ class Interpreter:
                 elif node[2] == '--':
                     return f"({expr_value} - 1)"
         raise TypeError(f"Unsupported expression: {node}")
+
 
 
     def to_python_code(self):

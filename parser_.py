@@ -180,9 +180,12 @@ class Parser:
             if p[2] in {'++', '--'}:
                 p[0] = ('postfix_op', p[1], p[2])
             else:
-                p[0] = ('binary_op', p[1], p[3], p[2])
-        else:
-            p[0] = ('binary_op', p[1], p[2], p[3])
+                p[0] = ('binary_op', p[1], p[2])
+        elif len(p) == 4:
+            if p[1] == '(' and p[3] == ')':
+                p[0] = p[2]
+            else:
+                p[0] = ('binary_op', p[1], p[2], p[3])
 
     def p_type(self, p):
         '''
