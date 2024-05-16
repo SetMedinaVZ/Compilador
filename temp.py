@@ -1,12 +1,15 @@
-i = None
-n = None
 f = None
 x = None
 print("texto dump")
-f = 1
-x = 5
-if (x > f):
-    n = (x + f)
-else:
-    n = (x - 4)
-print(n)
+f = 0
+x = 0
+x = 0
+None
+while (x < 3):
+    f = 0
+    None
+    while (f < 3):
+        print(x)
+        print(f)
+        f = (f + 1)
+    x = (x + 1)
