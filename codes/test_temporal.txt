@@ -1,5 +1,5 @@
 program main{
-    bool result;
-    result = True;
-    writeln(result);
+    bool a, b, result;
+    a = true;
+    b = false;
 }
