@@ -123,11 +123,11 @@ class Parser:
 
     def p_print_statement(self, p):
         '''
-        print_statement : WRITELN LPAREN expression RPAREN SEMICOLON 
-                        | WRITE LPAREN expression RPAREN SEMICOLON
+        print_statement : WRITELN LPAREN expression_list RPAREN SEMICOLON 
+                        | WRITE LPAREN expression_list RPAREN SEMICOLON
         '''
-        p[0] = ('print', p[3])
-
+        p[0] = ('print', p[1], p[3])
+        
     def p_if_statement(self, p):
         '''
         if_statement : IF LPAREN expression RPAREN LBRACE statement_list RBRACE

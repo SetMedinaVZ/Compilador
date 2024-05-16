@@ -133,8 +133,15 @@ class Interpreter:
 
 
     def generate_print(self, node):
-        value = self.generate_expression(node[1])
-        self.output.append(f"{'    ' * self.indent_level}print({value})")
+        # node[1] is 'writeln' or 'write'
+        # node[2] is the list of expressions
+        expressions = [self.generate_expression(expr) for expr in node[2]]
+        if node[1] == 'writeln':
+            self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)})")
+        else:
+            # For 'write', using end='' to avoid newline
+            self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)}, end='')")
+
 
     def generate_if(self, node):
         condition = self.generate_expression(node[1])

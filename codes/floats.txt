@@ -1,0 +1,38 @@
+program main {
+    float a, b, c, result;
+    
+    // Asignaciones de floats
+    a = 3.14F;
+    b = 2.71f;
+    
+    // Operaciones aritméticas con floats
+    c = a + b;
+    writeln("Suma: ", c);
+    
+    c = a - b;
+    writeln("Resta: ", c);
+    
+    c = a * b;
+    writeln("Multiplicación: ", c);
+    
+    c = a / b;
+    writeln("División: ", c);
+    
+    // Comparaciones con floats
+    if (a > b) {
+        writeln("a es mayor que b");
+    } else if (a < b) {
+        writeln("a es menor que b");
+    } else {
+        writeln("a es igual a b");
+    }
+    
+    // Uso de floats en ciclos
+    result = 0.0F;
+    for (float i = 0.1F; i < 1.0F; i += 0.1F) {
+        result += i;
+        writeln("Valor de i: ", i);
+    }
+    
+    writeln("Resultado final: ", result);
+}

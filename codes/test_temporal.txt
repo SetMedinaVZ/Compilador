@@ -5,5 +5,5 @@ program main {
     b = false;
     
     result = a && b;  // AND lógico
-    writeln(result);
+    writeln("result:", result);
 }
