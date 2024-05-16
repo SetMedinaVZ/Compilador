@@ -1,0 +1,7 @@
+program main{
+    int f,x;
+    f = 1;
+    x = 5;
+    x = "string";
+    writeln(x);
+}

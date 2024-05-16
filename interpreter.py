@@ -4,8 +4,9 @@ import os
 class Interpreter:
     def __init__(self):
         self.variables = {}
+        self.var_types = {} 
         self.output = []
-        self.indent_level = 0  # Contador de indentación
+        self.indent_level = 0
 
     def generate(self, node):
         if node[0] == 'program':
@@ -33,17 +34,34 @@ class Interpreter:
             self.generate_for(node)
         return "\n".join(self.output)
 
+    def check_type(self, var_name, value):
+        var_type = self.var_types.get(var_name)
+        if var_type == 'int' and not isinstance(value, int):
+            raise TypeError(f"Variable '{var_name}' is of type 'int' but got '{value}'")
+        elif var_type == 'float' and not isinstance(value, float):
+            raise TypeError(f"Variable '{var_name}' is of type 'float' but got '{value}'")
+        elif var_type == 'string' and not isinstance(value, str):
+            raise TypeError(f"Variable '{var_name}' is of type 'string' but got '{value}'")
+        elif var_type == 'int[]' and not isinstance(value, list):
+            raise TypeError(f"Variable '{var_name}' is of type 'int[]' but got '{value}'")
+        elif var_type == 'bool' and not isinstance(value, bool):
+            raise TypeError(f"Variable '{var_name}' is of type 'bool' but got '{value}'")
+
     def generate_declaration(self, node):
         if node[1] == 'int[]':  # Manejo especial para arrays
             self.generate_array_declaration(node)
         else:
+            var_type = node[1]
             for var, expr in node[2]:
+                self.var_types[var] = var_type  # Guardar el tipo de la variable
                 if expr is None:
                     self.output.append(f"{'    ' * self.indent_level}{var} = None")
                 else:
                     value = self.generate_expression(expr)
+                    self.check_type(var, value)  # Verificar el tipo de la variable
                     self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
-        
+
+            
     def generate_declaration_init(self, node):
         value = self.generate_expression(node[3])
         self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
@@ -83,8 +101,11 @@ class Interpreter:
             save_and_exit("", error_message)
 
     def generate_assignment(self, node):
+        var_name = node[1]
         value = self.generate_expression(node[2])
-        self.output.append(f"{'    ' * self.indent_level}{node[1]} = {value}")
+        self.check_type(var_name, value)  # Verificar el tipo de la variable
+        self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
+
 
     def generate_print(self, node):
         value = self.generate_expression(node[1])
