@@ -1,9 +1,8 @@
 program main {
-    bool a, b, result;
+    float a, b, c, result;
     
-    a = true;
-    b = false;
-    
-    result = a && b;  // AND lógico
-    writeln("result:", result);
+    // Asignaciones de floats
+    a = 3.14F;
+    b = 2.71f;
+    writeln(a, b);
 }

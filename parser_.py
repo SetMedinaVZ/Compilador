@@ -215,6 +215,7 @@ class Parser:
 
 parser = Parser()
 
+#This is for printing the result of the parser
 with open(filename, 'r') as inputfile:
     data = inputfile.read()
 
