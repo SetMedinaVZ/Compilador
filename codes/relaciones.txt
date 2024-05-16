@@ -1,7 +1,7 @@
 program main {
     int a, b;
     bool result;
-    
+
     a = 5;
     b = 3;
     

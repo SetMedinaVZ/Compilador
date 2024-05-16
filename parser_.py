@@ -164,8 +164,13 @@ class Parser:
                 | expression GTE expression
                 | expression EQ expression
                 | expression NE expression
+                | expression AND expression
+                | expression OR expression
+                | NOT expression
+                | LPAREN expression RPAREN
                 | VAR_INT
                 | VAR_FLOAT
+                | VAR_BOOL
                 | STRING
                 | ID
         '''
