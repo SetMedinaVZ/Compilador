@@ -160,7 +160,7 @@ class Interpreter:
         self.indent_level += 1
         self.generate_statements(node[3])
         self.indent_level -= 1
-        
+    
     def generate_if_else_if(self, node):
         condition = self.generate_expression(node[1])
         self.output.append(f"{'    ' * self.indent_level}if {condition}:")
@@ -175,11 +175,10 @@ class Interpreter:
             self.generate_statements(else_if[2])
             self.indent_level -= 1
 
-        if node[4]:  # Si hay un bloque else al final
-            self.output.append(f"{'    ' * self.indent_level}else:")
-            self.indent_level += 1
-            self.generate_statements(node[4])
-            self.indent_level -= 1
+        self.output.append(f"{'    ' * self.indent_level}else:")
+        self.indent_level += 1
+        self.generate_statements(node[4])
+        self.indent_level -= 1
 
     def generate_while(self, node):
         condition = self.generate_expression(node[1])

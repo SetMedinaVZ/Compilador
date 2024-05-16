@@ -18,7 +18,7 @@ program main {
     c = a / b;
     writeln("División: ", c);
     
-    writeln("comparacion else if");
+    // Comparaciones con floats
     if (a > b) {
         writeln("a es mayor que b");
     } else if (a < b) {
