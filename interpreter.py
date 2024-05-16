@@ -34,18 +34,38 @@ class Interpreter:
             self.generate_for(node)
         return "\n".join(self.output)
 
-    def check_type(self, var_name, value):
+    def check_type(self, var_name, value_type):
         var_type = self.var_types.get(var_name)
-        if var_type == 'int' and not isinstance(value, int):
-            raise TypeError(f"Variable '{var_name}' is of type 'int' but got '{value}'")
-        elif var_type == 'float' and not isinstance(value, float):
-            raise TypeError(f"Variable '{var_name}' is of type 'float' but got '{value}'")
-        elif var_type == 'string' and not isinstance(value, str):
-            raise TypeError(f"Variable '{var_name}' is of type 'string' but got '{value}'")
-        elif var_type == 'int[]' and not isinstance(value, list):
-            raise TypeError(f"Variable '{var_name}' is of type 'int[]' but got '{value}'")
-        elif var_type == 'bool' and not isinstance(value, bool):
-            raise TypeError(f"Variable '{var_name}' is of type 'bool' but got '{value}'")
+        if var_type != value_type:
+            raise TypeError(f"Variable '{var_name}' is of type '{var_type}' but got '{value_type}'")
+
+
+    def check_expression_type(self, node):
+        if isinstance(node, int):
+            return 'int'
+        elif isinstance(node, float):
+            return 'float'
+        elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
+            return 'string'
+        elif isinstance(node, str):
+            return self.var_types.get(node, 'unknown')
+        elif isinstance(node, tuple):
+            if node[0] == 'binary_op':
+                left_type = self.check_expression_type(node[1])
+                right_type = self.check_expression_type(node[3])
+                if left_type != right_type:
+                    raise TypeError(f"Type mismatch in binary operation: {left_type} {node[2]} {right_type}")
+                return left_type
+            elif node[0] == 'postfix_op':
+                expr_type = self.check_expression_type(node[1])
+                if expr_type != 'int':
+                    raise TypeError(f"Postfix operation on non-int type: {expr_type}")
+                return 'int'
+        raise TypeError(f"Unsupported expression: {node}")
+
+        var_type = self.var_types.get(var_name)
+        if var_type != value_type:
+            raise TypeError(f"Variable '{var_name}' is of type '{var_type}' but got '{value_type}'")
 
     def generate_declaration(self, node):
         if node[1] == 'int[]':  # Manejo especial para arrays
@@ -102,10 +122,10 @@ class Interpreter:
 
     def generate_assignment(self, node):
         var_name = node[1]
+        value_type = self.check_expression_type(node[2])
+        self.check_type(var_name, value_type)  # Verificar el tipo de la variable
         value = self.generate_expression(node[2])
-        self.check_type(var_name, value)  # Verificar el tipo de la variable
         self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
-
 
     def generate_print(self, node):
         value = self.generate_expression(node[1])
@@ -184,22 +204,27 @@ class Interpreter:
             self.generate_declaration_init(statement)
 
     def generate_expression(self, node):
-        if isinstance(node, int): # Se usa en los arrays
+        if isinstance(node, int):
+            return node
+        elif isinstance(node, float):
+            return node
+        elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
+            return node
+        elif isinstance(node, str):
             return node
         elif isinstance(node, tuple):
             if node[0] == 'binary_op':
-                left = self.generate_expression(node[1])
+                left_value = self.generate_expression(node[1])
                 op = node[2]
-                right = self.generate_expression(node[3])
-                return f"({left} {op} {right})"
+                right_value = self.generate_expression(node[3])
+                return f"({left_value} {op} {right_value})"
             elif node[0] == 'postfix_op':
-                expr = self.generate_expression(node[1])
+                expr_value = self.generate_expression(node[1])
                 if node[2] == '++':
-                    return f"({expr} + 1)"
+                    return f"({expr_value} + 1)"
                 elif node[2] == '--':
-                    return f"({expr} - 1)"
-        else:
-            return str(node)
+                    return f"({expr_value} - 1)"
+        raise TypeError(f"Unsupported expression: {node}")
 
     def to_python_code(self):
         return "\n".join(self.output)
