@@ -26,13 +26,4 @@ program main {
     } else {
         writeln("a es igual a b");
     }
-    
-    // Uso de floats en ciclos
-    result = 0.0F;
-    for (float i = 0.1F; i < 1.0F; i += 0.1F) {
-        result += i;
-        writeln("Valor de i: ", i);
-    }
-    
-    writeln("Resultado final: ", result);
 }

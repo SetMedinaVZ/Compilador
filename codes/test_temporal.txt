@@ -1,8 +1,12 @@
 program main {
     float a, b, c, result;
-    
-    // Asignaciones de floats
     a = 3.14F;
     b = 2.71f;
-    writeln(a, b);
+    if (a > b) {
+        writeln("a es mayor que b");
+    } else if (a < b) {
+        writeln("a es menor que b");
+    } else {
+        writeln("a es igual a b");
+    }
 }
