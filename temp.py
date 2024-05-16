@@ -1,4 +1,12 @@
-myNum = [10, 20, 30, 40]
-myNum[0] = 15
-myNum[(0 + 1)] = 20
-print(myNum)
+i = None
+n = None
+f = None
+x = None
+print("texto dump")
+f = 1
+x = 5
+if (x > f):
+    n = (x + f)
+else:
+    n = (x - 4)
+print(n)

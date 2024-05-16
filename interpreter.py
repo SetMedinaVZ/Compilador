@@ -50,16 +50,27 @@ class Interpreter:
         self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
         
     def generate_array_declaration(self, node):
-        var_name = node[2][0][1]
-        values = node[2][0][2]
+        if node[2][0][0] == 'assignment':
+            var_name = node[2][0][1]
+            values = node[2][0][2] if len(node[2][0]) > 2 else []
+        else:
+            var_name = node[2][0][0]
+            values = []
+        #operaciones binarias dentro
+        processed_values = []
+        for value in values:
+            if isinstance(value, tuple) and value[0] == 'binary_op':
+                processed_values.append(self.generate_expression(value))
+            else:
+                processed_values.append(value)
 
-        if all(isinstance(value, int) for value in values):
-            values_str = ", ".join(map(str, values))
+        if all(isinstance(value, int) for value in processed_values):
+            values_str = ", ".join(map(str, processed_values))
             self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values_str}]")
         else:
             error_message = "Array initialization must be a list of integers"
             save_and_exit("", error_message)
-    
+            
     def generate_array_element_assignment(self, node):
         var_name = node[1]
         index = self.generate_expression(node[2])
