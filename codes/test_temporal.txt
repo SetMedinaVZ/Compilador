@@ -1,5 +1,6 @@
 program main{
     bool a;
-    a = true;
+    a=true;
+
     writeln(a);
 }

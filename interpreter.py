@@ -124,6 +124,7 @@ class Interpreter:
     def generate_assignment(self, node):
         var_name = node[1]
         value_type = self.check_expression_type(node[2])
+        self.var_types[var_name] = value_type  # Actualizar el tipo de la variable
         self.check_type(var_name, value_type)  # Verificar el tipo de la variable
         value = self.generate_expression(node[2])
         self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
