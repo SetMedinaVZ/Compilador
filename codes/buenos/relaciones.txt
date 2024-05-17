@@ -6,20 +6,20 @@ program main {
     b = 3;
     
     result = (a > b);   // Mayor que
-    writeln(result);
+    writeln("Mayor que: ", result);
     
     result = (a < b);   // Menor que
-    writeln(result);
+    writeln("Menor que: ", result);
     
     result = (a == b);  // Igual a
-    writeln(result);
+    writeln("Igual a: ", result);
     
     result = (a != b);  // Diferente de
-    writeln(result);
+    writeln("Diferente de: ", result);
     
     result = (a >= b);  // Mayor o igual que
-    writeln(result);
+    writeln("Mayor o igual que: ", result);
     
     result = (a <= b);  // Menor o igual que
-    writeln(result);
+    writeln("Menor o igual que: ", result);
 }
