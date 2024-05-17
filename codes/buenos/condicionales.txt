@@ -9,4 +9,11 @@ program main {
     } else {
         writeln("a es igual a b");
     }
+
+    if ( a > b){
+        writeln("x > f");
+    } else {
+        writeln("x minus f");
+    }
+
 }

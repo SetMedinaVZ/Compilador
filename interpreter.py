@@ -149,8 +149,15 @@ class Interpreter:
         self.indent_level += 1
         self.generate_statements(node[2])
         self.indent_level -= 1
-        if len(node) > 3:  # Si hay bloques elseif o else
-            self.generate_else_if_and_else(node[3], node[4])
+
+        # Comprobar si hay elseif o else
+        if len(node) > 3:
+            # Revisar si hay bloques elseif
+            if node[3] and isinstance(node[3], list):
+                self.generate_else_if_and_else(node[3], node[4] if len(node) > 4 else None)
+            else:
+                # Manejar el caso de else directamente aquí
+                self.generate_else(node[3])
 
     def generate_else_if_and_else(self, elseifs, else_block):
         for elseif in elseifs:
@@ -159,12 +166,17 @@ class Interpreter:
             self.indent_level += 1
             self.generate_statements(elseif[2])
             self.indent_level -= 1
-        if else_block:  # Si hay un bloque else
+
+        if else_block:  # Comprobar y generar 'else'
+            self.generate_else(else_block)
+
+    def generate_else(self, else_block):
+        if else_block:  # Verificar si realmente hay un bloque else
             self.output.append(f"{'    ' * self.indent_level}else:")
             self.indent_level += 1
             self.generate_statements(else_block[1])
             self.indent_level -= 1
-            
+    
     def generate_if_else(self, node):
         condition = self.generate_expression(node[1])
         self.output.append(f"{'    ' * self.indent_level}if {condition}:")
