@@ -127,27 +127,37 @@ class Parser:
                         | WRITE LPAREN expression_list RPAREN SEMICOLON
         '''
         p[0] = ('print', p[1], p[3])
-        
+    
     def p_if_statement(self, p):
         '''
-        if_statement : IF LPAREN expression RPAREN LBRACE statement_list RBRACE else_if_list
-                    | IF LPAREN expression RPAREN LBRACE statement_list RBRACE else_if_list ELSE LBRACE statement_list RBRACE
+        if_statement : IF LPAREN expression RPAREN LBRACE statement_list RBRACE else_if_list optional_else
+                     | IF LPAREN expression RPAREN LBRACE statement_list RBRACE optional_else
         '''
         if len(p) == 9:
-            p[0] = ('if', p[3], p[6], p[8])
-        else:
-            p[0] = ('if', p[3], p[6], p[8], p[11])
-
+            p[0] = ('if', p[3], p[6], p[8], None)  # No hay bloque else
+        elif len(p) == 10:
+            p[0] = ('if', p[3], p[6], p[8], p[9])
+            
     def p_else_if_list(self, p):
         '''
         else_if_list : else_if_list ELSE IF LPAREN expression RPAREN LBRACE statement_list RBRACE
                     | ELSE IF LPAREN expression RPAREN LBRACE statement_list RBRACE
+                    | empty
         '''
         if len(p) == 10:
             p[0] = p[1] + [('elseif', p[5], p[8])]
         elif len(p) == 9:
             p[0] = [('elseif', p[4], p[7])]
+        else:
+            p[0] = []
 
+    def p_optional_else(self, p):
+        '''
+        optional_else : ELSE LBRACE statement_list RBRACE
+                    | empty
+        '''
+        if len(p) == 5:
+            p[0] = ('else', p[3])
 
     def p_while_statement(self, p):
         'while_statement : WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE'
@@ -214,7 +224,11 @@ class Parser:
             p[0] = p[1]
         else:
             p[0] = f'{p[1]}[]'  # Tipo array
-
+            
+    def p_empty(self, p):
+        'empty :'
+        pass
+    
     def p_error(self, p):
         print("Syntax error at line: %s, at token %s" % (p.lineno, p.value))
 

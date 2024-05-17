@@ -5,8 +5,7 @@ program main{
     if ( x > f)
     {
         writeln("x > f");
-    } else
-    {
+    } else {
         writeln("x minus f");
     }
 
