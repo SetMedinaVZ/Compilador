@@ -7,8 +7,6 @@ program main {
     } else if (a < b) {
             writeln("a es menor que b");
     } else {
-        if(a > b){
-            writeln("a es mayor que b");
-        }
+        writeln("a es igual a b");
     }
 }
