@@ -1,20 +1,21 @@
 import sys
 import os
+from utils import save_and_exit
 
 class Interpreter:
     def __init__(self):
-        self.variables = {}
-        self.var_types = {} 
-        self.output = []
-        self.indent_level = 0
+        self.variables = {} # For variable initialization
+        self.var_types = {} # For variable types
+        self.output = [] # For generated Python code
+        self.indent_level = 0 # For indentation
 
     def generate(self, node):
-        if node[0] == 'program':
+        if node[0] == 'program': # Program node
             for statement in node[2]:
                 self.generate(statement)
-        elif node[0] == 'declaration':
-            self.generate_declaration(node)
-        elif node[0] == 'declaration_init':
+        elif node[0] == 'declaration': 
+            self.generate_declaration(node) 
+        elif node[0] == 'declaration_init': 
             self.generate_declaration_init(node)
         elif node[0] == 'array_declaration':
             self.generate_array_declaration(node)
@@ -282,19 +283,4 @@ class Interpreter:
 
     def to_python_code(self):
         return "\n".join(self.output)
-
-def save_and_exit(python_code, error=None):
-    with open("temp.py", "w") as file:
-        if error:
-            file.write(f"def report_error():\n")
-            file.write(f"    print('Error: {error}')\n\n")
-            file.write(f"report_error()\n")
-        else:
-            file.write(python_code)
-
-    if error:
-        print(f"Error: {error}. Exiting to run temp.py.")
-    else:
-        print("Python code saved to temp.py. Exiting to run temp.py.")
-    os._exit(0)
 

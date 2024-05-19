@@ -9,7 +9,7 @@ program main {
     writeln("Mayor que: ", result);
     
     result = (a < b);   // Menor que
-    writeln("Menor que: ", result);
+    write("Menor que: ", result);
     
     result = (a == b);  // Igual a
     writeln("Igual a: ", result);

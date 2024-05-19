@@ -1,5 +1,5 @@
 import ply.lex as lex
-
+from utils import print_red
 class Lexer(object):
     def __init__(self):
         self.lexer = None
@@ -104,7 +104,7 @@ class Lexer(object):
 
     # Error handling rule
     def t_error(self, t):
-        print("Illegal character '%s'" % t.value[0])
+        print_red("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
 
     def get_tokens(self, data, **kwargs):

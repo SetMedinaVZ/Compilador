@@ -1,7 +1,8 @@
 import sys
 import ply.yacc as yacc
+import logging 
 from Lexer import Lexer
-import logging
+from utils import print_red, print_green
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -16,6 +17,7 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 filename = sys.argv[1]
+
 
 class Parser:
     tokens = Lexer.tokens
@@ -230,7 +232,8 @@ class Parser:
         pass
     
     def p_error(self, p):
-        print("Syntax error at line: %s, at token %s" % (p.lineno, p.value))
+        print_red("\nSyntax error at line: %s, at token %s" % (p.lineno, p.value))
+        # print("Syntax error at line: %s, at token %s" % (p.lineno, p.value))
 
     def parse(self, data):
         lexer = self.lexer.get_lexer()
@@ -245,4 +248,6 @@ with open(filename, 'r') as inputfile:
     data = inputfile.read()
 
 result = parser.parse(data)
-print(result)
+if result:
+    print("Parsing was successful")
+    print_green(result)

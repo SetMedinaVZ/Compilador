@@ -2,11 +2,11 @@ import sys
 import os
 from Parser import Parser
 from Interpreter import Interpreter
-from compile import save_and_exit
+from utils import save_and_exit
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python main.py <filename>")
+        print("Starting the program requires a single argument: Add the path to the file you want to run.")
         sys.exit(1)
 
     filename = sys.argv[1]
@@ -21,7 +21,6 @@ def main():
         interpreter = Interpreter()
         python_code = interpreter.generate(parsed_data)
 
-        # Save the Python code to temp.py and exit
         save_and_exit(python_code)
 
     except Exception as e:

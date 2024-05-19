@@ -1,0 +1,86 @@
+program main {
+    int i, j, n, f, x, a, b;
+    float pi, e, result;
+    bool flag1, flag2, check;
+    int[] myArray = [10, 20, 30, 40];
+    float[] floatArray;
+    
+    // Basic assignments and arithmetic operations
+    i = 1;
+    j = 2;
+    a = 5 + 3;
+    b = 10 - 2;
+    pi = 3.14;
+    e = 2.71;
+    
+    writeln("Basic arithmetic operations:");
+    writeln(a); // 8
+    writeln(b); // 8
+    
+    // Conditional statements
+    if (a > b) {
+        writeln("a is greater than b");
+    } else {
+        writeln("a is not greater than b");
+    }
+    
+    // Logical operations
+    flag1 = true;
+    flag2 = false;
+    check = flag1 && flag2; // false
+    writeln("Logical AND: ", check);
+    check = flag1 || flag2; // true
+    writeln("Logical OR: ", check);
+    check = !flag1; // false
+    writeln("Logical NOT: ", check);
+    
+    // Array manipulations
+    writeln("Initial array values:");
+    writeln(myArray);
+    myArray[1] = 25;
+    writeln("Modified array values:");
+    writeln(myArray);
+    
+    // Nested for loops
+    writeln("Nested for loops:");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            writeln("i: ", i, " j: ", j);
+        }
+    }
+    
+    // While loop
+    writeln("While loop:");
+    x = 0;
+    while (x < 5) {
+        writeln("x: ", x);
+        x = x + 1;
+    }
+    
+    // Float operations
+    result = pi + e;
+    writeln("Float addition: ", result);
+    result = pi - e;
+    writeln("Float subtraction: ", result);
+    result = pi * e;
+    writeln("Float multiplication: ", result);
+    result = pi / e;
+    writeln("Float division: ", result);
+    
+    // Array initialization with float
+    floatArray = [0.1, 0.2, 0.3];
+    writeln("Float array values:");
+    writeln(floatArray);
+    floatArray[2] = 0.5;
+    writeln("Modified float array values:");
+    writeln(floatArray);
+    
+    // Complex if-else with logical operations
+    if ((a > b) && (pi > e)) {
+        writeln("Both conditions are true");
+    } else if ((a > b) || (pi > e)) {
+        writeln("At least one condition is true");
+    } else {
+        writeln("Neither condition is true");
+    }
+}
