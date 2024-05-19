@@ -1,17 +1,7 @@
 import sys
 import ply.yacc as yacc
-import logging 
 from Lexer import Lexer
 from utils import print_red, print_green
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="parselog.log",
-    filemode="w",
-    format="%(filename)10s:%(lineno)4d:%(message)s"
-)
-
-log = logging.getLogger()
 
 if len(sys.argv) != 2:
     print("Usage: python parser.py <filename>")
@@ -19,7 +9,6 @@ if len(sys.argv) != 2:
 
 filename = sys.argv[1]
 
-# Definición del parser
 class Parser:
     tokens = Lexer.tokens
 
@@ -50,8 +39,35 @@ class Parser:
                   | if_statement
                   | while_statement
                   | for_statement
+                  | function_declaration
+                  | return_statement
         '''
         p[0] = p[1]
+
+    def p_function_declaration(self, p):
+        'function_declaration : FUNCTION ID LPAREN parameter_list RPAREN LBRACE statement_list RBRACE'
+        p[0] = ('function_declaration', p[2], p[4], p[7])
+
+    def p_parameter_list(self, p):
+        '''
+        parameter_list : parameter
+                       | parameter_list COMA parameter
+                       | empty
+        '''
+        if len(p) == 2:
+            p[0] = [p[1]]
+        elif len(p) == 4:
+            p[0] = p[1] + [p[3]]
+        else:
+            p[0] = []
+
+    def p_parameter(self, p):
+        'parameter : type ID'
+        p[0] = (p[1], p[2])
+
+    def p_return_statement(self, p):
+        'return_statement : RETURN expression SEMICOLON'
+        p[0] = ('return', p[2])
 
     def p_declaration_statement(self, p):
         '''
@@ -196,12 +212,10 @@ class Parser:
                 | ID
                 | TRUE
                 | FALSE
+                | function_call
         '''
         if len(p) == 2:
-            if p[1] in {True, False}:
-                p[0] = p[1]
-            else:
-                p[0] = p[1]
+            p[0] = p[1]
         elif len(p) == 3:
             if p[2] in {'++', '--'}:
                 p[0] = ('postfix_op', p[1], p[2])
@@ -214,6 +228,23 @@ class Parser:
                 p[0] = p[2]
             else:
                 p[0] = ('binary_op', p[1], p[2], p[3])
+
+    def p_function_call(self, p):
+        'function_call : ID LPAREN argument_list RPAREN'
+        p[0] = ('function_call', p[1], p[3])
+
+    def p_argument_list(self, p):
+        '''
+        argument_list : expression
+                      | argument_list COMA expression
+                      | empty
+        '''
+        if len(p) == 2:
+            p[0] = [p[1]]
+        elif len(p) == 4:
+            p[0] = p[1] + [p[3]]
+        else:
+            p[0] = []
 
     def p_type(self, p):
         '''
@@ -228,7 +259,7 @@ class Parser:
             p[0] = p[1]
         else:
             p[0] = f'{p[1]}[]'  # Array type
-            
+
     def p_empty(self, p):
         'empty :'
         pass
@@ -238,7 +269,7 @@ class Parser:
 
     def parse(self, data):
         lexer = self.lexer.get_lexer()
-        self.parser = yacc.yacc(module=self, debug=log)
+        self.parser = yacc.yacc(module=self, debug=True, start='program')
         result = self.parser.parse(input=data, lexer=lexer)
         return result
 
@@ -248,7 +279,7 @@ print_green("Parsing...")
 
 parser = Parser()
 
-#This is for printing the result of the parser
+# Esto es para imprimir el resultado del parser
 with open(filename, 'r') as inputfile:
     data = inputfile.read()
 

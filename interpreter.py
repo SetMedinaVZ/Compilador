@@ -1,29 +1,23 @@
-
-
 import sys
 from utils import save_and_exit
-# Interpreter class responsible for generating and executing intermediate code
-# Here methods are available to generate the a intermediate code from the AST 
-# execution takes place in 'main.py' file
-# a new instance of the content generated in this file is developed in 'interpretate_.py'
-
 
 print("Interpreter.py imported")
 
 class Interpreter:
     def __init__(self):
-        self.variables = {} # For variable initialization
-        self.var_types = {} # For variable types
-        self.output = [] # For generated Python code
-        self.indent_level = 0 # For indentation
+        self.variables = {}  # For variable initialization
+        self.var_types = {}  # For variable types
+        self.functions = {}  # For storing functions
+        self.output = []  # For generated Python code
+        self.indent_level = 0  # For indentation
 
     def generate(self, node):
-        if node[0] == 'program': # Program node
+        if node[0] == 'program':  # Program node
             for statement in node[2]:
                 self.generate(statement)
-        elif node[0] == 'declaration': 
-            self.generate_declaration(node) 
-        elif node[0] == 'declaration_init': 
+        elif node[0] == 'declaration':
+            self.generate_declaration(node)
+        elif node[0] == 'declaration_init':
             self.generate_declaration_init(node)
         elif node[0] == 'array_declaration':
             self.generate_array_declaration(node)
@@ -41,13 +35,18 @@ class Interpreter:
             self.generate_while(node)
         elif node[0] == 'for':
             self.generate_for(node)
+        elif node[0] == 'function_declaration':
+            self.generate_function_declaration(node)
+        elif node[0] == 'function_call':
+            return self.generate_function_call(node)
+        elif node[0] == 'return':
+            return self.generate_return(node)
         return "\n".join(self.output)
 
     def check_type(self, var_name, value_type):
         var_type = self.var_types.get(var_name)
         if var_type != value_type:
             raise TypeError(f"Variable '{var_name}' is of type '{var_type}' but got '{value_type}'")
-
 
     def check_expression_type(self, node):
         if isinstance(node, int):
@@ -76,8 +75,9 @@ class Interpreter:
                 return 'int'
             if node[0] == 'unary_op':
                 return self.check_expression_type(node[2])
+            if node[0] == 'function_call':
+                return self.check_expression_type(self.generate_function_call(node))
         raise TypeError(f"Unsupported expression: {node}")
-
 
     def generate_declaration(self, node):
         if node[1] == 'int[]':  # Manejo especial para arrays
@@ -93,12 +93,11 @@ class Interpreter:
                     self.check_type(var, var_type)  # Verificar el tipo de la variable
                     self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
 
-                
     def generate_declaration_init(self, node):
         value = self.generate_expression(node[3])
         self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
         self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
-        
+
     def generate_array_declaration(self, node):
         if node[2][0][0] == 'assignment':
             var_name = node[2][0][1]
@@ -106,7 +105,7 @@ class Interpreter:
         else:
             var_name = node[2][0][0]
             values = []
-        #operaciones binarias dentro
+        # operaciones binarias dentro
         processed_values = []
         for value in values:
             if isinstance(value, tuple) and value[0] == 'binary_op':
@@ -120,7 +119,7 @@ class Interpreter:
         else:
             error_message = "Array initialization must be a list of integers"
             save_and_exit("", error_message)
-            
+
     def generate_array_element_assignment(self, node):
         var_name = node[1]
         index = self.generate_expression(node[2])
@@ -140,17 +139,12 @@ class Interpreter:
         value = self.generate_expression(node[2])
         self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
 
-
     def generate_print(self, node):
-        # node[1] is 'writeln' or 'write'
-        # node[2] is the list of expressions
         expressions = [self.generate_expression(expr) for expr in node[2]]
         if node[1] == 'writeln':
             self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)})")
         else:
-            # For 'write', using end='' to avoid newline
             self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)}, end='')")
-
 
     def generate_if(self, node):
         condition = self.generate_expression(node[1])
@@ -159,13 +153,10 @@ class Interpreter:
         self.generate_statements(node[2])
         self.indent_level -= 1
 
-        # Comprobar si hay elseif o else
         if len(node) > 3:
-            # Revisar si hay bloques elseif
             if node[3] and isinstance(node[3], list):
                 self.generate_else_if_and_else(node[3], node[4] if len(node) > 4 else None)
             else:
-                # Manejar el caso de else directamente aquí
                 self.generate_else(node[3])
 
     def generate_else_if_and_else(self, elseifs, else_block):
@@ -176,16 +167,16 @@ class Interpreter:
             self.generate_statements(elseif[2])
             self.indent_level -= 1
 
-        if else_block:  # Comprobar y generar 'else'
+        if else_block:
             self.generate_else(else_block)
 
     def generate_else(self, else_block):
-        if else_block:  # Verificar si realmente hay un bloque else
+        if else_block:
             self.output.append(f"{'    ' * self.indent_level}else:")
             self.indent_level += 1
             self.generate_statements(else_block[1])
             self.indent_level -= 1
-    
+
     def generate_if_else(self, node):
         condition = self.generate_expression(node[1])
         self.output.append(f"{'    ' * self.indent_level}if {condition}:")
@@ -250,6 +241,62 @@ class Interpreter:
             self.generate_array_declaration(statement)
         elif statement[0] == 'declaration_init':
             self.generate_declaration_init(statement)
+        elif statement[0] == 'function_declaration':
+            self.generate_function_declaration(statement)
+        elif statement[0] == 'function_call':
+            return self.generate_function_call(statement)
+        elif statement[0] == 'return':
+            return self.generate_return(statement)
+
+    def generate_function_declaration(self, node):
+        func_name = node[1]
+        parameters = node[2]
+        body = node[3]
+        self.functions[func_name] = (parameters, body)
+
+        param_str = ", ".join([param[1] for param in parameters])
+        self.output.append(f"{'    ' * self.indent_level}def {func_name}({param_str}):")
+        self.indent_level += 1
+        self.generate_statements(body)
+        self.indent_level -= 1
+
+    def generate_function_call(self, node):
+        func_name = node[1]
+        arguments = [self.generate_expression(arg) for arg in node[2]]
+        if func_name in self.functions:
+            params, body = self.functions[func_name]
+            if len(arguments) != len(params):
+                raise TypeError(f"Function '{func_name}' called with incorrect number of arguments")
+
+            # Create a new scope for function execution
+            original_vars = self.variables.copy()
+            original_var_types = self.var_types.copy()
+
+            for param, arg in zip(params, arguments):
+                self.variables[param[1]] = arg
+                self.var_types[param[1]] = self.check_expression_type(arg)
+
+            # Execute function body
+            result = None
+            for stmt in body:
+                result = self.generate(stmt)
+                if isinstance(result, tuple) and result[0] == 'return':
+                    result = result[1]
+                    break
+
+            # Restore original scope
+            self.variables = original_vars
+            self.var_types = original_var_types
+            return result
+        else:
+            arg_str = ", ".join(map(str, arguments))
+            self.output.append(f"{'    ' * self.indent_level}{func_name}({arg_str})")
+            return f"{func_name}({arg_str})"
+
+    def generate_return(self, node):
+        value = self.generate_expression(node[1])
+        self.output.append(f"{'    ' * self.indent_level}return {value}")
+        return ('return', value)
 
     def generate_expression(self, node):
         if isinstance(node, int):
@@ -261,7 +308,7 @@ class Interpreter:
         elif isinstance(node, str):
             if node.lower() in {"true", "false"}:  # Reconocer valores booleanos
                 return node.capitalize()  # Convertir a True/False
-            return node
+            return self.variables.get(node, node)
         elif isinstance(node, bool):  # Manejar valores booleanos directamente
             return str(node)
         elif isinstance(node, tuple):
@@ -286,8 +333,9 @@ class Interpreter:
                 if op == '!':
                     op = 'not'
                 return f"({op} {expr_value})"
+            elif node[0] == 'function_call':
+                return self.generate_function_call(node)
         raise TypeError(f"Unsupported expression: {node}")
-
 
     def to_python_code(self):
         return "\n".join(self.output)

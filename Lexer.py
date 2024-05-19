@@ -23,6 +23,8 @@ class Lexer(object):
         'bool': 'BOOL',
         'true': 'TRUE',
         'false': 'FALSE',
+        'function': 'FUNCTION',
+        'return': 'RETURN',
     }
 
     # List of token names

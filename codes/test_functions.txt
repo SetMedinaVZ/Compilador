@@ -1,0 +1,11 @@
+program main {
+    int result;
+    
+    function add(int a, int b) {
+        return a + b;
+    }
+    
+    result = add(5, 3);  
+    writeln("Addition result: ", result);
+    
+}
