@@ -1,7 +1,7 @@
 import sys
 import os
 from Parser import Parser
-from Interpreter import Interpreter
+from interpreter import Interpreter
 from utils import save_and_exit
 
 def main():
