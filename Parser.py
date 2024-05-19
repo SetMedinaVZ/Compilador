@@ -17,8 +17,7 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 filename = sys.argv[1]
-
-
+filename = sys.argv[1]
 class Parser:
     tokens = Lexer.tokens
 
@@ -77,7 +76,7 @@ class Parser:
                         | ID ASSIGN array_initialization
         '''
         if len(p) == 2:
-            p[0] = (p[1], None)  # No hay inicialización
+            p[0] = (p[1], None)  # No initialization
         elif len(p) == 4:
             p[0] = ('assignment', p[1], p[3])
         elif len(p) == 6:
@@ -85,14 +84,14 @@ class Parser:
 
     def p_array_initialization(self, p):
         '''
-        array_initialization : LBRACKET int_list RBRACKET
+        array_initialization : LBRACKET value_list RBRACKET
         '''
         p[0] = p[2]
 
-    def p_int_list(self, p):
+    def p_value_list(self, p):
         '''
-        int_list : VAR_INT
-                 | int_list COMA VAR_INT
+        value_list : expression
+                   | value_list COMA expression
         '''
         if len(p) == 2:
             p[0] = [p[1]]
@@ -136,7 +135,7 @@ class Parser:
                      | IF LPAREN expression RPAREN LBRACE statement_list RBRACE optional_else
         '''
         if len(p) == 9:
-            p[0] = ('if', p[3], p[6], p[8], None)  # No hay bloque else
+            p[0] = ('if', p[3], p[6], p[8], None)  # No else block
         elif len(p) == 10:
             p[0] = ('if', p[3], p[6], p[8], p[9])
             
@@ -221,11 +220,12 @@ class Parser:
              | BOOL
              | STRING
              | INT LBRACKET RBRACKET
+             | FLOAT LBRACKET RBRACKET
         '''
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = f'{p[1]}[]'  # Tipo array
+            p[0] = f'{p[1]}[]'  # Array type
             
     def p_empty(self, p):
         'empty :'
@@ -233,12 +233,11 @@ class Parser:
     
     def p_error(self, p):
         print_red("\nSyntax error at line: %s, at token %s" % (p.lineno, p.value))
-        # print("Syntax error at line: %s, at token %s" % (p.lineno, p.value))
 
     def parse(self, data):
         lexer = self.lexer.get_lexer()
         self.parser = yacc.yacc(module=self, debug=log)
-        result = self.parser.parse(input=data, lexer=lexer, debug=log)
+        result = self.parser.parse(input=data, lexer=lexer)
         return result
 
 parser = Parser()
@@ -250,4 +249,7 @@ with open(filename, 'r') as inputfile:
 result = parser.parse(data)
 if result:
     print("Parsing was successful")
+    print_green(result)
+else:
+    print_red("Parsing was not successful")
     print_green(result)

@@ -68,7 +68,7 @@ program main {
     writeln("Float division: ", result);
     
     // Array initialization with float
-    floatArray = [0.1, 0.2, 0.3];
+    floatArray = [0.1, 0.2, 0.3]; 
     writeln("Float array values:");
     writeln(floatArray);
     floatArray[2] = 0.5;

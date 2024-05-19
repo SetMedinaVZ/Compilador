@@ -4,17 +4,17 @@ from utils import save_and_exit
 
 class Interpreter:
     def __init__(self):
-        self.variables = {} # For variable initialization
-        self.var_types = {} # For variable types
-        self.output = [] # For generated Python code
-        self.indent_level = 0 # For indentation
+        self.variables = {}  # For variable initialization
+        self.var_types = {}  # For variable types
+        self.output = []  # For generated Python code
+        self.indent_level = 0  # For indentation
 
     def generate(self, node):
-        if node[0] == 'program': # Program node
+        if node[0] == 'program':  # Program node
             for statement in node[2]:
                 self.generate(statement)
         elif node[0] == 'declaration': 
-            self.generate_declaration(node) 
+            self.generate_declaration(node)
         elif node[0] == 'declaration_init': 
             self.generate_declaration_init(node)
         elif node[0] == 'array_declaration':
@@ -39,7 +39,6 @@ class Interpreter:
         var_type = self.var_types.get(var_name)
         if var_type != value_type:
             raise TypeError(f"Variable '{var_name}' is of type '{var_type}' but got '{value_type}'")
-
 
     def check_expression_type(self, node):
         if isinstance(node, int):
@@ -70,9 +69,8 @@ class Interpreter:
                 return self.check_expression_type(node[2])
         raise TypeError(f"Unsupported expression: {node}")
 
-
     def generate_declaration(self, node):
-        if node[1] == 'int[]':  # Manejo especial para arrays
+        if node[1] == 'int[]' or node[1] == 'float[]':  # Manejo especial para arrays
             self.generate_array_declaration(node)
         else:
             var_type = node[1]
@@ -85,43 +83,41 @@ class Interpreter:
                     self.check_type(var, var_type)  # Verificar el tipo de la variable
                     self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
 
-                
     def generate_declaration_init(self, node):
         value = self.generate_expression(node[3])
         self.variables[node[2]] = value  # Opcional, si manejas un almacenamiento de variables
         self.output.append(f"{'    ' * self.indent_level}{node[2]} = {value}")
         
     def generate_array_declaration(self, node):
-        if node[2][0][0] == 'assignment':
-            var_name = node[2][0][1]
-            values = node[2][0][2] if len(node[2][0]) > 2 else []
-        else:
-            var_name = node[2][0][0]
-            values = []
-        #operaciones binarias dentro
-        processed_values = []
-        for value in values:
-            if isinstance(value, tuple) and value[0] == 'binary_op':
-                processed_values.append(self.generate_expression(value))
-            else:
-                processed_values.append(value)
+        var_type = node[1]
+        var_name = node[2][0][0]
+        values = node[2][0][2] if len(node[2][0]) > 2 else []
+        
+        processed_values = [self.generate_expression(value) for value in values]
 
-        if all(isinstance(value, int) for value in processed_values):
+        if var_type == 'int[]' and all(isinstance(value, int) for value in processed_values):
+            values_str = ", ".join(map(str, processed_values))
+            self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values_str}]")
+        elif var_type == 'float[]' and all(isinstance(value, float) for value in processed_values):
             values_str = ", ".join(map(str, processed_values))
             self.output.append(f"{'    ' * self.indent_level}{var_name} = [{values_str}]")
         else:
-            error_message = "Array initialization must be a list of integers"
+            error_message = f"Array initialization must be a list of {var_type[:-2]}s"
             save_and_exit("", error_message)
             
     def generate_array_element_assignment(self, node):
         var_name = node[1]
-        index = self.generate_expression(node[2])
+        index_expr = self.generate_expression(node[2])
         value = self.generate_expression(node[3])
-
-        if isinstance(value, int):
+        
+        var_type = self.var_types.get(var_name)
+        index = f"({index_expr})"
+        if var_type == 'int[]' and isinstance(eval(value), int):
+            self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
+        elif var_type == 'float[]' and isinstance(eval(value), float):
             self.output.append(f"{'    ' * self.indent_level}{var_name}[{index}] = {value}")
         else:
-            error_message = "Array element assignment must be an integer"
+            error_message = f"Array element assignment must be of type {var_type[:-2]}"
             save_and_exit("", error_message)
 
     def generate_assignment(self, node):
@@ -132,17 +128,12 @@ class Interpreter:
         value = self.generate_expression(node[2])
         self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
 
-
     def generate_print(self, node):
-        # node[1] is 'writeln' or 'write'
-        # node[2] is the list of expressions
         expressions = [self.generate_expression(expr) for expr in node[2]]
         if node[1] == 'writeln':
             self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)})")
         else:
-            # For 'write', using end='' to avoid newline
             self.output.append(f"{'    ' * self.indent_level}print({', '.join(expressions)}, end='')")
-
 
     def generate_if(self, node):
         condition = self.generate_expression(node[1])
@@ -151,13 +142,10 @@ class Interpreter:
         self.generate_statements(node[2])
         self.indent_level -= 1
 
-        # Comprobar si hay elseif o else
         if len(node) > 3:
-            # Revisar si hay bloques elseif
             if node[3] and isinstance(node[3], list):
                 self.generate_else_if_and_else(node[3], node[4] if len(node) > 4 else None)
             else:
-                # Manejar el caso de else directamente aquí
                 self.generate_else(node[3])
 
     def generate_else_if_and_else(self, elseifs, else_block):
@@ -168,11 +156,11 @@ class Interpreter:
             self.generate_statements(elseif[2])
             self.indent_level -= 1
 
-        if else_block:  # Comprobar y generar 'else'
+        if else_block:
             self.generate_else(else_block)
 
     def generate_else(self, else_block):
-        if else_block:  # Verificar si realmente hay un bloque else
+        if else_block:
             self.output.append(f"{'    ' * self.indent_level}else:")
             self.indent_level += 1
             self.generate_statements(else_block[1])
@@ -245,16 +233,16 @@ class Interpreter:
 
     def generate_expression(self, node):
         if isinstance(node, int):
-            return node
+            return str(node)
         elif isinstance(node, float):
-            return node
+            return str(node)
         elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
             return node
         elif isinstance(node, str):
-            if node.lower() in {"true", "false"}:  # Reconocer valores booleanos
-                return node.capitalize()  # Convertir a True/False
+            if node.lower() in {"true", "false"}:
+                return node.capitalize()
             return node
-        elif isinstance(node, bool):  # Manejar valores booleanos directamente
+        elif isinstance(node, bool):
             return str(node)
         elif isinstance(node, tuple):
             if node[0] == 'binary_op':
@@ -280,7 +268,5 @@ class Interpreter:
                 return f"({op} {expr_value})"
         raise TypeError(f"Unsupported expression: {node}")
 
-
     def to_python_code(self):
         return "\n".join(self.output)
-

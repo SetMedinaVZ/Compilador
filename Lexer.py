@@ -1,5 +1,6 @@
 import ply.lex as lex
 from utils import print_red
+
 class Lexer(object):
     def __init__(self):
         self.lexer = None
@@ -28,12 +29,11 @@ class Lexer(object):
     tokens = [
         'ID', 'SEMICOLON', 'COMA', 'ASSIGN',
         'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',  # BRACES
-        'LBRACKET', 'RBRACKET',  # Corchetes para arrays
+        'LBRACKET', 'RBRACKET',  # Brackets for arrays
         'VAR_INT', 'VAR_FLOAT', "STRING", "VAR_BOOL", # VAR TYPE
         'PLUS', 'MINUS', 'DIVIDE', 'TIMES', 'PLUSPLUS', 'MINUSMINUS',  # ARITHMETIC OPERATORS
         'GT', 'LT', 'GTE', 'LTE', 'EQ', 'NE', # RELATIONAL OPERATORS
         'AND', 'OR', 'NOT',  # LOGICAL OPERATORS
-
     ] + list(reserved.values())
 
     # Regular expression rules for tokens

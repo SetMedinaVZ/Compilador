@@ -1,0 +1,14 @@
+program main {
+    float a, b, c, d, e;
+    
+    a = 5.2 + 3.4;  // Suma
+    b = 10.56 - 2.45; // Resta
+    c = 4.567 * 2.3456;  // Multiplicación
+    d = 8.45 / 2.987654;  // División
+    
+    writeln(a);
+    writeln(b);
+    writeln(c);
+    writeln(d);
+    writeln(e);
+}
