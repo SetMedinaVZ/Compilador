@@ -6,10 +6,11 @@ from utils import print_red, print_green
 
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="parselog.txt",
+    filename="parselog.log",
     filemode="w",
     format="%(filename)10s:%(lineno)4d:%(message)s"
 )
+
 log = logging.getLogger()
 
 if len(sys.argv) != 2:
@@ -17,7 +18,8 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 filename = sys.argv[1]
-filename = sys.argv[1]
+
+# Definición del parser
 class Parser:
     tokens = Lexer.tokens
 
@@ -240,6 +242,10 @@ class Parser:
         result = self.parser.parse(input=data, lexer=lexer)
         return result
 
+
+# Esto es para imprimir el resultado del parser
+print_green("Parsing...")
+
 parser = Parser()
 
 #This is for printing the result of the parser
@@ -247,9 +253,10 @@ with open(filename, 'r') as inputfile:
     data = inputfile.read()
 
 result = parser.parse(data)
+
 if result:
-    print("Parsing was successful")
+    print_green("Parsing successful!")
     print_green(result)
 else:
-    print_red("Parsing was not successful")
-    print_green(result)
+    print_red("Parsing failed!")
+    sys.exit(1)
