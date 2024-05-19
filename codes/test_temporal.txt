@@ -1,12 +1,7 @@
 program main {
-    float a, b, c, result;
-    a = 3.14F;
-    b = 2.71f;
-    if ((a == b) && (a == b)){
-        writeln("a es mayor que b");
-    } else {
-        if(a > b){
-            writeln("a es mayor que b");
-        }
-    }
+    bool a, b, result;
+    
+    a = true;
+    b = false;
+    
 }

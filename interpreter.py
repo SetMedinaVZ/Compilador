@@ -41,18 +41,18 @@ class Interpreter:
 
 
     def check_expression_type(self, node):
-        if isinstance(node, int):
-            return 'int'
-        elif isinstance(node, float):
-            return 'float'
-        elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
-            return 'string'
-        elif isinstance(node, str):
+        if isinstance(node, str):
             if node.lower() in {"true", "false"}:  # Verificar valores booleanos
                 return 'bool'
             return self.var_types.get(node, 'unknown')
         elif isinstance(node, bool):  # Reconocer booleanos True y False
             return 'bool'
+        elif isinstance(node, int):
+            return 'int'
+        elif isinstance(node, float):
+            return 'float'
+        elif isinstance(node, str) and node.startswith('"') and node.endswith('"'):
+            return 'string'
         elif isinstance(node, tuple):
             if node[0] == 'binary_op':
                 left_type = self.check_expression_type(node[1])
@@ -75,13 +75,21 @@ class Interpreter:
             self.generate_array_declaration(node)
         else:
             var_type = node[1]
-            for var, expr in node[2]:
+            for declaration in node[2]:
+                if len(declaration) == 2:
+                    var, expr = declaration
+                elif len(declaration) == 3 and declaration[0] == 'assignment':
+                    var, expr = declaration[1], declaration[2]
+                else:
+                    raise Exception(f"Unsupported declaration format: {declaration}")
+
                 self.var_types[var] = var_type  # Guardar el tipo de la variable
                 if expr is None:
                     self.output.append(f"{'    ' * self.indent_level}{var} = None")
                 else:
+                    # Aquí suponemos que 'generate_expression' puede manejar correctamente las expresiones, incluidos los floats
                     value = self.generate_expression(expr)
-                    self.check_type(var, var_type)  # Verificar el tipo de la variable
+                    self.check_type(var, self.check_expression_type(expr))  # Verificar el tipo de la variable
                     self.output.append(f"{'    ' * self.indent_level}{var} = {value}")
 
                 
@@ -125,12 +133,25 @@ class Interpreter:
 
     def generate_assignment(self, node):
         var_name = node[1]
-        value_type = self.check_expression_type(node[2])
-        self.var_types[var_name] = value_type  # Actualizar el tipo de la variable
-        self.check_type(var_name, value_type)  # Verificar el tipo de la variable
-        value = self.generate_expression(node[2])
-        self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
+        expr = node[2]
 
+        # Verificar si la variable ha sido declarada
+        if var_name not in self.var_types:
+            error_message = f"Variable '{var_name}' not declared."
+            save_and_exit("", error_message)
+            return
+
+        # Generar la expresión y verificar el tipo
+        value = self.generate_expression(expr)
+        value_type = self.check_expression_type(expr)
+        expected_type = self.var_types[var_name]
+        
+        # Verificar que el tipo de la expresión coincida con el tipo de la variable
+        if value_type != expected_type:
+            error_message = f"Type error: Cannot assign {value_type} to {expected_type}."
+            save_and_exit("", error_message)
+        else:
+            self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
 
     def generate_print(self, node):
         # node[1] is 'writeln' or 'write'
