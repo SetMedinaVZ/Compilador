@@ -1,9 +1,10 @@
+
+
 # Interpreter class responsible for generating and executing intermediate code
+print("Interpreter.py imported")
 # Here methods are available to generate the a intermediate code from the AST 
 # execution takes place in 'main.py' file
 # a new instance of the content generated in this file is developed in 'interpretate_.py'
-
-print("Interpreter.py imported")
 import sys
 from utils import save_and_exit
 
