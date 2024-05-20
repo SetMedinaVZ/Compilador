@@ -1,4 +1,3 @@
-import sys
 from utils import save_and_exit
 
 print("Interpreter.py imported")
@@ -11,6 +10,7 @@ class Interpreter:
         self.output = []  # For generated Python code
         self.indent_level = 0  # For indentation
         self.return_value = None  # For function return values
+        self.additional_context = {}  # Additional context for noise
 
     def generate(self, node):
         if node[0] == 'program':  # Program node
@@ -275,14 +275,6 @@ class Interpreter:
         self.output.append(f"{'    ' * self.indent_level}return {value}")
         return ('return', value)
 
-    def generate_assignment(self, node):
-        var_name = node[1]
-        value = self.generate_expression(node[2])
-        value_type = self.check_expression_type(node[2])
-        self.var_types[var_name] = value_type  # Actualizar el tipo de la variable
-        self.check_type(var_name, value_type)  # Verificar el tipo de la variable
-        self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
-
     def generate_expression(self, node):
         if isinstance(node, int):
             return node
@@ -323,6 +315,36 @@ class Interpreter:
         elif node is None:
             return 'None'  # Manejar el caso None específicamente
         raise TypeError(f"Unsupported expression: {node}")
-    
+
     def to_python_code(self):
         return "\n".join(self.output)
+
+    # Noise functions to simulate additional functionality
+    def process_context(self, context):
+        # Simulated function to process context
+        print("Processing context:", context)
+        self.additional_context = context
+
+    def evaluate_complex_expression(self, expr):
+        # Simulated function to evaluate a complex expression
+        print("Evaluating complex expression:", expr)
+        if isinstance(expr, tuple) and expr[0] == 'binary_op':
+            left = self.generate_expression(expr[1])
+            right = self.generate_expression(expr[3])
+            return left + right  # Simplified example
+
+    def dummy_function(self):
+        # Another dummy function for added complexity
+        print("Dummy function executed")
+        return "dummy_result"
+
+    def log_internal_state(self):
+        # Function to log internal state for debugging
+        print("Logging internal state:")
+        print("Variables:", self.variables)
+        print("Variable Types:", self.var_types)
+        print("Functions:", self.functions)
+        print("Output:", self.output)
+        print("Indent Level:", self.indent_level)
+        print("Return Value:", self.return_value)
+        print("Additional Context:", self.additional_context)
