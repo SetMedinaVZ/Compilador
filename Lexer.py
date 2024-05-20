@@ -67,7 +67,7 @@ class Lexer(object):
     t_ignore = ' \t'
 
     def t_VAR_FLOAT(self, t):
-        r'\d+\.\d+[Ff]?'
+        r'\-?\d+\.\d+[Ff]?'
         if t.value[-1] in 'Ff':
             t.value = float(t.value[:-1])
         else:
@@ -75,7 +75,8 @@ class Lexer(object):
         return t
 
     def t_VAR_INT(self, t):
-        r'\d+'
+        #negative or positive integers
+        r'\-?\d+'
         t.value = int(t.value)
         return t
 
