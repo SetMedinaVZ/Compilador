@@ -4,7 +4,7 @@ from utils import print_red
 class Lexer(object):
     def __init__(self):
         self.lexer = None
-        
+
     def get_lexer(self):
         self.lexer = lex.lex(module=self)
         return self.lexer
@@ -69,7 +69,7 @@ class Lexer(object):
     t_ignore = ' \t'
 
     def t_VAR_FLOAT(self, t):
-        r'\d+\.\d+[Ff]?'
+        r'-?\d+\.\d+[Ff]?'
         if t.value[-1] in 'Ff':
             t.value = float(t.value[:-1])
         else:
@@ -77,7 +77,7 @@ class Lexer(object):
         return t
 
     def t_VAR_INT(self, t):
-        r'\d+'
+        r'-?\d+'
         t.value = int(t.value)
         return t
 

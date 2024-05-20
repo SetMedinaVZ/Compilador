@@ -1,0 +1,12 @@
+program main{
+    int i, n, f, x;
+    writeln("texto dump");
+
+    f = 5;
+    writeln(f, "es f");
+
+    for (x=-2 ; x<f ; x++)
+    {
+        writeln(x);
+    }
+}
