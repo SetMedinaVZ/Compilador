@@ -1,10 +1,10 @@
 #!/bin/zsh
-for test_file_buenos in ./codes/buenos/*.txt
+for test_file_buenos in ./tests/buenos/*.txt
 do
   echo ------------------"Leyendo $test_file_buenos------------------"
   python3 compiler.py $test_file_buenos && python3 temp.py
 done
-for test_file_malos in ./codes/malos/*.txt
+for test_file_malos in ./tests/malos/*.txt
 do
   echo ------------------"Leyendo $test_file_malos------------------"
   python3 compiler.py $test_file_malos && python3 temp.py
