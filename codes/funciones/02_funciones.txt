@@ -1,0 +1,16 @@
+program main {
+    int result;
+
+    function factorial(int n) {
+        if (n <= 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+
+    result = factorial(5);
+    writeln("Factorial result: ", result);
+}
+
+

@@ -10,6 +10,7 @@ class Interpreter:
         self.functions = {}  # For storing functions
         self.output = []  # For generated Python code
         self.indent_level = 0  # For indentation
+        self.return_value = None  # For function return values
 
     def generate(self, node):
         if node[0] == 'program':  # Program node
@@ -212,7 +213,10 @@ class Interpreter:
 
     def generate_statements(self, statements):
         for statement in statements:
-            self.generate_statement(statement)
+            result = self.generate_statement(statement)
+            if isinstance(result, tuple) and result[0] == 'return':
+                self.return_value = result[1]
+                break
 
     def generate_statement(self, statement):
         if statement[0] == 'assignment':
@@ -263,40 +267,21 @@ class Interpreter:
     def generate_function_call(self, node):
         func_name = node[1]
         arguments = [self.generate_expression(arg) for arg in node[2]]
-        if func_name in self.functions:
-            params, body = self.functions[func_name]
-            if len(arguments) != len(params):
-                raise TypeError(f"Function '{func_name}' called with incorrect number of arguments")
-
-            # Create a new scope for function execution
-            original_vars = self.variables.copy()
-            original_var_types = self.var_types.copy()
-
-            for param, arg in zip(params, arguments):
-                self.variables[param[1]] = arg
-                self.var_types[param[1]] = self.check_expression_type(arg)
-
-            # Execute function body
-            result = None
-            for stmt in body:
-                result = self.generate(stmt)
-                if isinstance(result, tuple) and result[0] == 'return':
-                    result = result[1]
-                    break
-
-            # Restore original scope
-            self.variables = original_vars
-            self.var_types = original_var_types
-            return result
-        else:
-            arg_str = ", ".join(map(str, arguments))
-            self.output.append(f"{'    ' * self.indent_level}{func_name}({arg_str})")
-            return f"{func_name}({arg_str})"
+        arg_str = ", ".join(map(str, arguments))
+        return f"{func_name}({arg_str})"
 
     def generate_return(self, node):
         value = self.generate_expression(node[1])
         self.output.append(f"{'    ' * self.indent_level}return {value}")
         return ('return', value)
+
+    def generate_assignment(self, node):
+        var_name = node[1]
+        value = self.generate_expression(node[2])
+        value_type = self.check_expression_type(node[2])
+        self.var_types[var_name] = value_type  # Actualizar el tipo de la variable
+        self.check_type(var_name, value_type)  # Verificar el tipo de la variable
+        self.output.append(f"{'    ' * self.indent_level}{var_name} = {value}")
 
     def generate_expression(self, node):
         if isinstance(node, int):
@@ -335,7 +320,9 @@ class Interpreter:
                 return f"({op} {expr_value})"
             elif node[0] == 'function_call':
                 return self.generate_function_call(node)
+        elif node is None:
+            return 'None'  # Manejar el caso None específicamente
         raise TypeError(f"Unsupported expression: {node}")
-
+    
     def to_python_code(self):
         return "\n".join(self.output)
