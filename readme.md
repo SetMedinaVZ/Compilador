@@ -1,7 +1,11 @@
 # Bienvenidos
-TC3002B ITESM COMPILADORES 
-CAMPUS MONTERREY
-Profesor: Paco Peña
+##### TC3002B ITESM COMPILADORES 
+#####  CAMPUS MONTERREY 
+#####  Profesor: Paco Peña 
+
+
+## Descripción
+El repositorio cuenta con dos ramas, cada una con una versión funcional que aborda el problema desde una perspectiva distinta. Ambas versiones se centran en analizar el texto y traducir el resultado a un programa funcional en Python, utilizando la lógica de un compilador. En esencia, se trata de un traductor que convierte un pseudolenguaje, proporcionado por el profesor, a lenguaje Python.
 
 
 Proyecto de un compilador (intérprete para python) en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
@@ -21,6 +25,3 @@ Sientanse libres de usar el codig o para los que estan en esta clase con el mism
 
 >Si Paco Peña no tiene un hater, yo no existo.
 
-
-## Descripción
-El repositorio cuenta con dos ramas, cada una con una versión funcional que aborda el problema desde una perspectiva distinta. Ambas versiones se centran en analizar el texto y traducir el resultado a un programa funcional en Python, utilizando la lógica de un compilador. En esencia, se trata de un traductor que convierte un pseudolenguaje, proporcionado por el profesor, a lenguaje Python.
