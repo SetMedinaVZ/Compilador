@@ -1,8 +1,11 @@
 # Bienvenidos
-TC3002B ITESM
+TC3002B ITESM COMPILADORES 
+CAMPUS MONTERREY
+Profesor: Paco Peña
 
-Proyecto de un pseudo compilador en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
-Sientanse libres de usar el codigo para los que estan en esta clase con el mismo profesor, y  recuerden:
+
+Proyecto de un compilador (intérprete para python) en Python para el modulo de compiladores de la clase Desarrollo de aplicaciones avanzadas de ciencias computacionales con el profesor Paco Peña.
+Sientanse libres de usar el codig o para los que estan en esta clase con el mismo profesor, y  recuerden:
 
 >Si Paco Peña opina, no estoy de acuerdo.
 
